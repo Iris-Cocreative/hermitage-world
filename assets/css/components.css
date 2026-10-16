@@ -561,7 +561,7 @@
 
   /* ---------------------------------------------------------------- pathway
      Samuel's seven stages, a path that turns rather than a ladder. */
-  .pathway { counter-reset: step; display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr)); border-top: var(--line-thin) solid var(--line); }
+  .pathway { counter-reset: step; display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(min(10.5rem, 100%), 1fr)); border-top: var(--line-thin) solid var(--line); }
   .pathway__step { position: relative; padding: var(--space-lg) var(--space-md) var(--space-lg) 0; border-bottom: var(--line-thin) solid var(--line-subtle); }
   .pathway__step::before {
     counter-increment: step;
