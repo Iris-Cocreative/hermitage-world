@@ -51,7 +51,7 @@
   .founded__art { width: min(32.5rem, 80vw); }
   .founded__art .art { width: 100%; }
   .founded__title { font-size: var(--text-3xl); line-height: 1.1; }
-  .founded__title em { font-style: normal; color: var(--accent); }
+  .founded__title em { font-style: normal; color: var(--accent-display); }
 
   /* Never the building: the letter card */
   .letter__card {

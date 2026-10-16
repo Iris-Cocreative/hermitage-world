@@ -91,7 +91,7 @@
     z-index: var(--z-toast);
     padding: var(--space-2xs) var(--space-sm);
     background: var(--gold-500);
-    color: var(--plaster-100);
+    color: var(--umber-900);
     border-radius: var(--radius-pill);
   }
   .skip-link:focus { top: var(--space-sm); }
@@ -118,7 +118,7 @@
   .t-body { font-size: var(--text-base); line-height: var(--leading-normal); }
   .t-small { font-size: var(--text-sm); line-height: var(--leading-normal); }
   .t-muted { color: var(--text-muted); }
-  .t-accent { color: var(--accent-text); }
+  .t-accent { color: var(--accent-display); }
 
   /* A small label that names what follows: "Calendar", "Tuesday".
      Sentence-case kicker (Figma) or tracked caps (day markers). */

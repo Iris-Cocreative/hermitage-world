@@ -15,7 +15,7 @@ Moved out of `iris-webflow-scripts/hermitage-world/` into its own repo and rebui
 | Forms | All demo: they say so, and send nothing |
 | Phase two | Membership, the community platform, and the Soul Guide are shown as clearly labeled previews |
 
-QA at the time of writing: every page loads with no console errors and no horizontal overflow at 1440px and 390px; all internal links resolve.
+QA at the time of writing: every page loads with no console errors and no horizontal overflow at 1440, 768 and 390px; all internal links resolve; all text tokens pass WCAG AA on their grounds.
 
 ## What came from where
 
@@ -36,7 +36,8 @@ QA at the time of writing: every page loads with no console errors and no horizo
 4. **The overlay header** floats transparent over the home hero (links visible, logo hidden) and turns solid after it, so a 35–65+ visitor can navigate from the first second.
 5. **The sun button opens the whole map** (all sections and subpages) on every screen size; it doubles as the mobile menu.
 6. **Community as "eight around one."** The mark becomes a map: seats for Indianapolis, the United States, Australia and Europe, open seats, and "a seat for you."
-7. **Honest placeholders everywhere:** `.pending` frames for missing photos and `.draft-mark` for unconfirmed facts. Hide them all with `<html class="hide-pending">` for a clean review.
+7. **Contrast for a 35–65+ audience.** Figma's light label on gold buttons is 3.1:1; the build uses umber on the same gold (5:1). It's one token, `--on-accent` in `tokens.css`. Subtle text was nudged to pass AA on every ground, and `--accent-display` gives large gold type a deeper gold on light grounds.
+8. **Honest placeholders everywhere:** `.pending` frames for missing photos and `.draft-mark` for unconfirmed facts. Hide them all with `<html class="hide-pending">` for a clean review.
 
 ## Open questions and content still needed
 

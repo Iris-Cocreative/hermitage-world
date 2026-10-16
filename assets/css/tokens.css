@@ -37,8 +37,10 @@
     --stone-200: #c2b49e;
     --stone-300: #bbb09d;
     --stone-400: #a1947f;
+    --stone-450: #978b75;   /* subtle text on dark grounds (5.4:1) */
     --stone-500: #857965;
     --stone-600: #5e564c;
+    --stone-650: #675e52;   /* subtle text on light grounds (4.75:1 on stone) */
     --stone-700: #463f36;
 
     /* Ink: text on light grounds. */
@@ -151,13 +153,16 @@
     --text: var(--plaster-200);
     --text-strong: var(--plaster-100);
     --text-muted: var(--stone-400);
-    --text-subtle: var(--stone-500);
+    --text-subtle: var(--stone-450);
     --heading: var(--plaster-100);
 
     --accent: var(--gold-500);            /* fills, marks, button grounds */
     --accent-hover: var(--gold-400);
     --accent-text: var(--gold-300);       /* accent used AS text: links, kickers */
-    --on-accent: var(--plaster-100);      /* text sitting on an accent fill */
+    --accent-display: var(--gold-500);    /* accent in display-size type (3:1 is enough) */
+    /* Text on a gold fill. Figma sets plaster here, but plaster on gold-500 is
+       only 3.1:1; umber is 5:1 and keeps the gold exact. Swap back in one line. */
+    --on-accent: var(--umber-900);
 
     --line: rgb(166 129 64 / 0.8);        /* gold hairline */
     --line-subtle: rgb(166 129 64 / 0.35);
@@ -200,11 +205,11 @@
     --text: var(--ink-900);
     --text-strong: var(--ink-900);
     --text-muted: var(--stone-600);
-    --text-subtle: var(--stone-500);
+    --text-subtle: var(--stone-650);
     --heading: var(--ink-900);
 
     --accent-text: var(--gold-700);
-    --on-accent: var(--plaster-100);
+    --accent-display: var(--gold-600);
 
     --line: rgb(166 129 64 / 0.85);
     --line-subtle: rgb(166 129 64 / 0.4);
