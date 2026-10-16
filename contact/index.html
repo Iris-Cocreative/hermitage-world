@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact · Hermitage World</title>
+<meta name="description" content="Write to the Hermitage, or find us at the Indiana Interchurch Center in Indianapolis.">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya:ital@0;1&display=swap">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/site.js"></script>
+</head>
+<body>
+<hw-header></hw-header>
+
+<main id="main">
+
+<section class="page-hero" data-room="dark">
+  <div class="room-arch" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <div data-reveal>
+      <h1>Write to us</h1>
+      <p class="t-lede">A question, a story, an offer of help, or simply hello. A person reads every message.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" data-room="dark">
+  <div class="container split split--top" style="--split-a: 1.3fr; --split-b: 1fr">
+    <form class="card card--lg stack" action="#" method="post" data-demo-form data-done="Thank you. We’ll write back soon." data-reveal>
+      <div class="grid grid--2" style="--grid-gap: var(--space-sm)">
+        <div class="field"><label class="field__label" for="c-name">Name</label><input class="input" id="c-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label class="field__label" for="c-email">Email</label><input class="input" id="c-email" name="email" type="email" autocomplete="email" required></div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="c-topic">About</label>
+        <select class="select" id="c-topic" name="topic">
+          <option>A general question</option>
+          <option>Gatherings and programs</option>
+          <option>The library and recordings</option>
+          <option>Giving</option>
+          <option>Hosting a circle or teaching</option>
+          <option>Press</option>
+        </select>
+      </div>
+      <div class="field"><label class="field__label" for="c-msg">Message</label><textarea class="textarea" id="c-msg" name="message" rows="6" required></textarea></div>
+      <button class="btn btn--solid btn--lg" type="submit">Send</button>
+      <p class="form-note">Prototype: nothing is sent yet.</p>
+    </form>
+    <div class="stack stack--lg" data-reveal>
+      <h2 class="t-h3">Where we are</h2>
+      <div class="board">
+        <div class="board__row" style="grid-template-columns: 6rem 1fr"><span class="board__label">Visit</span><p class="board__text">Indiana Interchurch Center<br>1100 West 42nd Street, Suite 350<br>Indianapolis, IN 46208</p></div>
+        <div class="board__row" style="grid-template-columns: 6rem 1fr"><span class="board__label">Call</span><p class="board__text"><a class="link" href="tel:+13175450742">+1 317 545 0742</a></p></div>
+        <div class="board__row" style="grid-template-columns: 6rem 1fr"><span class="board__label">Email</span><p class="board__text"><a class="link" href="mailto:info@hermitageindy.org">info@hermitageindy.org</a> <span class="draft-mark">new address with the domain move</span></p></div>
+      </div>
+      <p class="t-muted">Online gatherings happen every week; <a class="link" href="../gatherings/">find one in your time zone</a>.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<hw-signup></hw-signup>
+<hw-footer></hw-footer>
+</body>
+</html>

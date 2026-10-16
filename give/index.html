@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Give · Hermitage World</title>
+<meta name="description" content="Help carry the Hermitage through its transition into the world: keep gatherings free, the library open, and teachers teaching.">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya:ital@0;1&display=swap">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/site.js"></script>
+</head>
+<body>
+<hw-header></hw-header>
+
+<main id="main">
+
+<section class="page-hero page-hero--media" data-room="dark">
+  <div class="room-arch" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <div data-reveal>
+      <h1>Carry the light forward</h1>
+      <p class="t-lede">The Hermitage is releasing its building and becoming a home for seekers everywhere. Your gift keeps the gatherings free, the library open, and the teachers teaching through the transition.</p>
+    </div>
+    <div class="page-hero__media" data-reveal>
+      <form class="card card--lg give-form" action="#" method="post" data-demo-form data-done="Thank you. (Prototype: no payment was taken.)">
+        <fieldset class="chips" aria-label="How often">
+          <label class="chip"><input type="radio" name="freq" value="once" checked><span>Once</span></label>
+          <label class="chip"><input type="radio" name="freq" value="monthly"><span>Monthly</span></label>
+        </fieldset>
+        <fieldset class="chips" aria-label="Amount">
+          <label class="chip"><input type="radio" name="amount" value="25"><span>$25</span></label>
+          <label class="chip"><input type="radio" name="amount" value="50" checked><span>$50</span></label>
+          <label class="chip"><input type="radio" name="amount" value="100"><span>$100</span></label>
+          <label class="chip"><input type="radio" name="amount" value="250"><span>$250</span></label>
+          <label class="chip"><input type="radio" name="amount" value="other"><span>Other</span></label>
+        </fieldset>
+        <div class="field">
+          <label class="field__label" for="g-memory">In memory or honor of (optional)</label>
+          <input class="input" id="g-memory" name="memory" type="text" placeholder="A name">
+        </div>
+        <button class="btn btn--solid btn--lg btn--block" type="submit">Give</button>
+        <p class="form-note">Prototype: the donation processor is still being chosen, and nothing is charged.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section" data-room="plaster">
+  <div class="lineart lineart--vaults" aria-hidden="true" style="opacity:.45"></div>
+  <div class="container">
+    <h2 class="mb-xl" data-reveal>Where it goes</h2>
+    <div class="grid grid--4">
+      <div class="feature" data-reveal><svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#circle-people"/></svg><h3>Gatherings, free</h3><p>The weekly circles, online and in Indianapolis, stay free for everyone.</p></div>
+      <div class="feature" data-reveal><svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#audio"/></svg><h3>The library</h3><p>Cleaning, titling and hosting forty years of Justin’s recordings.</p></div>
+      <div class="feature" data-reveal><svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#person"/></svg><h3>Teachers</h3><p>New programs and the teachers carrying the lineage forward.</p></div>
+      <div class="feature" data-reveal><svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#door"/></svg><h3>A place to meet</h3><p>The room at the Interchurch Center, and a home online.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" data-room="dark">
+  <div class="container split split--top" style="--split-a: 1fr; --split-b: 1fr">
+    <div class="stack stack--lg" data-reveal>
+      <h2>We remember</h2>
+      <p class="t-lede">Many gifts are made in memory of someone who loved this place, or loved Justin. Name them when you give, and they will be remembered here. <span class="draft-mark">remembrance page to design</span></p>
+    </div>
+    <div class="stack stack--lg" data-reveal>
+      <h2 class="t-h3">Other ways to give</h2>
+      <div class="board">
+        <div class="board__row" style="grid-template-columns: 7rem 1fr"><span class="board__label">By mail</span><p class="board__text">The Hermitage, 1100 West 42nd Street, Suite 350, Indianapolis, IN 46208</p></div>
+        <div class="board__row" style="grid-template-columns: 7rem 1fr"><span class="board__label">Legacy</span><p class="board__text">A bequest or planned gift. <a class="link" href="../contact/">Talk with us</a></p></div>
+        <div class="board__row" style="grid-template-columns: 7rem 1fr"><span class="board__label">Time</span><p class="board__text">Facilitate a circle, mentor a newcomer, help with the library. <a class="link" href="../contact/">Offer your time</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<hw-signup></hw-signup>
+<hw-footer></hw-footer>
+</body>
+</html>

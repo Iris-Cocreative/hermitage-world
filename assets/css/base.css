@@ -1,0 +1,150 @@
+/* ==========================================================================
+   Base — element defaults and type roles. No classes for layout here.
+   ========================================================================== */
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + var(--space-sm));
+    background: var(--umber-900);
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  img, svg, video, canvas { display: block; max-width: 100%; }
+  img { height: auto; }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: var(--weight-regular);   /* Marcellus ships one weight. Never bold it. */
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--heading);
+    text-wrap: balance;
+  }
+  h1 { font-size: var(--text-5xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-xl); }
+  h4 { font-size: var(--text-lg); }
+
+  p, ul, ol, dl, figure, blockquote { margin: 0; }
+  p { text-wrap: pretty; }
+  ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+
+  a { color: inherit; text-decoration: none; }
+  /* links inside running prose are underlined and take the accent */
+  .prose a, a.link {
+    color: var(--accent-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .prose a:hover, a.link:hover { color: var(--text-strong); }
+
+  strong, b { font-weight: var(--weight-medium); }
+  em { font-style: italic; }
+  hr { border: 0; border-top: var(--line-thin) solid var(--line-subtle); margin: 0; }
+
+  button, input, select, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; background: none; border: 0; padding: 0; }
+
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  ::selection { background: var(--gold-500); color: var(--plaster-100); }
+
+  /* Visually hidden but read by screen readers */
+  .sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: var(--space-sm);
+    top: -100px;
+    z-index: var(--z-toast);
+    padding: var(--space-2xs) var(--space-sm);
+    background: var(--gold-500);
+    color: var(--plaster-100);
+    border-radius: var(--radius-pill);
+  }
+  .skip-link:focus { top: var(--space-sm); }
+
+  /* -------------------------------------------------------------- type roles
+     Use these classes to choose a role independent of the heading level. */
+  .t-display {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    line-height: var(--leading-none);
+    letter-spacing: 0.01em;
+  }
+  .t-h1 { font-family: var(--font-display); font-size: var(--text-5xl); line-height: var(--leading-tight); }
+  .t-h2 { font-family: var(--font-display); font-size: var(--text-3xl); line-height: var(--leading-tight); }
+  .t-h3 { font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.12; }
+  .t-h4 { font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.2; }
+
+  .t-lede {
+    font-size: var(--text-lg);
+    line-height: var(--leading-normal);
+    color: var(--text-muted);
+    max-width: 34em;
+  }
+  .t-body { font-size: var(--text-base); line-height: var(--leading-normal); }
+  .t-small { font-size: var(--text-sm); line-height: var(--leading-normal); }
+  .t-muted { color: var(--text-muted); }
+  .t-accent { color: var(--accent-text); }
+
+  /* A small label that names what follows: "Calendar", "Tuesday".
+     Sentence-case kicker (Figma) or tracked caps (day markers). */
+  .t-kicker {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    letter-spacing: var(--tracking-wide);
+    color: var(--accent-text);
+  }
+  .t-caps {
+    font-family: var(--font-body);
+    font-weight: var(--weight-light);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--accent-text);
+  }
+
+  /* Running text: long-form pages (Friar Justin's story, meditation). */
+  .prose { max-width: var(--measure); }
+  .prose > * + * { margin-top: 1em; }
+  .prose h2 { font-size: var(--text-2xl); margin-top: 1.8em; }
+  .prose h3 { font-size: var(--text-xl); margin-top: 1.6em; }
+  .prose p, .prose li { color: var(--text-muted); line-height: var(--leading-loose); }
+  .prose strong { color: var(--text-strong); }
+  .prose ul, .prose ol { padding-left: 1.2em; }
+  .prose li + li { margin-top: 0.4em; }
+}

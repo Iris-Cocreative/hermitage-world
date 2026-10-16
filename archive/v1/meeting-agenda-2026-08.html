@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermitage World — Working Session Agenda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya:ital@0;1&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plaster: #F1EBDF;
+    --plaster-deep: #E6DECC;
+    --shadow: #221B12;
+    --ink: #2B241B;
+    --ink-soft: #5C5344;
+    --lumen: #F5EDDC;
+    --lumen-soft: #C4B69C;
+    --amber: #D99A2B;
+    --amber-bright: #F2BE5A;
+    --amber-deep: #8A5F14;
+    --bronze: #8A6B3F;
+    --measure: 66ch;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--plaster);
+    color: var(--ink);
+    font-family: 'Alegreya Sans', 'Segoe UI', sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 3rem); }
+  .section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+
+  /* Header — a shadow room */
+  header {
+    background: var(--shadow);
+    color: var(--lumen);
+    padding-block: clamp(3rem, 8vw, 5.5rem);
+  }
+  .inscription {
+    font-family: Marcellus, 'Times New Roman', serif;
+    font-size: 0.8125rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--lumen-soft);
+  }
+  header h1 {
+    font-family: Marcellus, 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.12;
+    margin-top: 1rem;
+    text-wrap: balance;
+  }
+  header .meta {
+    margin-top: 1.5rem;
+    color: var(--lumen-soft);
+    font-size: 0.95rem;
+  }
+  header .meta strong { color: var(--lumen); font-weight: 500; }
+
+  /* Agenda items — hairline-separated boards, never cards */
+  .agenda-item {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 1.5rem;
+    padding-block: 2rem;
+    border-top: 1px solid rgba(43,36,27,.18);
+  }
+  .agenda-item:first-of-type { border-top: none; }
+  .agenda-time {
+    font-family: Marcellus, 'Times New Roman', serif;
+    font-size: 0.8125rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    padding-top: 0.45rem;
+  }
+  .agenda-item h2 {
+    font-family: Marcellus, 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .agenda-item p { margin-top: 0.6rem; color: var(--ink-soft); max-width: var(--measure); }
+  .agenda-item ul { margin-top: 0.75rem; padding-left: 1.2rem; color: var(--ink-soft); max-width: var(--measure); }
+  .agenda-item li { margin-top: 0.35rem; }
+  .agenda-item li::marker { color: var(--bronze); }
+  .note { font-size: 0.875rem; color: var(--ink-soft); margin-top: 0.75rem; font-style: italic; font-family: Alegreya, Georgia, serif; }
+
+  /* Decisions band — raking-light plaster */
+  .decisions { background: var(--plaster-deep); }
+  .decisions h2 {
+    font-family: Marcellus, 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 1.9rem);
+  }
+  .decisions ul { margin-top: 1.25rem; padding-left: 1.2rem; max-width: var(--measure); }
+  .decisions li { margin-top: 0.6rem; }
+  .decisions li::marker { color: var(--bronze); }
+  .decisions li strong { font-weight: 700; }
+
+  /* Voice quote */
+  .voice {
+    font-family: Alegreya, Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    line-height: 1.5;
+    max-width: 30em;
+  }
+  .voice cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Alegreya Sans', 'Segoe UI', sans-serif;
+    font-style: normal;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+
+  footer {
+    background: var(--shadow);
+    color: var(--lumen-soft);
+    padding-block: 2.5rem;
+    font-size: 0.875rem;
+  }
+  footer .inscription { margin-bottom: 0.75rem; }
+
+  @media (max-width: 620px) {
+    .agenda-item { grid-template-columns: 1fr; gap: 0.35rem; }
+    .agenda-time { padding-top: 0; }
+  }
+  @media print {
+    header, footer, .decisions { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section { padding-block: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <p class="inscription">Hermitage World · Working Session</p>
+    <h1>Design Review: Moodboard &amp; First Prototype</h1>
+    <p class="meta"><strong>Date:</strong> August 2026 (to be confirmed) &nbsp;·&nbsp; <strong>Duration:</strong> ~60 minutes &nbsp;·&nbsp; <strong>With:</strong> Garry Chilluffo, Samuel Robinson &amp; the Hermitage team · James (IRIS Cocreative)</p>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="container">
+
+      <div class="agenda-item">
+        <div class="agenda-time">5 min</div>
+        <div>
+          <h2>Welcome &amp; arrival</h2>
+          <p>A moment to land together before we look at the work.</p>
+        </div>
+      </div>
+
+      <div class="agenda-item">
+        <div class="agenda-time">5 min</div>
+        <div>
+          <h2>Since we last met</h2>
+          <p>An honest recap of progress since the July 7 re-kickoff. We've moved a little slower than we'd hoped, and we'll say so plainly — but two substantial pieces are ready for your eyes today: the moodboard and a first working prototype.</p>
+        </div>
+      </div>
+
+      <div class="agenda-item">
+        <div class="agenda-time">15 min</div>
+        <div>
+          <h2>Moodboard review</h2>
+          <p>The visual direction we've been developing: <em>Concrete &amp; Light</em> — the hermitage built as a modern chapel. Warm plaster, board-formed concrete, and light entering through deliberate apertures, drawing directly on the atrium image from our last session.</p>
+          <ul>
+            <li>Walk through the moodboard images together</li>
+            <li>Gut reactions first, analysis second — does this feel like the Hermitage?</li>
+            <li>Where it honors the vision (sacred without announcing itself, interfaith by construction) and where it should stretch</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="agenda-item">
+        <div class="agenda-time">20 min</div>
+        <div>
+          <h2>Prototype walkthrough</h2>
+          <p>A first working prototype of three pages, viewed live in the browser on desktop and mobile:</p>
+          <ul>
+            <li><strong>Homepage</strong> — the threshold: arrival, the five values as lit apertures, pathways for each kind of visitor, gatherings, and the newsletter doorway</li>
+            <li><strong>Friar Justin &amp; the Library</strong> — the hall of remembrance and living repository: his story, the teaching library, and how founder grounds while mission leads</li>
+            <li><strong>Design system / styleguide</strong> — the underlying visual language, briefly, so you can see the system behind the pages</li>
+          </ul>
+          <p class="note">Photography placeholders are labeled honestly throughout — the stained-glass, tapestry, and Justin archive photos will drop straight into the frames once received.</p>
+        </div>
+      </div>
+
+      <div class="agenda-item">
+        <div class="agenda-time">10 min</div>
+        <div>
+          <h2>Feedback &amp; open questions</h2>
+          <p>Gathering your reactions, plus a check-in on the threads still open from last time:</p>
+          <ul>
+            <li>Photo assets from Garry — the stickman stained glass, companion nun piece, tapestry, and photos of Justin teaching</li>
+            <li>Status of the Justin video library cleanup (~17h homilies, ~7–8h teaching)</li>
+            <li>Justin AI — any movement on the likeness/voice question with the Franciscans</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="agenda-item">
+        <div class="agenda-time">5 min</div>
+        <div>
+          <h2>Next steps &amp; the road to August 23</h2>
+          <p>What we'll each do before the board meeting on August 23, where a design update is expected — and confirming our next working session after August 19.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section decisions" style="background: var(--plaster);">
+    <div class="container">
+      <h2>Suggested additions to the moodboard</h2>
+      <p style="margin-top: 0.75rem; color: var(--ink-soft); max-width: var(--measure);">Images worth gathering before or during the session — each one anchors a part of the vision we named in July, and together they'd help the board <em>see</em> the direction rather than hear it described.</p>
+
+      <h3 style="font-family: Marcellus, serif; font-weight: 400; font-size: 1.2rem; margin-top: 2rem;">The architecture of light</h3>
+      <ul>
+        <li><strong>Ronchamp's south wall</strong> (Le Corbusier, Notre-Dame du Haut) — the scattered, deep-set colored-glass apertures that directly inspired the prototype's signature element</li>
+        <li><strong>Breuer's St. John's Abbey Church</strong> (Collegeville, MN) — board-formed concrete as a sacred material, and a honeycomb window wall that's stained glass without one tradition's iconography</li>
+        <li><strong>The Indianapolis Airport Civic Plaza atrium</strong> — Garry's own image from the vision session: vast glass-and-beam space, awe without religiosity. It belongs on the board in his words</li>
+      </ul>
+
+      <h3 style="font-family: Marcellus, serif; font-weight: 400; font-size: 1.2rem; margin-top: 2rem;">World sacred geometry</h3>
+      <ul>
+        <li><strong>One image each from the traditions Samuel named</strong> — a Timurid dome interior (Samarkand), an Ottoman courtyard (Sinan), a Ming temple hall — chosen for shared proportion and symmetry rather than ornament, making the interfaith breadth visible</li>
+        <li><strong>Carved Roman capitals</strong> — an inscription cut in stone (Trajan's Column lettering) — the root of the site's Marcellus typography and "letters carved into concrete" feel</li>
+      </ul>
+
+      <h3 style="font-family: Marcellus, serif; font-weight: 400; font-size: 1.2rem; margin-top: 2rem;">The Franciscan ground note</h3>
+      <ul>
+        <li><strong>The architecture of a forest</strong> — light shafting through a high canopy, trunks as columns — Samuel's "geometry meeting organic form," and the counterweight that keeps the concrete from feeling cold</li>
+        <li><strong>Humble warm materials</strong> — rough-sawn wood, undyed wool or linen weave (a nod to the tapestry), a simple rope cincture — Franciscan simplicity as texture, not symbol</li>
+        <li><strong>The Hermitage's own artifacts</strong> — even phone photos of the stickman stained glass, the companion nun piece, and the tapestry would ground the board in the real lineage while we wait on Garry's high-res versions</li>
+      </ul>
+
+      <h3 style="font-family: Marcellus, serif; font-weight: 400; font-size: 1.2rem; margin-top: 2rem;">Material and light studies</h3>
+      <ul>
+        <li><strong>Raking light on plaster</strong> — morning sun across a rough warm wall, the texture of the site's light grounds</li>
+        <li><strong>Amber glass lit from behind</strong> — a single glowing pane in a dark room, the palette's one accent as a physical object</li>
+        <li><strong>A threshold</strong> — a heavy door standing open onto light, or a vestibule between dark and bright — the "facade, door, hallways" metaphor in one frame</li>
+      </ul>
+
+      <p class="note" style="margin-top: 1.5rem;">Just as useful: a small "not this" corner — a lotus logo, a sage-green gradient, a stock sunset meditation photo — to make the deliberate refusal of new-age defaults explicit for the board.</p>
+    </div>
+  </section>
+
+  <section class="section decisions">
+    <div class="container">
+      <h2>Decisions we'd love your help with</h2>
+      <ul>
+        <li><strong>Mission statement wording</strong> — is the agreed essence ready to go to the board as final language?</li>
+        <li><strong>Meditation library</strong> — healing meditations free (Justin's tradition); confirm the approach for the rest</li>
+        <li><strong>Board meeting framing</strong> — what should the August 23 design update lead with: the moodboard, the prototype, or both?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <blockquote class="voice">
+        "The hermitage is a quiet space within each human being."
+        <cite>— Friar Justin Belitz, OFM</cite>
+      </blockquote>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p class="inscription">Hermitage World</p>
+    <p>Prepared by IRIS Cocreative · Working document for the Hermitage World engagement.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Value Icons · Hermitage World · Concrete &amp; Light</title>
+<meta name="description" content="Icon exploration for the five values of Hermitage World: three candidates per value, one shared grammar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23221B12'/%3E%3Crect x='5' y='5' width='6' height='6' fill='%23F2BE5A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya:ital,wght@0,400..700;1,400..700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hw.css">
+<style>
+  body { font-size: 1.0625rem; }
+  .ic-head {
+    padding-top: 9rem;
+    background: linear-gradient(168deg, #F7F2E8 0%, var(--plaster) 60%, var(--plaster-deep) 100%);
+  }
+  .ic-head h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); max-width: 16em; }
+  .ic-head .sub { color: var(--ink-soft); max-width: 52em; font-size: 1.125rem; }
+  .ic-section { padding-block: clamp(3rem, 6vw, 4.5rem); }
+
+  .value-block h2 {
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    margin-bottom: .4rem;
+  }
+  .value-block .meaning {
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin-bottom: var(--s4);
+  }
+  .value-block + .value-block { border-top: 1px solid rgba(43,36,27,.14); }
+
+  .cands {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  @media (max-width: 900px) { .cands { grid-template-columns: 1fr; } }
+
+  .cand {
+    padding: var(--s3) var(--s3) var(--s3);
+    box-shadow: inset 0 0 0 1px rgba(43,36,27,.14);
+    position: relative;
+  }
+  .cand.pick { box-shadow: inset 0 0 0 2px var(--amber); }
+  .cand .badge {
+    position: absolute;
+    top: -0.7rem; left: var(--s3);
+    background: linear-gradient(180deg, var(--amber-bright), var(--amber));
+    color: #2A1E06;
+    font-weight: 700;
+    font-size: .75rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .25em .8em;
+  }
+  .cand h3 {
+    font-family: var(--face-inscription);
+    font-size: 1.05rem;
+    letter-spacing: .04em;
+    margin: 0 0 .2rem;
+  }
+  .cand .why { font-size: .9rem; color: var(--ink-soft); margin: 0 0 var(--s3); min-height: 3.6em; }
+
+  .cand .contexts {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--s3);
+  }
+  .tile-lit {
+    width: 92px; height: 92px;
+    flex: none;
+    position: relative;
+    background: linear-gradient(135deg, rgba(0,0,0,.38), rgba(0,0,0,.12) 45%, rgba(255,255,255,.10) 60%, rgba(0,0,0,.30));
+    box-shadow: inset 3px 4px 9px rgba(0,0,0,.5), inset -2px -2px 6px rgba(255,255,255,.06);
+  }
+  .tile-lit::before {
+    content: "";
+    position: absolute; inset: 11%;
+    background: linear-gradient(315deg, rgba(0,0,0,.42), rgba(255,255,255,.07) 52%, rgba(0,0,0,.26));
+    box-shadow: inset 2px 3px 7px rgba(0,0,0,.5);
+  }
+  .tile-lit::after {
+    content: "";
+    position: absolute; inset: 26%;
+    background: radial-gradient(circle at 48% 42%, #fff8e6, var(--amber-bright) 55%, color-mix(in srgb, var(--amber-bright) 55%, #201503) 100%);
+    box-shadow: inset 0 0 6px rgba(255,255,255,.5), 0 2px 20px 3px rgba(217,154,43,.45);
+  }
+  .tile-lit svg {
+    position: absolute; inset: 0; margin: auto;
+    width: 44%; height: 44%;
+    z-index: 1;
+    color: #241A08;
+  }
+  .g-line { width: 56px; height: 56px; color: var(--ink); flex: none; }
+  .g-small { width: 22px; height: 22px; color: var(--ink-soft); flex: none; margin-bottom: 4px; }
+
+  .system-note {
+    background: var(--shadow);
+    color: var(--lumen);
+  }
+  .system-note h2 { font-size: clamp(1.6rem, 2.8vw, 2.2rem); }
+  .system-note p { color: var(--lumen-soft); max-width: 60ch; }
+  .set-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s4);
+    margin-top: var(--s4);
+    align-items: center;
+  }
+  .set-row svg { width: 56px; height: 56px; color: var(--amber-bright); }
+</style>
+</head>
+<body>
+<!-- Icon exploration inside the Concrete & Light world (contract in index.html, seed f03e9f46).
+     Grammar: 48-unit grid, one 1.7 stroke, geometric primitives, one filled point per glyph. -->
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>Hermitage&nbsp;World</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="index.html">Homepage</a>
+      <a href="styleguide.html">Design System</a>
+      <a href="friar-justin.html">Friar Justin</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="ic-head ic-section plaster">
+    <div class="container">
+      <h1>The Five Values, Drawn</h1>
+      <p class="sub">Three candidates for each value, all in one grammar: a 48-unit grid, a single 1.7 stroke, geometric primitives, and exactly one filled point in every glyph. The point is the person, the spark, the divine energy within. Read down the recommended column and the five icons tell one story: the spark shines, walks its own way, is held among all forms, builds, and joins the others. Nothing borrowed from any single tradition.</p>
+    </div>
+  </section>
+
+  <!-- ============ VALUE 1 ============ -->
+  <section class="value-block ic-section ground-plaster plaster">
+    <div class="container">
+      <h2>Inner divinity &amp; unlimited potential</h2>
+      <p class="meaning">You already carry what you are looking for. The spark is present, radiant, and larger than any container.</p>
+      <div class="cands">
+        <div class="cand pick">
+          <span class="badge">Recommended</span>
+          <h3>The Radiant Point</h3>
+          <p class="why">The spark at center, rays reaching for the ring: light already shining from within. The simplest true statement of the value.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/><path d="M24 14v4M24 30v4M14 24h4M30 24h4M17 17l2.8 2.8M28.2 28.2 31 31M31 17l-2.8 2.8M19.8 28.2 17 31"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/><path d="M24 14v4M24 30v4M14 24h4M30 24h4M17 17l2.8 2.8M28.2 28.2 31 31M31 17l-2.8 2.8M19.8 28.2 17 31"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="3.2" fill="currentColor" stroke="none"/><path d="M24 14v4M24 30v4M14 24h4M30 24h4M17 17l2.8 2.8M28.2 28.2 31 31M31 17l-2.8 2.8M19.8 28.2 17 31"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>The Open Vault</h3>
+          <p class="why">The vault above the spark is broken open at its crown, and light passes through: potential without a ceiling. More narrative, slightly less calm.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M15.5 17.5A13 13 0 1 0 32.5 17.5"/><circle cx="24" cy="27" r="2.6" fill="currentColor" stroke="none"/><path d="M24 15V7M16.5 17l-4.5-5.5M31.5 17l4.5-5.5"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M15.5 17.5A13 13 0 1 0 32.5 17.5"/><circle cx="24" cy="27" r="2.6" fill="currentColor" stroke="none"/><path d="M24 15V7M16.5 17l-4.5-5.5M31.5 17l4.5-5.5"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15.5 17.5A13 13 0 1 0 32.5 17.5"/><circle cx="24" cy="27" r="3.2" fill="currentColor" stroke="none"/><path d="M24 15V7M16.5 17l-4.5-5.5M31.5 17l4.5-5.5"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>The Deep Well</h3>
+          <p class="why">Rings of depth around the spark, the outermost left open: the further in you go, the further it opens. Quietest of the three; reads less at small sizes.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/><circle cx="24" cy="24" r="8.5"/><path d="M18 10.4A15 15 0 1 0 30 10.4"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/><circle cx="24" cy="24" r="8.5"/><path d="M18 10.4A15 15 0 1 0 30 10.4"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="24" cy="24" r="3.2" fill="currentColor" stroke="none"/><circle cx="24" cy="24" r="8.5"/><path d="M18 10.4A15 15 0 1 0 30 10.4"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUE 2 ============ -->
+  <section class="value-block ic-section ground-plaster plaster">
+    <div class="container">
+      <h2>Personal experience over doctrine</h2>
+      <p class="meaning">Nothing here asks for belief. The spark leaves the prescribed line and walks a path only it can walk.</p>
+      <div class="cands">
+        <div class="cand pick">
+          <span class="badge">Recommended</span>
+          <h3>The Own Path</h3>
+          <p class="why">A dashed rule stands for the handed-down line; the spark departs it on a lived curve. The clearest possible picture of the value, and the most human glyph in the set.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M16 8v32" stroke-dasharray="3 4"/><path d="M16 38c8-3 4.5-13 10.5-19 2.5-2.5 4.5-4.5 6-6.5"/><circle cx="33.5" cy="11" r="2.6" fill="currentColor" stroke="none"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M16 8v32" stroke-dasharray="3 4"/><path d="M16 38c8-3 4.5-13 10.5-19 2.5-2.5 4.5-4.5 6-6.5"/><circle cx="33.5" cy="11" r="2.6" fill="currentColor" stroke="none"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M16 8v32" stroke-dasharray="3 4"/><path d="M16 38c8-3 4.5-13 10.5-19 2.5-2.5 4.5-4.5 6-6.5"/><circle cx="33.5" cy="11" r="3.2" fill="currentColor" stroke="none"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>The Unclosed Circle</h3>
+          <p class="why">The circle refuses to close; the spark stands in the opening. Elegant and calm, but the meaning leans abstract without a caption.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M33.9 11.5A16 16 0 1 0 39.6 19"/><circle cx="39" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M33.9 11.5A16 16 0 1 0 39.6 19"/><circle cx="39" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M33.9 11.5A16 16 0 1 0 39.6 19"/><circle cx="39" cy="12" r="3.2" fill="currentColor" stroke="none"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>Through the Aperture</h3>
+          <p class="why">The spark enters through an opening in the wall: direct experience as the door. Ties tightly to the site's aperture grammar, at the cost of repeating it.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 19v-5h20v20H14v-5"/><circle cx="18" cy="24" r="2.6" fill="currentColor" stroke="none"/><path d="M6 24h6"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 19v-5h20v20H14v-5"/><circle cx="18" cy="24" r="2.6" fill="currentColor" stroke="none"/><path d="M6 24h6"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M14 19v-5h20v20H14v-5"/><circle cx="18" cy="24" r="3.2" fill="currentColor" stroke="none"/><path d="M6 24h6"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUE 3 ============ -->
+  <section class="value-block ic-section ground-plaster plaster">
+    <div class="container">
+      <h2>Radical acceptance</h2>
+      <p class="meaning">There is beauty in everyone and everything. Every form belongs inside the circle, unchanged.</p>
+      <div class="cands">
+        <div class="cand pick">
+          <span class="badge">Recommended</span>
+          <h3>All Held</h3>
+          <p class="why">One ring holds three unlike forms: the point, the square, the triangle, none asked to become the others. Acceptance of difference drawn literally, and instantly legible.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="15.5"/><circle cx="18" cy="20" r="2.6" fill="currentColor" stroke="none"/><rect x="26" y="16" width="6.5" height="6.5"/><path d="M20.8 32.5l3.4-6 3.4 6z"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="15.5"/><circle cx="18" cy="20" r="2.6" fill="currentColor" stroke="none"/><rect x="26" y="16" width="6.5" height="6.5"/><path d="M20.8 32.5l3.4-6 3.4 6z"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="24" cy="24" r="15.5"/><circle cx="18" cy="20" r="3.2" fill="currentColor" stroke="none"/><rect x="26" y="16" width="6.5" height="6.5"/><path d="M20.8 32.5l3.4-6 3.4 6z"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>The Vesica</h3>
+          <p class="why">Two equal circles sharing common ground. Beautiful and ancient, but it reads as partnership more than acceptance, and the sacred-geometry echo may pull toward the new-age register the brand avoids.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="19" cy="24" r="11.5"/><circle cx="29" cy="24" r="11.5"/><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="19" cy="24" r="11.5"/><circle cx="29" cy="24" r="11.5"/><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="19" cy="24" r="11.5"/><circle cx="29" cy="24" r="11.5"/><circle cx="24" cy="24" r="3.2" fill="currentColor" stroke="none"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>The Embrace</h3>
+          <p class="why">Two arcs curve around the spark without closing on it: held, never confined. Tender, but the open arcs can read as brackets at interface sizes.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M19.5 9.5A15.5 15.5 0 0 0 19.5 38.5"/><path d="M28.5 9.5A15.5 15.5 0 0 1 28.5 38.5"/><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M19.5 9.5A15.5 15.5 0 0 0 19.5 38.5"/><path d="M28.5 9.5A15.5 15.5 0 0 1 28.5 38.5"/><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M19.5 9.5A15.5 15.5 0 0 0 19.5 38.5"/><path d="M28.5 9.5A15.5 15.5 0 0 1 28.5 38.5"/><circle cx="24" cy="24" r="3.2" fill="currentColor" stroke="none"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUE 4 ============ -->
+  <section class="value-block ic-section ground-plaster plaster">
+    <div class="container">
+      <h2>Self-responsibility &amp; conscious creation</h2>
+      <p class="meaning">Thought, intention and action shape a life. The spark is the pen, and the form is still being drawn.</p>
+      <div class="cands">
+        <div class="cand pick">
+          <span class="badge">Recommended</span>
+          <h3>The Drawn Square</h3>
+          <p class="why">A square, deliberately unfinished, with the spark at the pen's position: your life as a form you are consciously completing. Echoes the site's aperture without copying it.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 36V14h20v22H22"/><circle cx="18" cy="36" r="2.6" fill="currentColor" stroke="none"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 36V14h20v22H22"/><circle cx="18" cy="36" r="2.6" fill="currentColor" stroke="none"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M14 36V14h20v22H22"/><circle cx="18" cy="36" r="3.2" fill="currentColor" stroke="none"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>Point, Line, Plane</h3>
+          <p class="why">Creation as ascent: the point becomes a line becomes a form. A quiet Bauhaus-order statement; reads as three separate marks at small sizes.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="36" r="2.6" fill="currentColor" stroke="none"/><path d="M16.5 31.5l6.5-6.5"/><rect x="25" y="11" width="12" height="12"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="36" r="2.6" fill="currentColor" stroke="none"/><path d="M16.5 31.5l6.5-6.5"/><rect x="25" y="11" width="12" height="12"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="12" cy="36" r="3.2" fill="currentColor" stroke="none"/><path d="M16.5 31.5l6.5-6.5"/><rect x="25" y="11" width="12" height="12"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>The Builder's Spiral</h3>
+          <p class="why">A rectangular spiral growing outward from the spark: creation compounding, turn by turn. Strong at large sizes; densest of the three when small.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="23" cy="25" r="2.6" fill="currentColor" stroke="none"/><path d="M23 20h7v11H16V14h20v23H12"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="23" cy="25" r="2.6" fill="currentColor" stroke="none"/><path d="M23 20h7v11H16V14h20v23H12"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="23" cy="25" r="3.2" fill="currentColor" stroke="none"/><path d="M23 20h7v11H16V14h20v23H12"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUE 5 ============ -->
+  <section class="value-block ic-section ground-plaster plaster">
+    <div class="container">
+      <h2>Unity &amp; connection</h2>
+      <p class="meaning">All life is held together by love. The sparks are many, and they are joined.</p>
+      <div class="cands">
+        <div class="cand pick">
+          <span class="badge">Recommended</span>
+          <h3>The Shared Center</h3>
+          <p class="why">Five sparks joined through one center: unity as a common heart, not a closed club. Calm, symmetric, and the filled center quietly rhymes with Inner Divinity, closing the set's story where it began.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/><circle cx="24" cy="10.5" r="2.4"/><circle cx="36.8" cy="19.8" r="2.4"/><circle cx="31.9" cy="34.9" r="2.4"/><circle cx="16.1" cy="34.9" r="2.4"/><circle cx="11.2" cy="19.8" r="2.4"/><path d="M24 19.5v-5M28.3 22.6l6-4.4M25.7 28.8l4.6 3.9M22.3 28.8l-4.6 3.9M19.7 22.6l-6-4.4"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/><circle cx="24" cy="10.5" r="2.4"/><circle cx="36.8" cy="19.8" r="2.4"/><circle cx="31.9" cy="34.9" r="2.4"/><circle cx="16.1" cy="34.9" r="2.4"/><circle cx="11.2" cy="19.8" r="2.4"/><path d="M24 19.5v-5M28.3 22.6l6-4.4M25.7 28.8l4.6 3.9M22.3 28.8l-4.6 3.9M19.7 22.6l-6-4.4"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="24" cy="24" r="3.2" fill="currentColor" stroke="none"/><circle cx="24" cy="10.5" r="2.8"/><circle cx="36.8" cy="19.8" r="2.8"/><circle cx="31.9" cy="34.9" r="2.8"/><circle cx="16.1" cy="34.9" r="2.8"/><circle cx="11.2" cy="19.8" r="2.8"/><path d="M24 19.5v-5M28.3 22.6l6-4.4M25.7 28.8l4.6 3.9M22.3 28.8l-4.6 3.9M19.7 22.6l-6-4.4"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>The Ring of Five</h3>
+          <p class="why">Five sparks joined hand to hand in a ring: community as a circle of equals. Honest and warm; slightly generic next to the shared-center form.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="10.5" r="2.6" fill="currentColor" stroke="none"/><circle cx="36.8" cy="19.8" r="2.4"/><circle cx="31.9" cy="34.9" r="2.4"/><circle cx="16.1" cy="34.9" r="2.4"/><circle cx="11.2" cy="19.8" r="2.4"/><path d="M26.3 12.2l8.4 6.1M35.9 22.5l-3.1 9.6M29.2 34.9H18.8M15.2 32.1l-3.1-9.6M13.3 18.3l8.4-6.1"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="10.5" r="2.6" fill="currentColor" stroke="none"/><circle cx="36.8" cy="19.8" r="2.4"/><circle cx="31.9" cy="34.9" r="2.4"/><circle cx="16.1" cy="34.9" r="2.4"/><circle cx="11.2" cy="19.8" r="2.4"/><path d="M26.3 12.2l8.4 6.1M35.9 22.5l-3.1 9.6M29.2 34.9H18.8M15.2 32.1l-3.1-9.6M13.3 18.3l8.4-6.1"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="24" cy="10.5" r="3.2" fill="currentColor" stroke="none"/><circle cx="36.8" cy="19.8" r="2.8"/><circle cx="31.9" cy="34.9" r="2.8"/><circle cx="16.1" cy="34.9" r="2.8"/><circle cx="11.2" cy="19.8" r="2.8"/><path d="M26.3 12.2l8.4 6.1M35.9 22.5l-3.1 9.6M29.2 34.9H18.8M15.2 32.1l-3.1-9.6M13.3 18.3l8.4-6.1"/></svg>
+          </div>
+        </div>
+        <div class="cand">
+          <h3>One Thread</h3>
+          <p class="why">A single line passing through five sparks: connection as one continuous thread of life. Lyrical and distinctive; the least symmetric, and it wants horizontal room.</p>
+          <div class="contexts">
+            <div class="tile-lit"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 32c3-9 6-14 9-14s4 11 7 11 4-13 7-13 5 8 9 12"/><circle cx="8" cy="32" r="2.4"/><circle cx="17" cy="18" r="2.4"/><circle cx="24" cy="29" r="2.6" fill="currentColor" stroke="none"/><circle cx="31" cy="16" r="2.4"/><circle cx="40" cy="28" r="2.4"/></svg></div>
+            <svg class="g-line" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 32c3-9 6-14 9-14s4 11 7 11 4-13 7-13 5 8 9 12"/><circle cx="8" cy="32" r="2.4"/><circle cx="17" cy="18" r="2.4"/><circle cx="24" cy="29" r="2.6" fill="currentColor" stroke="none"/><circle cx="31" cy="16" r="2.4"/><circle cx="40" cy="28" r="2.4"/></svg>
+            <svg class="g-small" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M8 32c3-9 6-14 9-14s4 11 7 11 4-13 7-13 5 8 9 12"/><circle cx="8" cy="32" r="2.8"/><circle cx="17" cy="18" r="2.8"/><circle cx="24" cy="29" r="3.2" fill="currentColor" stroke="none"/><circle cx="31" cy="16" r="2.8"/><circle cx="40" cy="28" r="2.8"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE RECOMMENDED SET ============ -->
+  <section class="system-note ic-section shadowed on-shadow">
+    <div class="container">
+      <h2>The recommended set, together</h2>
+      <p>Read left to right, the five glyphs tell the seeker's story in the brand's own grammar: the spark shines within, walks its own path, is held among all forms, builds a life, and joins the others through a shared heart. One stroke, one grid, one filled point each. Small sizes use a 2.4 stroke cut of the same drawings.</p>
+      <div class="set-row" aria-label="The five recommended icons in sequence">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/><path d="M24 14v4M24 30v4M14 24h4M30 24h4M17 17l2.8 2.8M28.2 28.2 31 31M31 17l-2.8 2.8M19.8 28.2 17 31"/></svg>
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M16 8v32" stroke-dasharray="3 4"/><path d="M16 38c8-3 4.5-13 10.5-19 2.5-2.5 4.5-4.5 6-6.5"/><circle cx="33.5" cy="11" r="2.6" fill="currentColor" stroke="none"/></svg>
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="15.5"/><circle cx="18" cy="20" r="2.6" fill="currentColor" stroke="none"/><rect x="26" y="16" width="6.5" height="6.5"/><path d="M20.8 32.5l3.4-6 3.4 6z"/></svg>
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 36V14h20v22H22"/><circle cx="18" cy="36" r="2.6" fill="currentColor" stroke="none"/></svg>
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/><circle cx="24" cy="10.5" r="2.4"/><circle cx="36.8" cy="19.8" r="2.4"/><circle cx="31.9" cy="34.9" r="2.4"/><circle cx="16.1" cy="34.9" r="2.4"/><circle cx="11.2" cy="19.8" r="2.4"/><path d="M24 19.5v-5M28.3 22.6l6-4.4M25.7 28.8l4.6 3.9M22.3 28.8l-4.6 3.9M19.7 22.6l-6-4.4"/></svg>
+      </div>
+      <p style="margin-top: var(--s4);">Two of the five (The Radiant Point, The Drawn Square) are refinements of the glyphs already live on the homepage; choosing this set would swap in The Own Path, All Held, and The Shared Center. Any candidate above can be substituted; the grammar holds regardless of the mix.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer shadowed">
+  <div class="container">
+    <div class="footer-cols">
+      <div>
+        <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>Hermitage&nbsp;World</a>
+        <p style="max-width:30ch; margin-top:var(--s2);">Icon exploration · Concrete &amp; Light.</p>
+      </div>
+      <nav aria-label="Pages">
+        <a href="index.html">Homepage</a>
+        <a href="styleguide.html">Design System</a>
+        <a href="friar-justin.html">Friar Justin &amp; the Library</a>
+      </nav>
+    </div>
+    <div class="fine">
+      <span>&copy; 2026 The Hermitage.</span>
+      <span>Prototype for review · pick a set and it becomes the system.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/hw.js"></script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friar Justin &amp; the Library · Hermitage World</title>
+<meta name="description" content="Friar Justin Belitz, OFM founded the Hermitage in 1985. His homilies, teachings, and meditations live here: a hall of remembrance that is not a memorial, but a doorway.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23221B12'/%3E%3Crect x='5' y='5' width='6' height='6' fill='%23F2BE5A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya:ital,wght@0,400..700;1,400..700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hw.css">
+<style>
+  /* ---------- Hall hero ---------- */
+  .hall {
+    padding-top: 9rem;
+    color: var(--lumen);
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(217,154,43,.10), transparent 70%),
+      var(--shadow);
+  }
+  .clerestory {
+    display: flex;
+    justify-content: center;
+    gap: var(--s3);
+    margin-bottom: var(--s6);
+  }
+  .clerestory .ap { --ap-size: 34px; }
+  .hall-inner {
+    display: grid;
+    grid-template-columns: 1fr minmax(260px, 360px);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .hall h1 {
+    font-size: clamp(2.3rem, 5vw, 4.2rem);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .hall .role {
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    color: var(--lumen-soft);
+    max-width: 36em;
+  }
+  .hall .voice { margin-top: var(--s4); }
+  .portrait {
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+  }
+  @media (max-width: 860px) {
+    .hall-inner { grid-template-columns: 1fr; }
+    .portrait { max-width: 340px; }
+  }
+
+  /* ---------- The prayer outline: three bays ---------- */
+  .outline h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); max-width: 16em; }
+  .outline .section-lede { color: var(--ink-soft); max-width: 46em; }
+  .bays {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.25rem, 2.6vw, 2.25rem);
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    align-items: stretch;
+  }
+  .bay {
+    padding: var(--s4);
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: var(--lumen);
+    box-shadow:
+      inset 3px 5px 14px rgba(0,0,0,.55),
+      inset -2px -2px 8px rgba(255,255,255,.03),
+      0 1px 0 rgba(255,255,255,.14);
+  }
+  .bay:nth-child(1) {
+    background:
+      radial-gradient(ellipse 120% 50% at 50% 0%, rgba(242,190,90,.34), transparent 70%),
+      linear-gradient(180deg, #4A3D28, #3A2F1E);
+  }
+  .bay:nth-child(2) {
+    background:
+      radial-gradient(ellipse 120% 45% at 50% 0%, rgba(91,123,174,.28), transparent 70%),
+      linear-gradient(180deg, #322A1C, #271F13);
+  }
+  .bay:nth-child(3) {
+    background:
+      radial-gradient(ellipse 120% 40% at 50% 0%, rgba(245,237,220,.14), transparent 65%),
+      linear-gradient(180deg, #1D1810, #14100A);
+  }
+  .bay h3 {
+    font-size: 1.4rem;
+    letter-spacing: .06em;
+    margin-bottom: .5rem;
+  }
+  .bay p { font-size: .98rem; color: var(--lumen-soft); margin: 0; }
+  .bay .stage {
+    font-family: var(--face-inscription);
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    font-size: .78rem;
+    color: var(--lumen-soft);
+    margin-bottom: auto;
+    padding-bottom: var(--s4);
+  }
+  @media (max-width: 860px) {
+    .bays { grid-template-columns: 1fr; }
+    .bay { min-height: 230px; }
+  }
+
+  /* ---------- Library ---------- */
+  .library h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); }
+  .library .section-lede { color: var(--lumen-soft); max-width: 46em; }
+  .wings {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: var(--s5);
+    align-items: start;
+  }
+  .wing h3 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgba(245,237,220,.22);
+    padding-bottom: var(--s2);
+    margin-bottom: var(--s2);
+  }
+  .wing .scope { color: var(--lumen-soft); font-size: .95rem; margin-bottom: var(--s3); }
+  .shelf { list-style: none; margin: 0; padding: 0; }
+  .shelf li { border-bottom: 1px solid rgba(245,237,220,.12); }
+  .shelf a {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--s2);
+    align-items: baseline;
+    padding: .7rem .2rem;
+    text-decoration: none;
+    color: var(--lumen);
+    transition: background .25s var(--ease-out);
+  }
+  .shelf a > span:first-child { transition: transform .25s var(--ease-out); }
+  .shelf a:hover { background: rgba(242,190,90,.07); }
+  .shelf a:hover > span:first-child { transform: translateX(.4rem); }
+  .shelf .len {
+    font-size: .85rem;
+    color: var(--lumen-soft);
+    white-space: nowrap;
+  }
+  .shelf .free {
+    font-size: .8rem;
+    font-weight: 700;
+    color: var(--amber-bright);
+    white-space: nowrap;
+  }
+  .wing-note { margin-top: var(--s4); font-size: .875rem; color: var(--lumen-soft); }
+  @media (max-width: 900px) {
+    .wings { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Soul Guide ---------- */
+  .soulguide { text-align: center; }
+  .soulguide h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); max-width: 16em; margin-inline: auto; }
+  .soulguide .how { margin-inline: auto; color: var(--ink-soft); max-width: 42em; }
+  .ask {
+    margin: var(--s5) auto 0;
+    max-width: 36rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s2);
+    justify-content: center;
+  }
+  .ask input {
+    flex: 1 1 16rem;
+    font: inherit;
+    padding: .85em 1.1em;
+    border: 1px solid color-mix(in srgb, var(--ink) 40%, transparent);
+    background: #FBF8F1;
+    color: var(--ink);
+  }
+  .ask input::placeholder { color: var(--ink-soft); }
+  .ask-note { font-size: .875rem; color: var(--ink-soft); margin-top: var(--s2); }
+
+  /* ---------- Endorsements ---------- */
+  .trusted { border-top: 1px solid rgba(43,36,27,.16); }
+  .trusted h2 { font-size: clamp(1.6rem, 2.8vw, 2.2rem); }
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--s4) var(--s5);
+    margin-top: var(--s4);
+  }
+  .quotes blockquote {
+    margin: 0;
+    font-family: var(--face-voice);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.55;
+  }
+  .quotes cite {
+    display: block;
+    margin-top: var(--s2);
+    font-family: var(--face-body);
+    font-style: normal;
+    font-size: .9rem;
+    letter-spacing: .03em;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Close ---------- */
+  .hall-close { text-align: center; }
+  .hall-close h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); max-width: 17em; margin-inline: auto; }
+  .hall-close p { margin-inline: auto; color: var(--lumen-soft); max-width: 40em; }
+  .hall-close .actions {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: var(--s2); margin-top: var(--s4);
+  }
+</style>
+</head>
+<body>
+<!-- Direction contract lives in index.html (Concrete & Light, seed f03e9f46);
+     this hall inherits that world: shadow ground, glass light, lapidary caps. -->
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav on-dark">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>Hermitage&nbsp;World</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="index.html#path">The Path</a>
+      <a href="index.html#gatherings">Gatherings</a>
+      <a href="friar-justin.html" aria-current="page">Friar Justin</a>
+      <a href="#library">Library</a>
+      <a class="btn btn-primary" href="index.html#gatherings">Join a gathering</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HALL HERO ============ -->
+  <section class="hall section on-shadow shadowed" data-ignite-group>
+    <div class="container">
+      <div class="clerestory" aria-hidden="true">
+        <div class="ap" data-ignite></div>
+        <div class="ap ap-blue" data-ignite></div>
+        <div class="ap" data-ignite></div>
+        <div class="ap ap-madder" data-ignite></div>
+        <div class="ap" data-ignite></div>
+        <div class="ap ap-blue" data-ignite></div>
+        <div class="ap" data-ignite></div>
+      </div>
+      <div class="hall-inner">
+        <div>
+          <h1>Friar Justin Belitz,&nbsp;OFM</h1>
+          <p class="role">Franciscan friar. Teacher of meditation on three continents. Founder of the Hermitage, 1985. He spent his life convinced of one simple thing:</p>
+          <blockquote class="voice">
+            &ldquo;The purpose of the Hermitage is to help as many people meditate daily so we can have world peace.&rdquo;
+            <cite>Friar Justin Belitz, OFM</cite>
+          </blockquote>
+        </div>
+        <figure class="asset-pending portrait" style="margin:0;">
+          <span class="inscription">Photograph to come</span>
+          <small>Portrait of Friar Justin, from the Hermitage archive</small>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PRAYER OUTLINE ============ -->
+  <section class="outline section ground-plaster plaster">
+    <div class="container">
+      <h2>He left a path, not a doctrine.</h2>
+      <p class="section-lede">Justin rarely explained it outright, but everything he taught follows what he called the prayer outline: a movement every person can walk at their own pace, from words, toward images, into silence.</p>
+      <div class="bays">
+        <div class="bay">
+          <span class="stage">First</span>
+          <h3>Spoken Prayer</h3>
+          <p>Where most of us begin: the prayers of childhood, words said aloud. Nothing to unlearn. A doorway, honored as one.</p>
+        </div>
+        <div class="bay">
+          <span class="stage">Then</span>
+          <h3>Mental Prayer</h3>
+          <p>Meditation with the mind's eye: visualization, affirmation, imagination in service of a full life. The heart of Success: Full Living.</p>
+        </div>
+        <div class="bay">
+          <span class="stage">Finally</span>
+          <h3>The Prayer of Silence</h3>
+          <p>Beyond words and images: quiet contemplation, resting in the hermitage within. The capstone he called Living the Prayer of Quiet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE LIBRARY ============ -->
+  <section class="library section ground-shadow on-shadow shadowed board-form" id="library">
+    <div class="container">
+      <h2>Twenty-five hours of his voice, kept living.</h2>
+      <p class="section-lede">Recorded simply, an iPad on a stand, a friar who kept teaching through everything. Being restored now, homily by homily. AI helps us search it; it never speaks for him.</p>
+      <div class="wings">
+        <div class="wing">
+          <h3>Sunday Homilies</h3>
+          <p class="scope">About 17 hours &middot; three years of Sundays &middot; six to eight minutes each</p>
+          <ul class="shelf">
+            <li><a href="#library"><span>Peace begins within</span><span class="len">7 min</span></a></li>
+            <li><a href="#library"><span>On being an instrument of peace</span><span class="len">6 min</span></a></li>
+            <li><a href="#library"><span>The quiet space, revisited</span><span class="len">8 min</span></a></li>
+            <li><a href="#library"><span>Seeing beauty in everyone</span><span class="len">7 min</span></a></li>
+            <li><a href="#library"><span>What silence is for</span><span class="len">6 min</span></a></li>
+          </ul>
+        </div>
+        <div class="wing">
+          <h3>Teachings</h3>
+          <p class="scope">About 8 hours of recorded teaching sessions</p>
+          <ul class="shelf">
+            <li><a href="#library"><span>The life mechanism</span><span class="len">42 min</span></a></li>
+            <li><a href="#library"><span>The prayer outline</span><span class="len">38 min</span></a></li>
+            <li><a href="#library"><span>Meditation for the busy mind</span><span class="len">35 min</span></a></li>
+            <li><a href="#library"><span>Goals, images &amp; grace</span><span class="len">40 min</span></a></li>
+          </ul>
+        </div>
+        <div class="wing">
+          <h3>Meditations</h3>
+          <p class="scope">Guided audio. In Justin's tradition, the healing meditations are free for everyone, always</p>
+          <ul class="shelf">
+            <li><a href="#library"><span>Meditation for healing</span><span class="free">Free</span></a></li>
+            <li><a href="#library"><span>Healing for another</span><span class="free">Free</span></a></li>
+            <li><a href="#library"><span>Morning stillness</span><span class="len">MP3</span></a></li>
+            <li><a href="#library"><span>The Success: Full Living retreat</span><span class="len">MP3</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="wing-note">Titles shown are representative placeholders; the launch library will be indexed from the restored archive.</p>
+    </div>
+  </section>
+
+  <!-- ============ SOUL GUIDE ============ -->
+  <section class="soulguide section ground-deep plaster">
+    <div class="container">
+      <h2>Ask a question. Hear him answer it.</h2>
+      <p class="how">We are indexing every homily and teaching so that any question, about grief, about practice, about God, surfaces the exact moment Friar Justin spoke to it. His own voice, his own words, found for you. Never generated.</p>
+      <form class="ask" action="#" method="post">
+        <label for="ask-input" class="inscription" style="width:100%;">Coming to the library</label>
+        <input id="ask-input" type="text" placeholder="How do I quiet a worried mind?" disabled aria-describedby="ask-note">
+        <button class="btn btn-primary" type="button" disabled>Find the moment</button>
+      </form>
+      <p class="ask-note" id="ask-note">In development, shown here as a preview of the search experience.</p>
+    </div>
+  </section>
+
+  <!-- ============ ENDORSEMENTS ============ -->
+  <section class="trusted section ground-deep plaster">
+    <div class="container">
+      <h2>Voices that vouched for him.</h2>
+      <div class="quotes">
+        <blockquote>&ldquo;Endorsement text from the current site to be carried over.&rdquo;<cite>Dr.&nbsp;Wayne Dyer</cite></blockquote>
+        <blockquote>&ldquo;Endorsement text from the current site to be carried over.&rdquo;<cite>Gerald Jampolsky, M.D.</cite></blockquote>
+        <blockquote>&ldquo;Endorsement text from the current site to be carried over.&rdquo;<cite>The Amazing Kreskin</cite></blockquote>
+        <blockquote>&ldquo;Endorsement text from the current site to be carried over.&rdquo;<cite>Barbara Stahura</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSE ============ -->
+  <section class="hall-close section ground-shadow on-shadow shadowed">
+    <div class="container">
+      <h2>This hall is not a memorial. It is a doorway he built for you.</h2>
+      <p>Justin never wanted followers looking back at him. He wanted meditators: people who find the quiet space within and carry peace out into their families, their work, their world. The best way to remember him is to begin.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="index.html#path">Begin the path</a>
+        <a class="btn btn-quiet" href="index.html#gatherings">Join a gathering</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer shadowed">
+  <div class="container">
+    <div class="footer-cols">
+      <div>
+        <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>Hermitage&nbsp;World</a>
+        <p style="max-width:30ch; margin-top:var(--s2);">An interfaith center for meditation and spirituality. Indianapolis, and everywhere.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="index.html#path">The Path</a>
+        <a href="index.html#gatherings">Gatherings</a>
+        <a href="friar-justin.html">Friar Justin</a>
+        <a href="#library">The Library</a>
+        <a href="#">Ways to Give</a>
+      </nav>
+      <nav aria-label="Contact">
+        <a href="#">Contact</a>
+        <a href="#">Newsletter</a>
+        <a href="https://hermitageindy.org">Formerly hermitageindy.org</a>
+      </nav>
+    </div>
+    <div class="fine">
+      <span>&copy; 2026 The Hermitage &middot; All traditions honored here.</span>
+      <span>Design prototype v0.1 &middot; imagery, times &amp; links are placeholders.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/hw.js"></script>
+</body>
+</html>

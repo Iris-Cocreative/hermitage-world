@@ -1,0 +1,142 @@
+/* ==========================================================================
+   Pages — compositions specific to one page. Anything used twice moves to
+   components.css. Values here still come from tokens.
+   ========================================================================== */
+
+@layer pages {
+  /* custom elements render their own boxes; the tags themselves don't box */
+  hw-header, hw-footer, hw-signup, hw-mark { display: contents; }
+
+  /* =========================================================== HOME ===== */
+
+  /* Threshold: the stained-glass room seen through the open door */
+  .threshold { text-align: center; padding-top: calc(var(--space-3xl) + var(--space-md)); }
+  .threshold .room-arch { --room-arch-top: var(--space-xl); }
+  .door {
+    position: relative;
+    width: min(68rem, 100%);
+    margin-inline: auto;
+    aspect-ratio: 1090 / 727;
+  }
+  /* the room fades into the dark at its edges, like the frame's vignette */
+  .door__room {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-mask: radial-gradient(ellipse 52% 60% at 50% 46%, #000 38%, rgb(0 0 0 / .55) 62%, transparent 100%);
+    mask: radial-gradient(ellipse 52% 60% at 50% 46%, #000 38%, rgb(0 0 0 / .55) 62%, transparent 100%);
+  }
+  /* the glowing outline of a door: always open */
+  .door__outline {
+    position: absolute;
+    left: 50%;
+    top: 5.5%;
+    width: 44%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 18px rgb(245 237 220 / .35));
+  }
+  .threshold__line { margin-top: var(--space-xl); font-size: var(--text-4xl); line-height: 1.19; color: var(--text-strong); }
+  .threshold__down { margin-top: var(--space-xl); }
+
+  /* Oculus */
+  .oculus { padding-bottom: var(--space-3xl); }
+  .oculus__roundel { --roundel-size: min(43rem, 82vw); margin-inline: auto; }
+  .oculus__roundel img { object-position: center 42%; }
+
+  /* Five lights: the header and arrows sit over the photo */
+  .lights .section-head { margin-bottom: 0; align-items: flex-start; }
+  .lights .section-head h2 { max-width: 7.5em; }
+
+  /* Founded */
+  .founded__art { width: min(32.5rem, 80vw); }
+  .founded__art .art { width: 100%; }
+  .founded__title { font-size: var(--text-3xl); line-height: 1.1; }
+  .founded__title em { font-style: normal; color: var(--accent); }
+
+  /* Never the building: the letter card */
+  .letter__card {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: center;
+    background: transparent;
+    max-width: 81.5rem;
+    margin-inline: auto;
+  }
+  @media (min-width: 900px) {
+    .letter__card { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); padding: var(--space-2xl) var(--space-xl); }
+    .letter__card > form { border-left: var(--line-thin) solid var(--line); padding-left: var(--space-xl); }
+  }
+  .letter__card h2 { font-size: var(--text-3xl); }
+  .letter__card h3 { font-size: var(--text-xl); }
+
+  /* Mission */
+  .mission { padding-block: calc(var(--space-3xl) * 1.5) var(--space-3xl); }
+  .mission__kicker { color: var(--text-strong); font-weight: var(--weight-medium); letter-spacing: 0; }
+  .mission .quote p { font-size: var(--text-2xl); line-height: 1.25; }
+}
+
+@layer pages {
+  /* ====================================================== INNER PAGES ===== */
+  fieldset.chips { border: 0; margin: 0; padding: 0; min-width: 0; }
+
+  /* Library filter bar */
+  .library-filter { display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-md); align-items: center; padding-block: var(--space-md); border-block: var(--line-thin) solid var(--line-subtle); }
+  .library-filter__search { flex: 1 1 18rem; }
+
+  /* Calendar day headings inside the upcoming board */
+  .calendar-day { padding-top: var(--space-lg); padding-bottom: var(--space-2xs); font-size: var(--text-lg); color: var(--accent-text); border-bottom: var(--line-thin) solid var(--line); }
+  .calendar-day:first-child { padding-top: var(--space-sm); }
+}
+
+@layer pages {
+  .book { display: flex; flex-direction: column; gap: var(--space-sm); }
+  .book__cover { --arch-a: .72; margin-bottom: var(--space-xs); }
+}
+
+@layer pages {
+  /* Calendar month grid */
+  .month__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); margin-bottom: var(--space-md); }
+  .month__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: var(--line-thin) solid var(--line); border-left: var(--line-thin) solid var(--line-subtle); }
+  .month__dow { padding: var(--space-2xs); font-size: var(--text-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--accent-text); border-right: var(--line-thin) solid var(--line-subtle); border-bottom: var(--line-thin) solid var(--line-subtle); }
+  .month__cell { min-height: 7rem; padding: var(--space-2xs); display: flex; flex-direction: column; gap: 0.25rem; border-right: var(--line-thin) solid var(--line-subtle); border-bottom: var(--line-thin) solid var(--line-subtle); }
+  .month__cell.is-today { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .month__cell.is-today .month__num { color: var(--accent-text); }
+  .month__num { font-family: var(--font-display); font-size: var(--text-sm); color: var(--text-muted); }
+  .month__item { display: block; padding: 0.2rem 0.4rem; border-left: 2px solid var(--accent); font-size: var(--text-xs); line-height: 1.25; color: var(--text); background: var(--surface-glass); border-radius: 0 var(--radius-xs) var(--radius-xs) 0; }
+  .month__item:hover { color: var(--accent-text); }
+  @media (max-width: 760px) { .month { display: none; } }
+
+  /* Event detail panel */
+  .event-panel { gap: var(--space-md); }
+
+  /* Soul guide ask bar */
+  .soul-ask { display: flex; gap: var(--space-2xs); }
+  .soul-ask .input { flex: 1; }
+  .soul-result { gap: var(--space-md); }
+}
+
+@layer pages {
+  /* Community ring: eight seats around one center (the mark as a map) */
+  .ring { container-type: inline-size; position: relative; aspect-ratio: 1; width: min(34rem, 100%); margin: var(--space-lg) auto; }
+  .ring::before { content: ""; position: absolute; inset: 10%; border: var(--line-thin) dashed var(--line-subtle); border-radius: 50%; }
+  .ring__core { position: absolute; inset: 31%; display: grid; place-items: center; padding: 8%; border-radius: 50%; background: radial-gradient(circle, rgb(242 190 90 / .28), rgb(166 129 64 / .12) 60%, transparent 72%); border: var(--line-thin) solid var(--line); text-align: center; font-family: var(--font-display); font-size: var(--text-md); line-height: 1.2; color: var(--heading); }
+  .ring__seat { position: absolute; left: 50%; top: 50%; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 7rem;
+    transform: translate(-50%, -50%) rotate(calc(var(--i) * 45deg - 90deg)) translateX(39cqw) rotate(calc(var(--i) * -45deg + 90deg)); }
+  .ring__dot { width: clamp(1.4rem, 3vw, 2.2rem); aspect-ratio: 1; border-radius: 50%; border: var(--line-thin) solid var(--line); background: var(--surface); }
+  .ring__seat.is-lit .ring__dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 22px rgb(217 154 43 / .45); }
+  .ring__seat.is-yours .ring__dot { border: 2px dashed var(--gold-300); }
+  .ring__label { font-size: var(--text-xs); text-align: center; color: var(--text-muted); }
+  .ring__seat.is-lit .ring__label, .ring__seat.is-yours .ring__label { color: var(--text-strong); }
+  @media (max-width: 520px) { .ring__seat { width: 5.5rem; } }
+
+  /* Feature tiles (phase-two platform) */
+  .feature { display: flex; flex-direction: column; gap: var(--space-2xs); padding-top: var(--space-md); border-top: var(--line-thin) solid var(--line); }
+  .feature .icon { --icon-size: 1.8rem; color: var(--accent); margin-bottom: var(--space-2xs); }
+  .feature h3 { font-size: var(--text-xl); }
+  .feature p { color: var(--text-muted); font-size: var(--text-sm); }
+}
+
+@layer pages {
+  .faq__q { font-size: var(--text-lg); }
+  .give-form { gap: var(--space-md); }
+}

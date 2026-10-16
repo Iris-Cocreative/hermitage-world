@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A gathering · Hermitage World</title>
+<meta name="description" content="When and where, what to expect, who hosts, and how to join.">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya:ital@0;1&display=swap">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<script src="../../assets/js/site.js"></script>
+</head>
+<body>
+<hw-header></hw-header>
+
+<!-- The event template. Which gathering it shows comes from ?id= and
+     assets/data/gatherings.js fills every [data-g] slot. -->
+<main id="main" data-gatherings="event">
+
+<section class="page-hero page-hero--media" data-room="dark">
+  <div class="room-arch" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <div data-reveal>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../">Gatherings</a><span aria-hidden="true">/</span><span data-g="title">Worldwide Energy Circle</span></nav>
+      <div class="cluster cluster--tight"><span data-g="mode"></span><span data-g="live"></span></div>
+      <h1 class="mt-sm" data-g="title">Worldwide Energy Circle</h1>
+      <p class="t-lede" data-g="summary">Every Tuesday since 2020, Indianapolis to Australia, the community holds silence together on Zoom.</p>
+    </div>
+    <div class="page-hero__media" data-reveal>
+      <div class="card card--lg event-panel">
+        <div class="stack stack--xs"><span class="t-caps">When, your time</span><p class="t-h4" data-g="when">Tuesdays</p><p class="t-small t-muted" data-g="host-time"></p></div>
+        <hr>
+        <div class="stack stack--xs"><span class="t-caps">Where</span><p data-g="place">Zoom</p></div>
+        <div class="stack stack--xs"><span class="t-caps">Host</span><p data-g="host">The Hermitage community</p></div>
+        <div class="stack stack--sm mt-sm">
+          <a class="btn btn--solid btn--block" href="#rsvp" data-g="action">Join</a>
+          <a class="btn btn--block" href="#" data-g="ics"><svg class="icon" aria-hidden="true"><use href="../../assets/img/icons.svg#calendar"/></svg>Add to my calendar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" data-room="dark">
+  <div class="container split split--top" style="--split-a: 1.2fr; --split-b: 1fr">
+    <div class="stack stack--lg" data-reveal>
+      <h2 class="t-h3">What to expect</h2>
+      <div class="prose" data-g="body"><p>Details to come.</p></div>
+    </div>
+    <div id="rsvp" class="card card--lg" data-reveal>
+      <h2 class="t-h3">Save a place</h2>
+      <p>We’ll send the link and a reminder before it begins.</p>
+      <form class="signup" action="#" method="post" data-demo-form data-done="You’re in. Watch your inbox.">
+        <label class="sr-only" for="rv-name">Name</label>
+        <input class="input" id="rv-name" type="text" name="name" placeholder="Name" autocomplete="name">
+        <label class="sr-only" for="rv-email">Email</label>
+        <input class="input" id="rv-email" type="email" name="email" placeholder="Email" autocomplete="email" required>
+        <button class="btn btn--solid btn--block" type="submit">Send me the link</button>
+        <p class="form-note">Prototype: nothing is sent yet.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<hw-signup></hw-signup>
+<hw-footer></hw-footer>
+<script src="../../assets/data/gatherings.js"></script>
+</body>
+</html>

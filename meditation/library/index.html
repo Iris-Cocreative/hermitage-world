@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meditation Library · Hermitage World</title>
+<meta name="description" content="Guided meditations, healing meditations, homilies and teachings from Friar Justin Belitz and the Hermitage. The healing meditations are always free.">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya:ital@0;1&display=swap">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<script src="../../assets/js/site.js"></script>
+</head>
+<body>
+<hw-header></hw-header>
+
+<main id="main">
+
+<section class="page-hero" data-room="dark">
+  <div class="room-arch" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <div data-reveal>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../">Meditation</a><span aria-hidden="true">/</span><span>Library</span></nav>
+      <h1>The meditation library</h1>
+      <p class="t-lede">Forty years of guided meditations, homilies and teachings, gathered in one place. The healing meditations are free, as Justin always kept them; the rest carry a nominal cost that keeps the Hermitage going.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" data-room="dark">
+  <div class="container">
+    <form class="library-filter" data-library-filter="#library-list" role="search" aria-label="Filter the library">
+      <div class="field library-filter__search">
+        <label class="sr-only" for="lib-q">Search the library</label>
+        <input class="input" id="lib-q" name="q" type="search" placeholder="Search by title or series">
+      </div>
+      <fieldset class="chips" aria-label="Kind">
+        <label class="chip"><input type="radio" name="kind" value="all" checked><span>Everything</span></label>
+        <label class="chip"><input type="radio" name="kind" value="meditation"><span>Meditations</span></label>
+        <label class="chip"><input type="radio" name="kind" value="homily"><span>Homilies</span></label>
+        <label class="chip"><input type="radio" name="kind" value="teaching"><span>Teachings</span></label>
+      </fieldset>
+      <fieldset class="chips" aria-label="Access">
+        <label class="chip"><input type="radio" name="access" value="all" checked><span>Free and paid</span></label>
+        <label class="chip"><input type="radio" name="access" value="free"><span>Free only</span></label>
+      </fieldset>
+    </form>
+
+    <div class="cluster cluster--between mt-xl">
+      <p class="t-muted" data-library-count aria-live="polite"></p>
+      <span class="draft-mark">catalog with durations arriving from Garry</span>
+    </div>
+    <div class="mt-sm" id="library-list" data-library="all"></div>
+  </div>
+</section>
+
+<section class="section" data-room="stone">
+  <div class="container grid grid--3">
+    <div class="stack stack--sm" data-reveal>
+      <h2 class="t-h3">How to listen</h2>
+      <p class="t-muted">Find a chair you can sit upright in and a time you won’t be interrupted. Headphones help. If you drift off, nothing is lost; begin again another day.</p>
+    </div>
+    <div class="stack stack--sm" data-reveal>
+      <h2 class="t-h3">Free, and nominal</h2>
+      <p class="t-muted">Healing meditations are free to everyone. Guided series and teachings carry a small cost; members will find them included once membership opens.</p>
+    </div>
+    <div class="stack stack--sm" data-reveal>
+      <h2 class="t-h3">Ask the library</h2>
+      <p class="t-muted">A Soul Guide that finds the exact moment in a homily where Justin speaks to your question is being explored. It will quote, never invent. <a class="link" href="../../friar-justin/soul-guide/">Read about it</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<hw-signup></hw-signup>
+<hw-footer></hw-footer>
+<script src="../../assets/data/library.js"></script>
+</body>
+</html>

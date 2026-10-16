@@ -1,0 +1,310 @@
+<title>Hermitage World Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya:ital@1&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#F1EBDF; --ground-deep:#E6DECC; --paper:#FBF8F1;
+    --ink:#2B241B; --ink-soft:#5C5344; --bronze:#8A6B3F;
+    --amber:#D99A2B; --amber-text:#8A5F14; --amber-bright:#F2BE5A;
+    --hair:rgba(43,36,27,.18); --hair-soft:rgba(43,36,27,.09);
+    --bar-0:#8A6B3F; --bar-1:#D99A2B; --bar-2:#5B7BAE; --bar-3:#7E7566; --bar-4:#B14A31; --bar-5:#2B241B;
+    --today:#B14A31;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#221B12; --ground-deep:#2C241A; --paper:#2C241A;
+      --ink:#F5EDDC; --ink-soft:#C4B69C; --bronze:#C4A26A;
+      --amber-text:#F2BE5A;
+      --hair:rgba(245,237,220,.18); --hair-soft:rgba(245,237,220,.08);
+      --bar-0:#C4A26A; --bar-1:#F2BE5A; --bar-2:#8FA9D8; --bar-3:#A79D8C; --bar-4:#E0755A; --bar-5:#F5EDDC;
+      --today:#E0755A;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#221B12; --ground-deep:#2C241A; --paper:#2C241A;
+    --ink:#F5EDDC; --ink-soft:#C4B69C; --bronze:#C4A26A;
+    --amber-text:#F2BE5A;
+    --hair:rgba(245,237,220,.18); --hair-soft:rgba(245,237,220,.08);
+    --bar-0:#C4A26A; --bar-1:#F2BE5A; --bar-2:#8FA9D8; --bar-3:#A79D8C; --bar-4:#E0755A; --bar-5:#F5EDDC;
+    --today:#E0755A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ground);color:var(--ink);font-family:'Alegreya Sans','Segoe UI',sans-serif;font-size:1.0625rem;line-height:1.6;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1080px;margin-inline:auto;padding:clamp(2rem,6vw,5rem) clamp(1.25rem,4vw,3rem) 6rem}
+  h1,h2,h3{font-family:Marcellus,'Times New Roman',serif;font-weight:400;line-height:1.12;text-wrap:balance}
+  h1{font-size:clamp(2.2rem,5vw,3.6rem);text-transform:uppercase;letter-spacing:.06em}
+  h2{font-size:clamp(1.5rem,2.8vw,2.1rem);margin-bottom:1.25rem}
+  h3{font-size:1.25rem}
+  .inscription{font-family:Marcellus,serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.22em;color:var(--ink-soft)}
+  p{max-width:66ch}
+  .soft{color:var(--ink-soft)}
+  a{color:var(--amber-text)}
+  header{display:grid;gap:1rem;padding-bottom:2.5rem;border-bottom:1px solid var(--hair);margin-bottom:3.5rem}
+  header .lede{font-size:1.2rem;color:var(--ink-soft);max-width:60ch}
+  .launch{display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:baseline;margin-top:.5rem}
+  .launch .date{font-family:Marcellus,serif;font-size:clamp(1.6rem,3vw,2.3rem)}
+  section{margin-bottom:4rem}
+
+  .chart{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:1rem 0 .5rem;overflow-x:auto}
+  .chart svg{display:block;width:100%;min-width:640px;height:auto;font-family:'Alegreya Sans',sans-serif}
+  .chart text{fill:var(--ink)}
+  .chart .month{font-family:Marcellus,serif;font-size:11px;letter-spacing:.18em;fill:var(--ink-soft)}
+  .chart .wk{stroke:var(--hair-soft)}
+  .chart .mo{stroke:var(--hair)}
+  .chart .lbl{font-size:14px}
+  .chart .rng{font-size:12px;fill:var(--ink-soft)}
+  .chart .ms{fill:var(--amber)}
+  .chart .today-line{stroke:var(--today);stroke-dasharray:3 3}
+  .chart .today-lbl{font-size:11px;fill:var(--today);letter-spacing:.08em}
+  .chart .launch-lbl{font-family:Marcellus,serif;font-size:11px;letter-spacing:.18em;fill:var(--amber-text)}
+  .chart .launch-line{stroke:var(--amber)}
+  .legend{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;margin-top:1rem;font-size:.9rem;color:var(--ink-soft)}
+  .legend span::before{content:"";display:inline-block;width:.7em;height:.7em;margin-right:.45em;vertical-align:-.02em;background:var(--amber);transform:rotate(45deg)}
+
+  table{width:100%;border-collapse:collapse;font-size:.98rem}
+  th{text-align:left;font-family:Marcellus,serif;font-weight:400;font-size:.78rem;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-soft);padding:0 1rem .6rem 0;border-bottom:1px solid var(--hair)}
+  td{padding:.7rem 1rem .7rem 0;border-bottom:1px solid var(--hair-soft);vertical-align:top}
+  td.d{font-family:Marcellus,serif;white-space:nowrap;letter-spacing:.02em;width:7.5rem}
+  td.n{font-family:Marcellus,serif;width:4.5rem}
+  td.who{color:var(--ink-soft);white-space:nowrap}
+  .tablewrap{overflow-x:auto}
+  .board{display:grid;grid-template-columns:minmax(200px,17rem) 1fr;gap:1rem 2rem;padding:1.4rem 0;border-top:1px solid var(--hair)}
+  .board:last-child{border-bottom:1px solid var(--hair)}
+  .board h3{margin-bottom:.25rem}
+  .board .when{color:var(--ink-soft);font-size:.95rem}
+  .board ul{padding-left:1.1rem;display:grid;gap:.35rem}
+  .board li::marker{color:var(--bronze)}
+  .board .dec{margin-top:.6rem;color:var(--amber-text);font-size:.95rem}
+  @media (max-width:700px){.board{grid-template-columns:1fr;gap:.5rem}}
+  .scope{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+  .scope ul{padding-left:1.1rem;display:grid;gap:.4rem}
+  .scope li::marker{color:var(--bronze)}
+  .scope .inscription{margin-bottom:.8rem}
+  @media (max-width:820px){.scope{grid-template-columns:1fr}}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+  @media (max-width:820px){.two{grid-template-columns:1fr}}
+  .rhythm li,.risks li{padding:.55rem 0;border-bottom:1px solid var(--hair-soft);list-style:none}
+  .rhythm li strong,.risks li strong{font-weight:700}
+  .voice{font-family:Alegreya,Georgia,serif;font-style:italic;font-size:1.3rem;line-height:1.45;max-width:30em;margin:2.5rem 0 .5rem}
+  .voice + cite{display:block;font-style:normal;font-size:.9rem;color:var(--ink-soft);letter-spacing:.04em}
+  footer{margin-top:4rem;padding-top:1.25rem;border-top:1px solid var(--hair);font-size:.85rem;color:var(--ink-soft)}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="inscription">Hermitage World · Seven-week plan · Draft v2 for feedback · September 8, 2026</p>
+  <h1>Seven weeks to the front door</h1>
+  <p class="lede">Seven Tuesday sessions, one launch. Brand and homepage settle in the first two weeks; every launch page is designed before build starts; content and media start now and run six weeks; Webflow takes two; the site goes live on the seventh Tuesday.</p>
+  <div class="launch"><span class="inscription">Launch</span><span class="date">Tuesday, October 27, 2026</span></div>
+  <p class="soft">This is a solid site the Hermitage can start using, not everything the sitemap holds. What isn't in the launch scope follows through the CMS and short rounds after launch. Dates move when the working group says so.</p>
+</header>
+
+<section>
+  <h2>The phases</h2>
+  <div class="chart" id="chart"></div>
+  <div class="legend"><span>Tuesday session</span></div>
+</section>
+
+<section>
+  <h2>The seven sessions</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Session</th><th>Date</th><th>What we settle</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="d">Sept 15</td><td>Motivating principles; sitemap v2 and launch scope; this plan signed off; homepage v2 and the geometric logo studies reviewed</td></tr>
+      <tr><td class="n">2</td><td class="d">Sept 22</td><td>Mark chosen; homepage final; Friar Justin and Meditation first look</td></tr>
+      <tr><td class="n">3</td><td class="d">Sept 29</td><td>Friar Justin, Meditation, Programs final; Gatherings, Calendar, In Person first look</td></tr>
+      <tr><td class="n">4</td><td class="d">Oct 6</td><td>Gatherings, Calendar, In Person, Community, About, Give final; mobile pass reviewed</td></tr>
+      <tr><td class="n">5</td><td class="d">Oct 13</td><td>Content check: what is in Collab OS, what is still missing; walkthrough of the build's first week</td></tr>
+      <tr><td class="n">6</td><td class="d">Oct 20</td><td>Full staging review with real content; go / no-go for cutover</td></tr>
+      <tr><td class="n">7</td><td class="d">Oct 27</td><td>Launch. Editing walkthrough for Garry and Samuel</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Milestones</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Date</th><th>Milestone</th><th>Who</th></tr></thead>
+    <tbody>
+      <tr><td class="d">Sept 11</td><td>Timeline agreed, async is fine; content and media work begins</td><td class="who">All</td></tr>
+      <tr><td class="d">Sept 15</td><td>Session 1; interim redirect hermitageworld.org → hermitageindy.org live once DNS info arrives</td><td class="who">James, Garry</td></tr>
+      <tr><td class="d">Sept 22</td><td>Mark chosen; homepage design final</td><td class="who">Garry, Samuel</td></tr>
+      <tr><td class="d">Sept 25</td><td>Brand Guidelines v1</td><td class="who">James</td></tr>
+      <tr><td class="d">Sept 29</td><td>Friar Justin + The Library, Meditation + Meditation Library, Programs designs final</td><td class="who">All</td></tr>
+      <tr><td class="d">Oct 6</td><td>Gatherings, Calendar, In Person, Community, About, Give, Contact, Newsletter designs final</td><td class="who">All</td></tr>
+      <tr><td class="d">Oct 9</td><td>Mobile pass done; design handoff to build; page copy complete in Collab OS</td><td class="who">James, Munia, Samuel</td></tr>
+      <tr><td class="d">Oct 12</td><td>Webflow build begins</td><td class="who">Sean</td></tr>
+      <tr><td class="d">Oct 16</td><td>Media complete: library catalog, first cleaned set of recordings, photographs, schedules, prices</td><td class="who">Garry, Samuel</td></tr>
+      <tr><td class="d">Oct 19–23</td><td>Content load; QA Oct 21–23: accessibility, forms, donations, calendar, media playback</td><td class="who">Sean, James</td></tr>
+      <tr><td class="d">Oct 20</td><td>Session 6: staging review, go / no-go</td><td class="who">Garry, Samuel</td></tr>
+      <tr><td class="d">Oct 26</td><td>DNS cutover; hermitageindy.org redirects page by page</td><td class="who">James, Garry</td></tr>
+      <tr><td class="d">Oct 27</td><td>Launch</td><td class="who">All</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Launch scope</h2>
+  <div class="scope">
+    <div>
+      <p class="inscription">Live on October 27</p>
+      <ul>
+        <li>Home</li>
+        <li>Meditation, with the Meditation Library holding whatever is clean by Oct 16</li>
+        <li>Programs index, Train Your Mind, Success: Full Living</li>
+        <li>Gatherings, Calendar, In Person · Indianapolis, one event template</li>
+        <li>Friar Justin and The Library, first set of homilies and teachings</li>
+        <li>Community as a single page: circles, teachers, a short set of endorsements</li>
+        <li>About, Contact, Give, Newsletter signup</li>
+      </ul>
+    </div>
+    <div>
+      <p class="inscription">After launch, through the CMS</p>
+      <ul>
+        <li>Success: Full Relating and Living the Prayer of Quiet as their own pages</li>
+        <li>Books &amp; Media, Stories, Teachers &amp; Guides as separate pages</li>
+        <li>FAQs; the Shop decision; the Silva Method decision</li>
+        <li>Soul Guide, Justin AI, membership tier (phase two)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Initiatives</h2>
+  <p class="soft" style="margin-bottom:1.5rem">The Collab OS breakdown. Each becomes an initiative on the canvas with its actions underneath.</p>
+
+  <div class="board">
+    <div><h3>1 · Brand refresh</h3><p class="when">Sept 8 – 25</p></div>
+    <div><ul>
+      <li>Geometric mark chosen from the round-two studies; lockups, favicon, wordmark</li>
+      <li>Brand Guidelines v1: mark, color, type, aperture, imagery, voice, icons</li>
+    </ul><p class="dec">Decisions: which mark · clean vs textured hero</p></div>
+  </div>
+  <div class="board">
+    <div><h3>2 · Site design</h3><p class="when">Sept 8 – Oct 9, finished before build</p></div>
+    <div><ul>
+      <li>Homepage v2 to final, Sept 22</li>
+      <li>Friar Justin + The Library, Meditation + Meditation Library, Programs + program template, Sept 29</li>
+      <li>Gatherings, Calendar, In Person, event template, Community, About, Give, Contact, Newsletter, Oct 6</li>
+      <li>Mobile pass and handoff, Oct 9. Munia joins on the second and third waves</li>
+    </ul></div>
+  </div>
+  <div class="board">
+    <div><h3>3 · Content &amp; media</h3><p class="when">Sept 8 – Oct 16, starts now</p></div>
+    <div><ul>
+      <li>Samuel: page copy per launch page in Collab OS by Oct 9; the weekly online schedule with real times; program outlines, dates, prices; the living-legacy framing</li>
+      <li>Garry: Justin photographs and the stained glass; cleaned homilies and teachings for the first library set; catalog with durations and free vs paid; DNS info; donation and newsletter provider access</li>
+      <li>Photographs from September in-person gatherings</li>
+      <li>Mission statement wording; endorsement permissions</li>
+    </ul></div>
+  </div>
+  <div class="board">
+    <div><h3>4 · Webflow build</h3><p class="when">Oct 12 – 23</p></div>
+    <div><ul>
+      <li>Sean: design system, homepage, templates; CMS collections for gatherings, programs, library recordings</li>
+      <li>Integrations: audio and video hosting with a player, calendar with time zones, Zoom links behind signup, newsletter, donations</li>
+      <li>Content load from Collab OS during week two</li>
+    </ul></div>
+  </div>
+  <div class="board">
+    <div><h3>5 · Launch</h3><p class="when">Oct 21 – 27</p></div>
+    <div><ul>
+      <li>QA and accessibility for a 35–65+ audience</li>
+      <li>Redirect map from hermitageindy.org; DNS cutover; launch; editing walkthrough</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>What we need from you, and when</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Need</th><th>From</th><th>By</th></tr></thead>
+    <tbody>
+      <tr><td>Sign-off on this plan and the launch scope</td><td class="who">Garry, Samuel</td><td class="d">Sept 11</td></tr>
+      <tr><td>DNS information for the interim redirect</td><td class="who">Garry</td><td class="d">Sept 15</td></tr>
+      <tr><td>Motivating principles for Hermitage World</td><td class="who">Garry, Samuel</td><td class="d">Sept 15</td></tr>
+      <tr><td>Lulu's take on landscape and nature imagery</td><td class="who">Garry</td><td class="d">Sept 15</td></tr>
+      <tr><td>Key Justin video links from the shared drive</td><td class="who">Samuel</td><td class="d">Sept 15</td></tr>
+      <tr><td>September online schedule with real days, times, hosts</td><td class="who">Samuel</td><td class="d">Sept 22</td></tr>
+      <tr><td>High-res Stickman stained glass, nun piece, tapestry, Justin photographs</td><td class="who">Garry</td><td class="d">Sept 22</td></tr>
+      <tr><td>Program outlines, dates, pricing for Train Your Mind and Success: Full Living</td><td class="who">Samuel</td><td class="d">Sept 29</td></tr>
+      <tr><td>Mission statement final wording</td><td class="who">Garry, Samuel</td><td class="d">Oct 6</td></tr>
+      <tr><td>Page copy complete for launch pages</td><td class="who">Samuel</td><td class="d">Oct 9</td></tr>
+      <tr><td>Donation platform and newsletter provider access</td><td class="who">Garry</td><td class="d">Oct 9</td></tr>
+      <tr><td>Library catalog with free vs paid marked; first cleaned set</td><td class="who">Garry</td><td class="d">Oct 16</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="two">
+  <div>
+    <h2>Working rhythm</h2>
+    <ul class="rhythm">
+      <li><strong>Seven Tuesday sessions</strong>, 60 minutes, 11:00 ET, Sept 15 through Oct 27.</li>
+      <li><strong>Everything else in Collab OS.</strong> Comments on cards, notes on the canvas, a meeting artifact after each call.</li>
+      <li><strong>Working group:</strong> Garry, Samuel, James. The board hears about it at launch.</li>
+      <li><strong>Iris team:</strong> James throughout; Munia on page design Sept 22 – Oct 9; Sean on build Oct 12 – 27.</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Risks, and how the plan absorbs them</h2>
+    <ul class="risks">
+      <li><strong>Copy lands late.</strong> Build starts Oct 12 on the pages that have copy; the rest loads in week two. Anything still missing on Oct 20 ships with the honest pending frame.</li>
+      <li><strong>Media cleanup runs long.</strong> The library launches with the first clean set; the catalog grows through the CMS.</li>
+      <li><strong>A design wave slips.</strong> The third-wave pages are the simplest and can be built from the system without a full mockup.</li>
+      <li><strong>Two-week slip anywhere</strong> moves launch to Nov 10, still well before the holidays, rather than shortening QA.</li>
+    </ul>
+  </div>
+</section>
+
+<blockquote class="voice">One way or another, we are moving front doors online.</blockquote>
+<cite>Samuel Robinson, August 4 review</cite>
+
+<footer>Prepared by Iris Cocreative for The Hermitage. Draft v2, companion to the Collab OS sitemap v2. For sign-off by September 11 and the September 15 session.</footer>
+</div>
+
+<script>
+(function(){
+  var start = new Date(2026,8,7);           // Mon Sept 7
+  var days = 56;                             // eight weeks shown, through Sun Nov 1
+  var W = 1000, L = 150, R = 30, rowH = 44, top = 34;
+  var phases = [
+    ['Align',                '2026-09-08','2026-09-11','--bar-0'],
+    ['1 · Brand refresh',    '2026-09-08','2026-09-25','--bar-1'],
+    ['2 · Site design',      '2026-09-08','2026-10-09','--bar-2'],
+    ['3 · Content & media',  '2026-09-08','2026-10-16','--bar-3'],
+    ['4 · Webflow build',    '2026-10-12','2026-10-23','--bar-4'],
+    ['5 · Launch',           '2026-10-21','2026-10-27','--bar-5']
+  ];
+  var sessions = ['2026-09-15','2026-09-22','2026-09-29','2026-10-06','2026-10-13','2026-10-20','2026-10-27'];
+  var months = [['September',0],['October',24],['November',55]];
+  function d(s){var p=s.split('-');return (new Date(p[0],p[1]-1,p[2])-start)/864e5;}
+  function x(day){return L + (day/days)*(W-L-R);}
+  var H = top + phases.length*rowH + 40;
+  var s = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Phase chart, September 7 to November 1, 2026">';
+  for (var w=0; w<=days; w+=7) s += '<line class="wk" x1="'+x(w)+'" y1="'+top+'" x2="'+x(w)+'" y2="'+(H-30)+'"/>';
+  months.forEach(function(m){ s += '<line class="mo" x1="'+x(m[1])+'" y1="'+(top-22)+'" x2="'+x(m[1])+'" y2="'+(H-30)+'"/><text class="month" x="'+(x(m[1])+8)+'" y="'+(top-8)+'">'+m[0].toUpperCase()+'</text>'; });
+  phases.forEach(function(p,i){
+    var y = top + i*rowH + 10, a = d(p[1]), b = d(p[2])+1;
+    s += '<text class="lbl" x="0" y="'+(y+17)+'">'+p[0]+'</text>';
+    s += '<rect x="'+x(a)+'" y="'+y+'" width="'+(x(b)-x(a))+'" height="22" style="fill:var('+p[3]+')"/>';
+    s += '<text class="rng" x="'+(x(b)+8)+'" y="'+(y+16)+'">'+p[1].slice(5).replace('-','/')+' – '+p[2].slice(5).replace('-','/')+'</text>';
+  });
+  var my = H-22;
+  sessions.forEach(function(m){ var mx=x(d(m)+0.5); s += '<polygon class="ms" points="'+mx+','+(my-6)+' '+(mx+5)+','+my+' '+mx+','+(my+6)+' '+(mx-5)+','+my+'"/>'; });
+  var tx = x(d('2026-09-08')+0.5);
+  s += '<line class="today-line" x1="'+tx+'" y1="'+top+'" x2="'+tx+'" y2="'+(H-30)+'"/><text class="today-lbl" x="'+(tx+5)+'" y="'+(H-32)+'">TODAY</text>';
+  var lx = x(d('2026-10-27')+0.5);
+  s += '<line class="launch-line" x1="'+lx+'" y1="'+(top-22)+'" x2="'+lx+'" y2="'+(H-30)+'"/><text class="launch-lbl" x="'+(lx-8)+'" y="'+(top-8)+'" text-anchor="end">LAUNCH · OCT 27</text>';
+  s += '</svg>';
+  document.getElementById('chart').innerHTML = s;
+})();
+</script>

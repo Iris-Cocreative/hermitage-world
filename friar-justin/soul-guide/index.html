@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soul Guide · Friar Justin · Hermitage World</title>
+<meta name="description" content="A candidate feature: ask a question and hear the exact moment in Friar Justin's homilies and teachings that speaks to it. Quotation, never invention.">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya:ital@0;1&display=swap">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<script src="../../assets/js/site.js"></script>
+</head>
+<body>
+<hw-header></hw-header>
+
+<main id="main">
+
+<section class="page-hero" data-room="dark">
+  <div class="room-arch" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <div data-reveal>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../">Friar Justin</a><span aria-hidden="true">/</span><span>Soul Guide</span></nav>
+      <span class="tag tag--soon">Candidate · phase two</span>
+      <h1 class="mt-sm">Ask the library</h1>
+      <p class="t-lede">A question in your own words; the exact moment in a homily or teaching where Justin speaks to it. Nothing generated, nothing put in his mouth. Only his recorded words, found for you.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" data-room="dark">
+  <div class="container container--narrow stack stack--lg">
+    <form class="soul-ask" action="#" data-reveal onsubmit="return false">
+      <label class="sr-only" for="ask">Your question</label>
+      <input class="input" id="ask" type="text" placeholder="How do I forgive someone who hasn’t asked?" disabled>
+      <button class="btn btn--solid" type="submit" disabled>Ask</button>
+    </form>
+    <p class="form-note ta-center">A preview of the idea, not a working feature.</p>
+
+    <article class="card card--lg soul-result" data-reveal>
+      <span class="t-caps">How a result would look</span>
+      <div class="player" style="aspect-ratio: 21/9">
+        <span class="icon-btn icon-btn--solid" style="--icon-btn: 3.6rem" aria-hidden="true"><svg class="icon"><use href="../../assets/img/icons.svg#play"/></svg></span>
+        <p class="player__label">Sunday homily · starts at the moment he answers · about two minutes</p>
+      </div>
+      <p class="t-muted">The clip plays from where the answer begins, with the transcript beside it and a link to the whole homily. If nothing in the library answers the question, it says so.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section" data-room="stone">
+  <div class="container">
+    <h2 class="mb-xl" data-reveal>Guardrails</h2>
+    <div class="grid grid--3">
+      <div class="stack stack--sm" data-reveal><h3>Exact clips only</h3><p class="t-muted">It retrieves and plays what Justin actually said. It never writes new words in his name.</p></div>
+      <div class="stack stack--sm" data-reveal><h3>No likeness</h3><p class="t-muted">No imitation of his voice, face or robe. Any guide figure is a friendly friar of its own, not a replica.</p></div>
+      <div class="stack stack--sm" data-reveal><h3>Within the teachings</h3><p class="t-muted">Scoped to the Hermitage library. It points to people, not answers, for anything that needs a human.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<hw-signup></hw-signup>
+<hw-footer></hw-footer>
+</body>
+</html>

@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Layout primitives — composable, content-agnostic.
+   container · section · stack · cluster · grid · split · center
+   ========================================================================== */
+
+@layer layout {
+  .container {
+    width: 100%;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .container--wide { max-width: calc(var(--container-wide) + 2 * var(--gutter)); }
+  .container--narrow { max-width: calc(var(--container-narrow) + 2 * var(--gutter)); }
+
+  /* A section is a room: it owns its ground (via data-room) and its rhythm. */
+  .section {
+    position: relative;
+    padding-block: var(--section-y);
+    overflow: clip;
+  }
+  .section--tight { padding-block: var(--space-2xl); }
+  .section--flush-top { padding-top: 0; }
+  .section--flush-bottom { padding-bottom: 0; }
+  /* hairline seams between rooms of the same ground */
+  .section--seam { border-top: var(--line-thin) solid var(--line-neutral); }
+
+  /* Vertical rhythm: children spaced by --stack-gap */
+  .stack { display: flex; flex-direction: column; gap: var(--stack-gap, var(--space-md)); }
+  .stack--xs { --stack-gap: var(--space-2xs); }
+  .stack--sm { --stack-gap: var(--space-sm); }
+  .stack--lg { --stack-gap: var(--space-lg); }
+  .stack--xl { --stack-gap: var(--space-xl); }
+  .stack--2xl { --stack-gap: var(--space-2xl); }
+
+  /* Horizontal groups that wrap: buttons, tags, meta */
+  .cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--cluster-gap, var(--space-sm));
+  }
+  .cluster--between { justify-content: space-between; }
+  .cluster--end { justify-content: flex-end; }
+  .cluster--tight { --cluster-gap: var(--space-2xs); }
+
+  /* Auto-fitting grid. Set --min on the element to change the column floor. */
+  .grid {
+    display: grid;
+    gap: var(--grid-gap, var(--space-lg));
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 18rem), 100%), 1fr));
+  }
+  .grid--2 { --min: 24rem; }
+  .grid--3 { --min: 17rem; }
+  .grid--4 { --min: 13rem; }
+  .grid--fill { grid-template-columns: repeat(auto-fill, minmax(min(var(--min, 18rem), 100%), 1fr)); }
+
+  /* Two columns that stack under --split-at. Media one side, words the other. */
+  .split {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  @media (min-width: 900px) {
+    .split { grid-template-columns: minmax(0, var(--split-a, 1fr)) minmax(0, var(--split-b, 1fr)); }
+    .split--media-right > :first-child { order: 2; }
+    .split--top { align-items: start; }
+  }
+
+  .center { text-align: center; margin-inline: auto; }
+  .center > * { margin-inline: auto; }
+  .measure { max-width: var(--measure); }
+  .full-bleed { width: 100%; }
+
+  /* Section header: title + optional lede + optional actions on the right */
+  .section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-md) var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+  .section-head__text { display: flex; flex-direction: column; gap: var(--space-sm); max-width: 52rem; }
+  .section-head h2 { max-width: 14em; }
+}

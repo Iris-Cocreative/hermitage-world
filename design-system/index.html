@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System · Hermitage World</title>
+<meta name="description" content="The Hermitage World design system: tokens, rooms, type, space, shape and every component, rendered live from the site's own CSS.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya:ital@0;1&display=swap">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/site.js"></script>
+<style>
+  /* page-only scaffolding for the specimen sheet */
+  .ds-nav { position: sticky; top: var(--nav-h); z-index: 5; background: var(--umber-950); border-bottom: 1px solid var(--line-subtle); }
+  .ds-nav .container { display: flex; gap: var(--space-md); overflow-x: auto; padding-block: var(--space-xs); font-size: var(--text-sm); white-space: nowrap; scrollbar-width: none; }
+  .ds-nav a { color: var(--stone-300); } .ds-nav a:hover { color: var(--gold-300); }
+  .ds-h { display: flex; align-items: baseline; gap: var(--space-sm); margin-bottom: var(--space-lg); }
+  .ds-h code, .ds code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 0.85em; color: var(--accent-text); }
+  .ds-label { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 0.78rem; color: var(--text-subtle); }
+  .swatches { display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); }
+  .swatch { display: flex; flex-direction: column; gap: 0.3rem; }
+  .swatch__chip { aspect-ratio: 3 / 2; border-radius: var(--radius-sm); border: 1px solid var(--line-neutral); }
+  .ds-row { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr; gap: var(--space-md); align-items: baseline; padding-block: var(--space-sm); border-bottom: 1px solid var(--line-subtle); }
+  .ds-space { height: 0.9rem; background: var(--accent); border-radius: 2px; }
+  .rooms { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--line-subtle); }
+  .rooms > div { position: relative; padding: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-sm); overflow: hidden; }
+  .icon-grid { display: grid; gap: var(--space-sm); grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); }
+  .icon-grid div { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding: var(--space-sm); border: 1px solid var(--line-subtle); border-radius: var(--radius-sm); }
+  .icon-grid .icon { --icon-size: 1.75rem; color: var(--text-strong); }
+  .ds-demo { padding: var(--space-lg); border: 1px dashed var(--line-subtle); border-radius: var(--radius-md); }
+</style>
+</head>
+<body>
+<hw-header></hw-header>
+
+<main id="main" class="ds">
+
+<section class="page-hero" data-room="dark">
+  <div class="room-arch" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <div data-reveal>
+      <span class="tag">For the team</span>
+      <h1 class="mt-sm">Design system</h1>
+      <p class="t-lede">Everything on this page is rendered by the site’s own stylesheet. Change a token in <code>assets/css/tokens.css</code> and this page, and every page, follows.</p>
+    </div>
+  </div>
+</section>
+
+<nav class="ds-nav" aria-label="Sections">
+  <div class="container">
+    <a href="#how">How it works</a><a href="#color">Color</a><a href="#rooms">Rooms</a><a href="#type">Type</a><a href="#space">Space</a><a href="#shape">Shape</a><a href="#mark">Mark</a><a href="#icons">Icons</a><a href="#actions">Actions</a><a href="#content">Content</a><a href="#forms">Forms</a><a href="#data">Data-driven</a><a href="#honesty">Placeholders</a>
+  </div>
+</nav>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how" data-room="dark">
+  <div class="container split split--top" style="--split-a: 1fr; --split-b: 1fr">
+    <div class="prose">
+      <h2>How it works</h2>
+      <p><strong>Three tiers of tokens.</strong> Primitives are raw values (the umber, plaster, stone and gold ramps; the type scale; the space scale). Semantic tokens say what a value is <em>for</em>: <code>--surface</code>, <code>--text</code>, <code>--text-muted</code>, <code>--accent</code>, <code>--line</code>. Components only ever use semantic tokens.</p>
+      <p><strong>Rooms.</strong> A section declares its ground with <code>data-room="dark | deep | plaster | stone | photo"</code>. The room remaps the semantic tokens for everything inside it, so a button, a card or a quote works on every ground with no variant classes.</p>
+      <p><strong>Cascade layers.</strong> <code>main.css</code> imports <code>tokens → base → layout → components → pages → utilities</code> in that order. A later layer always wins, so page rules never need <code>!important</code>.</p>
+    </div>
+    <div class="prose">
+      <h2>Where things live</h2>
+      <ul>
+        <li><code>assets/css/tokens.css</code>: every color, size, space, radius, duration.</li>
+        <li><code>assets/css/components.css</code>: reusable pieces (index at the top of the file).</li>
+        <li><code>assets/css/pages.css</code>: compositions used on one page only.</li>
+        <li><code>assets/js/site.js</code>: the sitemap, header, footer, drawer, mark and shared behaviors. Add or rename a page there once.</li>
+        <li><code>assets/data/gatherings.js</code> and <code>library.js</code>: content that a CMS will own later.</li>
+        <li><code>assets/img/icons.svg</code>: the icon sprite.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR -->
+<section class="section section--seam" id="color" data-room="dark">
+  <div class="container stack stack--xl">
+    <div class="ds-h"><h2>Color</h2><code>tokens.css · primitives</code></div>
+    <div class="stack stack--sm"><h3 class="t-h4">Umber, the darks</h3><div class="swatches" data-swatches="umber-1000 umber-950 umber-900 umber-850 umber-800 umber-700"></div></div>
+    <div class="stack stack--sm"><h3 class="t-h4">Plaster, the lights</h3><div class="swatches" data-swatches="plaster-50 plaster-100 plaster-200 plaster-300 plaster-400"></div></div>
+    <div class="stack stack--sm"><h3 class="t-h4">Stone and ink, secondary text</h3><div class="swatches" data-swatches="stone-200 stone-300 stone-400 stone-500 stone-600 stone-700 ink-900 ink-700"></div></div>
+    <div class="stack stack--sm"><h3 class="t-h4">Gold, the one accent</h3><div class="swatches" data-swatches="gold-300 gold-400 gold-500 gold-600 gold-700"></div></div>
+    <div class="stack stack--sm"><h3 class="t-h4">Glass, light only (never on text or controls)</h3><div class="swatches" data-swatches="glass-amber glass-blue glass-verdigris glass-madder"></div></div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section class="section" id="rooms" data-room="deep">
+  <div class="container">
+    <div class="ds-h"><h2>Rooms</h2><code>data-room</code></div>
+    <div class="rooms">
+      <div data-room="dark"><span class="ds-label">dark</span><h3>A room</h3><p class="t-muted">Muted text reads here.</p><div class="cluster"><a class="btn btn--solid btn--sm" href="#rooms">Solid</a><a class="btn btn--sm" href="#rooms">Outline</a></div><a class="link" href="#rooms">A link</a></div>
+      <div data-room="deep"><span class="ds-label">deep</span><h3>A room</h3><p class="t-muted">Muted text reads here.</p><div class="cluster"><a class="btn btn--solid btn--sm" href="#rooms">Solid</a><a class="btn btn--sm" href="#rooms">Outline</a></div><a class="link" href="#rooms">A link</a></div>
+      <div data-room="plaster"><span class="ds-label">plaster</span><h3>A room</h3><p class="t-muted">Muted text reads here.</p><div class="cluster"><a class="btn btn--solid btn--sm" href="#rooms">Solid</a><a class="btn btn--ink btn--sm" href="#rooms">Ink</a></div><a class="link" href="#rooms">A link</a></div>
+      <div data-room="stone"><span class="ds-label">stone</span><h3>A room</h3><p class="t-muted">Muted text reads here.</p><div class="cluster"><a class="btn btn--solid btn--sm" href="#rooms">Solid</a><a class="btn btn--ink btn--sm" href="#rooms">Ink</a></div><a class="link" href="#rooms">A link</a></div>
+      <div data-room="photo"><div class="room-photo" style="--photo-opacity:.45"><img src="../assets/img/photo/light-shaft-room.jpg" alt=""></div><span class="ds-label" style="position:relative">photo</span><h3 style="position:relative">A room</h3><p class="t-muted" style="position:relative">Over an image.</p><div class="cluster" style="position:relative"><a class="btn btn--solid btn--sm" href="#rooms">Solid</a><a class="btn btn--sm" href="#rooms">Outline</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section class="section" id="type" data-room="dark">
+  <div class="container">
+    <div class="ds-h"><h2>Type</h2><code>Marcellus · Alegreya Sans · Alegreya italic</code></div>
+    <div class="ds-row"><span class="ds-label">--text-display</span><span class="t-display">Hermitage</span></div>
+    <div class="ds-row"><span class="ds-label">--text-5xl · h1</span><span class="t-h1">You are not alone</span></div>
+    <div class="ds-row"><span class="ds-label">--text-4xl</span><span style="font-family:var(--font-display);font-size:var(--text-4xl)">The door has no lock</span></div>
+    <div class="ds-row"><span class="ds-label">--text-3xl · h2</span><span class="t-h2">Five lights hold this place up</span></div>
+    <div class="ds-row"><span class="ds-label">--text-2xl · quote</span><span style="font-family:var(--font-display);font-size:var(--text-2xl)">A quiet space within each human being</span></div>
+    <div class="ds-row"><span class="ds-label">--text-xl · h3</span><span class="t-h3">Begin, Deepen, Remember</span></div>
+    <div class="ds-row"><span class="ds-label">--text-lg · lede</span><span class="t-lede" style="max-width:none">Everyone arrives differently, and each hallway turns.</span></div>
+    <div class="ds-row"><span class="ds-label">--text-base · body</span><span class="t-body">Nothing here asks for belief. Everything invites practice.</span></div>
+    <div class="ds-row"><span class="ds-label">--text-sm</span><span class="t-small">Secondary information and metadata.</span></div>
+    <div class="ds-row"><span class="ds-label">.t-kicker</span><span class="t-kicker">Calendar</span></div>
+    <div class="ds-row"><span class="ds-label">.t-caps</span><span class="t-caps">Tuesday</span></div>
+    <div class="ds-row"><span class="ds-label">.voice</span><span>As Justin put it, <span class="voice">you are a powerful spiritual being</span>.</span></div>
+  </div>
+</section>
+
+<!-- SPACE -->
+<section class="section section--seam" id="space" data-room="dark">
+  <div class="container">
+    <div class="ds-h"><h2>Space</h2><code>--space-*</code></div>
+    <div data-spaces="3xs 2xs xs sm md lg xl 2xl 3xl"></div>
+  </div>
+</section>
+
+<!-- SHAPE -->
+<section class="section" id="shape" data-room="plaster">
+  <div class="container">
+    <div class="ds-h"><h2>Shape</h2><code>arch · roundel · pill · card</code></div>
+    <div class="grid grid--4" style="align-items:end">
+      <div class="stack stack--sm"><div class="arch arch--outline"><img src="../assets/img/photo/hall-begin.jpg" alt=""></div><span class="ds-label">.arch (--arch-a)</span></div>
+      <div class="stack stack--sm"><div class="arch-window"><div class="arch"><img src="../assets/img/photo/stained-glass-hall.jpg" alt=""></div></div><span class="ds-label">.arch-window</span></div>
+      <div class="stack stack--sm"><div class="roundel" style="--roundel-size: 90%"><img src="../assets/img/photo/forest-canopy.jpg" alt=""></div><span class="ds-label">.roundel</span></div>
+      <div class="stack stack--sm"><div class="card"><h3>Card</h3><p>--radius-md, gold hairline.</p></div><span class="ds-label">.card</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARK -->
+<section class="section" id="mark" data-room="dark">
+  <div class="container">
+    <div class="ds-h"><h2>Mark</h2><code>&lt;hw-mark&gt; · .lockup</code></div>
+    <div class="grid grid--4" style="align-items:center">
+      <div style="--mark-size: 8rem"><hw-mark label="Hermitage World"></hw-mark></div>
+      <div style="--mark-size: 4rem"><a class="lockup" href="../">Hermitage World lockup</a></div>
+      <div data-room="plaster" style="padding: var(--space-lg); border-radius: var(--radius-md); --mark-size: 4rem"><hw-mark label="Mark on plaster" still></hw-mark></div>
+      <p class="t-muted t-small">The sun: one disc and eight satellites, each a touch different in size. It takes <code>currentColor</code> and breathes gently while on screen (never under reduced motion). Geometry from Figma 282:1342.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ICONS -->
+<section class="section section--seam" id="icons" data-room="dark">
+  <div class="container">
+    <div class="ds-h"><h2>Icons</h2><code>assets/img/icons.svg</code></div>
+    <div class="icon-grid" data-icons="arrow arrow-right arrow-left arrow-down chevron-down chevron-right sun close menu play pause calendar clock location online download external audio video book heart person circle-people search mail check plus give door lock-open"></div>
+  </div>
+</section>
+
+<!-- ACTIONS -->
+<section class="section" id="actions" data-room="deep">
+  <div class="container stack stack--xl">
+    <div class="ds-h"><h2>Actions</h2><code>.btn · .circle-link · .icon-btn · .tag · .live</code></div>
+    <div class="cluster"><a class="btn btn--solid" href="#actions">Solid</a><a class="btn" href="#actions">Outline</a><a class="btn btn--sm" href="#actions">Small</a><a class="btn btn--lg btn--solid" href="#actions">Large</a><button class="btn" disabled>Disabled</button></div>
+    <div class="cluster">
+      <a class="circle-link" href="#actions"><span class="circle-link__ring"><svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#arrow"/></svg></span><span>Begin the path</span></a>
+      <a class="circle-link circle-link--sm circle-link--down" href="#actions"><span class="circle-link__ring"><svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#arrow-right"/></svg></span><span>Down</span></a>
+      <button class="icon-btn" type="button" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#arrow-right"/></svg></button>
+      <button class="icon-btn icon-btn--solid" type="button" aria-label="Menu"><svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#sun"/></svg></button>
+    </div>
+    <div class="cluster"><span class="tag">Online</span><span class="tag tag--accent">Free</span><span class="tag tag--soon">Phase two</span><span class="live">Happening now</span></div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="section" id="content" data-room="dark">
+  <div class="container stack stack--2xl">
+    <div class="ds-h"><h2>Content</h2><code>quote · accordion · board · pathway · timeline · stat · values · hall</code></div>
+    <blockquote class="quote"><p>“The Hermitage is a quiet space within each human being.”</p><cite>Friar Justin</cite></blockquote>
+    <div class="grid grid--2">
+      <div class="stack" data-accordion-group>
+        <div class="accordion is-open"><button class="accordion__toggle" type="button"><span class="accordion__title">Accordion</span><span class="accordion__sub">One open at a time in a group</span><svg class="icon accordion__chev" aria-hidden="true"><use href="../assets/img/icons.svg#chevron-down"/></svg></button><div class="accordion__panel"><div><div class="accordion__body"><p>The panel animates its height with a grid-rows trick, no measuring.</p></div></div></div></div>
+        <div class="accordion"><button class="accordion__toggle" type="button"><span class="accordion__title">Another</span><svg class="icon accordion__chev" aria-hidden="true"><use href="../assets/img/icons.svg#chevron-down"/></svg></button><div class="accordion__panel"><div><div class="accordion__body"><p>Closed by default.</p></div></div></div></div>
+      </div>
+      <div class="board">
+        <div class="board__row"><span class="board__label">Tuesday</span><div><p class="board__title">Board row</p><p class="board__text">Hairline-separated rows for schedules and catalogs.</p></div><a class="btn btn--sm board__action" href="#content">Action</a></div>
+        <div class="board__row"><span class="board__label">Monthly</span><div><p class="board__title">Another row</p></div><span></span></div>
+      </div>
+    </div>
+    <div class="grid grid--3">
+      <div class="stat"><span class="stat__num">3,300+</span><span class="stat__label">seekers on the weekly letter</span></div>
+      <ol class="timeline" role="list"><li class="timeline__item"><span class="timeline__year">1985</span><h3>Timeline</h3></li><li class="timeline__item is-now"><span class="timeline__year">Now</span><h3>Current item</h3></li></ol>
+      <ol class="pathway pathway--list" role="list"><li class="pathway__step"><h3>Pathway</h3><p>Numbered steps.</p></li><li class="pathway__step"><h3>Second</h3><p>Roman numerals.</p></li></ol>
+    </div>
+  </div>
+</section>
+
+<!-- FORMS -->
+<section class="section" id="forms" data-room="plaster">
+  <div class="container grid grid--2">
+    <div class="stack">
+      <div class="ds-h"><h2>Forms</h2><code>.input · .select · .textarea · .chips</code></div>
+      <div class="field"><label class="field__label" for="ds-a">Label</label><input class="input" id="ds-a" placeholder="Placeholder"></div>
+      <div class="field"><label class="field__label" for="ds-b">Select</label><select class="select" id="ds-b"><option>One</option><option>Two</option></select></div>
+      <div class="field"><label class="field__label" for="ds-c">Textarea</label><textarea class="textarea" id="ds-c"></textarea></div>
+      <fieldset class="chips" aria-label="Chips"><label class="chip"><input type="radio" name="ds-chip" checked><span>Chosen</span></label><label class="chip"><input type="radio" name="ds-chip"><span>Another</span></label></fieldset>
+    </div>
+    <div class="card card--lg"><form class="signup" action="#" data-demo-form data-done="Done."><h3>Signup</h3><div class="signup__fields"><input class="input" placeholder="Name" aria-label="Name"><input class="input" placeholder="Email" aria-label="Email" type="email"></div><button class="btn btn--solid btn--block" type="submit">Join 3,300+ seekers</button></form></div>
+  </div>
+</section>
+
+<!-- DATA -->
+<section class="section" id="data" data-room="deep">
+  <div class="container stack stack--xl">
+    <div class="ds-h"><h2>Data-driven</h2><code>gatherings.js · library.js</code></div>
+    <p class="t-muted">These render from the data files. Edit a gathering’s time once and the home page, the gatherings page, the calendar and its event page all change.</p>
+    <div class="grid grid--2" data-gatherings="cards" data-filter="online"></div>
+    <div data-library="all" data-limit="3"></div>
+  </div>
+</section>
+
+<!-- HONESTY -->
+<section class="section" id="honesty" data-room="dark">
+  <div class="container grid grid--3">
+    <div class="stack"><div class="ds-h"><h2 class="t-h3">Placeholders</h2></div><p class="t-muted">Missing photos and unconfirmed facts are always labeled, never faked. Add <code>class="hide-pending"</code> to <code>&lt;html&gt;</code> to hide every draft mark at once for a clean review.</p></div>
+    <div class="arch arch--outline" style="--arch-a:.9"><div class="pending"><strong>.pending</strong>Names the asset and where it comes from</div></div>
+    <div class="stack"><p>A fact to check <span class="draft-mark">.draft-mark</span></p><p class="note"><span><strong>.note</strong> A prototype caveat in context.</span></p></div>
+  </div>
+</section>
+
+</main>
+
+<hw-footer></hw-footer>
+<script src="../assets/data/gatherings.js"></script>
+<script src="../assets/data/library.js"></script>
+<script>
+  // swatches, spaces and icons are drawn from the live tokens so the sheet can't drift
+  (function () {
+    var cs = getComputedStyle(document.documentElement);
+    document.querySelectorAll('[data-swatches]').forEach(function (el) {
+      el.innerHTML = el.getAttribute('data-swatches').split(' ').map(function (n) {
+        var v = cs.getPropertyValue('--' + n).trim();
+        return '<div class="swatch"><span class="swatch__chip" style="background:var(--' + n + ')"></span><span class="ds-label">--' + n + '</span><span class="ds-label">' + v + '</span></div>';
+      }).join('');
+    });
+    document.querySelectorAll('[data-spaces]').forEach(function (el) {
+      el.innerHTML = el.getAttribute('data-spaces').split(' ').map(function (n) {
+        return '<div class="ds-row"><span class="ds-label">--space-' + n + '</span><div class="ds-space" style="width:var(--space-' + n + ')"></div></div>';
+      }).join('');
+    });
+    document.querySelectorAll('[data-icons]').forEach(function (el) {
+      el.innerHTML = el.getAttribute('data-icons').split(' ').map(function (n) {
+        return '<div>' + HW.icon(n) + '<span class="ds-label">#' + n + '</span></div>';
+      }).join('');
+    });
+  })();
+</script>
+</body>
+</html>

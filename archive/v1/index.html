@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermitage World · You are not alone in your longing</title>
+<meta name="description" content="Hermitage World is an interfaith center for meditation and spirituality: a worldwide community learning to find the quiet space within.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23221B12'/%3E%3Crect x='5' y='5' width='6' height='6' fill='%23F2BE5A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya:ital,wght@0,400..700;1,400..700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hw.css">
+<style>
+  /* ---------- Hero: the south wall in morning light ---------- */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-block: 7rem clamp(4rem, 9vw, 7rem);
+    overflow: hidden;
+    background: linear-gradient(168deg, #F7F2E8 0%, var(--plaster) 42%, var(--plaster-deep) 100%);
+  }
+  .hero-wall {
+    position: absolute; inset: 0;
+    pointer-events: none;
+  }
+  .hero-wall .ap { position: absolute; }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6.4vw, 5.5rem);
+    max-width: 11.5em;
+    margin-bottom: var(--s3);
+  }
+  .hero .lede {
+    font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+    max-width: 34em;
+    color: var(--ink-soft);
+    margin-bottom: var(--s4);
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .hero::after {
+    /* the morning's raking light across the plaster */
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      linear-gradient(112deg, rgba(255,251,238,.9) 0%, rgba(255,251,238,0) 36%),
+      radial-gradient(ellipse 44% 30% at 70% 14%, rgba(242,190,90,.13), transparent 70%),
+      linear-gradient(292deg, rgba(43,36,27,.10) 0%, transparent 30%);
+  }
+  .hero .container, .hero-wall { z-index: 1; }
+  @media (max-width: 760px) {
+    /* keep a small clerestory clear of the headline; hide the rest of the scatter */
+    .hero-wall .ap { display: none; }
+    .hero-wall .ap:nth-child(1) { display: block; top: 11% !important; right: 9% !important; --ap-size: 60px !important; }
+    .hero-wall .ap:nth-child(3) { display: block; top: 6% !important; right: 34% !important; --ap-size: 40px !important; }
+    .hero-wall .ap:nth-child(6) { display: block; top: 19% !important; right: 20% !important; --ap-size: 28px !important; }
+    .hero-wall .ap:nth-child(10) { display: block; top: 8% !important; left: 12% !important; right: auto !important; --ap-size: 26px !important; }
+  }
+
+  /* ---------- Threshold: daylight into shadow ---------- */
+  .threshold {
+    background: linear-gradient(180deg, var(--plaster-deep) 0%, var(--concrete) 34%, var(--concrete-deep) 55%, var(--shadow) 82%);
+    text-align: center;
+    padding-block: clamp(5rem, 11vw, 9rem) clamp(4rem, 9vw, 7rem);
+  }
+  .threshold h2 { font-size: clamp(1.7rem, 3.2vw, 2.6rem); max-width: 18em; margin-inline: auto; }
+  .door {
+    width: min(300px, 62vw);
+    aspect-ratio: 5 / 7;
+    margin: clamp(2.5rem, 6vw, 4.5rem) auto;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% 100%, rgba(217, 154, 43, .32), transparent 70%),
+      linear-gradient(180deg, #14100A, #1B150C);
+    box-shadow:
+      inset 4px 6px 16px rgba(0,0,0,.75),
+      inset -3px -3px 10px rgba(255,255,255,.04),
+      0 1px 0 rgba(255,255,255,.18);
+    position: relative;
+  }
+  .door::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: 12%;
+    width: 3px; height: 34%;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, transparent, var(--amber-bright));
+    opacity: .8;
+    filter: blur(1px);
+  }
+  .threshold .voice { color: var(--lumen); margin-inline: auto; }
+
+  /* ---------- Values: the lit wall ---------- */
+  .values { text-align: center; }
+  .values::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 55%;
+    background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(217,154,43,.07), transparent 70%);
+    pointer-events: none;
+  }
+  .values h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); }
+  .values .section-lede { margin-inline: auto; color: var(--lumen-soft); max-width: 46em; }
+  .value-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(2rem, 4.5vw, 4rem);
+    margin-top: clamp(3rem, 7vw, 5.5rem);
+  }
+  .value {
+    width: 178px;
+    display: grid;
+    justify-items: center;
+    gap: var(--s2);
+  }
+  @media (min-width: 1100px) {
+    .value-row { gap: clamp(1.5rem, 2.6vw, 2.4rem); flex-wrap: nowrap; }
+    .value { width: auto; flex: 1 1 0; max-width: 210px; }
+  }
+  .value .ap { --ap-size: 108px; }
+  .value .ap svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 46%; height: 46%;
+    z-index: 1;
+    color: rgba(245, 237, 220, .5);
+    transition: color .9s var(--ease-out), filter .9s var(--ease-out);
+  }
+  .value .ap.lit svg { color: #241A08; }
+  .value h3 { font-size: 1.15rem; margin: var(--s2) 0 0; letter-spacing: .02em; }
+  .value p { font-size: .95rem; color: var(--lumen-soft); margin: 0; }
+
+  /* ---------- The path: three hallways ---------- */
+  .path h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); max-width: 14em; }
+  .path .section-lede { color: var(--lumen-soft); }
+  .portals {
+    display: grid;
+    grid-template-columns: 1.08fr 1fr .94fr;
+    gap: clamp(1.25rem, 2.6vw, 2.25rem);
+    align-items: end;
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
+  .portal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 430px;
+    padding: var(--s4);
+    text-decoration: none;
+    color: var(--lumen);
+    background:
+      radial-gradient(ellipse 120% 45% at 50% 0%, rgba(217,154,43,.16), transparent 72%),
+      linear-gradient(180deg, #191309, #241D12);
+    box-shadow:
+      inset 3px 5px 14px rgba(0,0,0,.6),
+      inset -2px -2px 8px rgba(255,255,255,.03),
+      0 1px 0 rgba(255,255,255,.08);
+    transition: box-shadow .45s var(--ease-out), transform .45s var(--ease-out);
+  }
+  .portal:nth-child(2) { min-height: 480px; }
+  .portal:nth-child(3) { min-height: 400px; }
+  .portal:hover, .portal:focus-visible {
+    transform: translateY(-4px);
+    box-shadow:
+      inset 3px 5px 14px rgba(0,0,0,.5),
+      inset 0 -60px 90px -50px rgba(217,154,43,.28),
+      0 18px 40px rgba(0,0,0,.45);
+  }
+  .portal h3 {
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    margin-bottom: var(--s2);
+  }
+  .portal strong { display: block; font-size: 1.1rem; margin-bottom: .5rem; }
+  .portal p { font-size: .98rem; color: var(--lumen-soft); margin-bottom: var(--s3); }
+  .portal .go { font-weight: 700; color: var(--amber-bright); }
+  @media (max-width: 900px) {
+    .portals { grid-template-columns: 1fr; align-items: stretch; }
+    .portal, .portal:nth-child(2), .portal:nth-child(3) { min-height: 0; padding-top: var(--s6); }
+  }
+
+  /* ---------- Gatherings ---------- */
+  .gatherings h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); }
+  .gather-list { margin-top: var(--s5); border-top: 1px solid rgba(43,36,27,.18); }
+  .gather {
+    display: grid;
+    grid-template-columns: 11rem 1fr auto;
+    gap: var(--s3) var(--s4);
+    align-items: baseline;
+    padding-block: var(--s3);
+    border-bottom: 1px solid rgba(43,36,27,.18);
+  }
+  .gather .when {
+    font-family: var(--face-inscription);
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-size: .95rem;
+  }
+  .gather h3 { font-size: 1.35rem; margin: 0 0 .3rem; }
+  .gather p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
+  .gather .join { white-space: nowrap; font-weight: 700; }
+  .gather-note { margin-top: var(--s3); font-size: .875rem; color: var(--ink-soft); }
+  @media (max-width: 760px) {
+    .gather { grid-template-columns: 1fr; gap: .35rem; }
+    .gather .join { margin-top: .5rem; }
+  }
+
+  /* ---------- Community ---------- */
+  .community { text-align: center; }
+  .community h2 { font-size: clamp(2rem, 4vw, 3.2rem); max-width: 16em; margin-inline: auto; }
+  .community .story { margin-inline: auto; color: var(--ink-soft); max-width: 44em; }
+  .signup {
+    margin: var(--s5) auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--s2);
+    max-width: 34rem;
+  }
+  .signup input {
+    flex: 1 1 15rem;
+    font: inherit;
+    padding: .8em 1.1em;
+    border: 1px solid color-mix(in srgb, var(--ink) 40%, transparent);
+    background: #FBF8F1;
+    color: var(--ink);
+  }
+  .signup input::placeholder { color: var(--ink-soft); }
+  .signup input:focus-visible { outline-offset: 0; }
+  .signup-note { font-size: .875rem; color: var(--ink-soft); margin-top: var(--s2); }
+
+  /* ---------- Founder band ---------- */
+  .founder-band .container {
+    display: grid;
+    grid-template-columns: minmax(260px, 380px) 1fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .founder-band .asset-pending { aspect-ratio: 4 / 5; min-height: 0; }
+  .founder-band h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+  @media (max-width: 820px) {
+    .founder-band .container { grid-template-columns: 1fr; }
+    .founder-band .asset-pending { max-width: 380px; }
+  }
+
+  /* ---------- Close ---------- */
+  .close-section { text-align: center; overflow: hidden; }
+  .close-aps {
+    display: flex;
+    justify-content: center;
+    gap: var(--s3);
+    margin-bottom: var(--s5);
+  }
+  .close-aps .ap { --ap-size: 40px; }
+  .close-section .voice { margin-inline: auto; max-width: 26em; }
+  .close-actions {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: var(--s2);
+    margin-top: var(--s5);
+  }
+</style>
+</head>
+<body>
+<!--
+THESIS: The hermitage is a quiet space within each human being; this site is that
+space built as architecture. It refuses the category default (serene nature photo,
+sage gradients, lotus minimalism) and builds a modern chapel instead: mass, light,
+threshold.
+OWN-WORLD: Sacred modernism (Ronchamp, Breuer). Warm plaster #F1EBDF, board-formed
+concrete, umber shadow #221B12; glass light in amber, blue, madder as punched
+splayed apertures. Marcellus lapidary caps, Alegreya Sans body, Alegreya italic
+for the founder's voice. Recognizable with all content removed.
+STORY: A seeker arrives alone, reads "You are not alone in your longing," passes
+a threshold from daylight into a lit interior, meets five values as glowing
+apertures, finds their hallway (Begin / Deepen / Remember), and joins a gathering.
+FIRST VIEWPORT: Full-height sunlit plaster wall scattered with punched apertures;
+headline lower-left at display scale; two actions beneath: Begin the path
+(primary amber), This week's gatherings (quiet).
+FORM: Sacred-modernism chapel, candidate 6 of 7 on the ordered grounded list;
+seed key f03e9f46.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the
+finish review, the verdict, and DESIGN.md
+-->
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>Hermitage&nbsp;World</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="#path">The Path</a>
+      <a href="#gatherings">Gatherings</a>
+      <a href="friar-justin.html">Friar Justin</a>
+      <a href="friar-justin.html#library">Library</a>
+      <a class="btn btn-primary" href="#gatherings">Join a gathering</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO — the south wall ============ -->
+  <section class="hero section plaster">
+    <div class="hero-wall" aria-hidden="true">
+      <div class="ap"           style="--ap-size:96px; top:12%;  right:8%;"></div>
+      <div class="ap"           style="--ap-size:44px; top:9%;   right:26%;"></div>
+      <div class="ap ap-blue"   style="--ap-size:60px; top:24%;  right:17%;"></div>
+      <div class="ap"           style="--ap-size:30px; top:31%;  right:34%;"></div>
+      <div class="ap"           style="--ap-size:72px; top:40%;  right:6%;"></div>
+      <div class="ap ap-madder" style="--ap-size:36px; top:47%;  right:24%;"></div>
+      <div class="ap"           style="--ap-size:26px; top:18%;  right:44%;"></div>
+      <div class="ap"           style="--ap-size:52px; top:58%;  right:14%;"></div>
+      <div class="ap ap-blue"   style="--ap-size:28px; top:63%;  right:31%;"></div>
+      <div class="ap"           style="--ap-size:34px; top:6%;   left:38%;"></div>
+      <div class="ap"           style="--ap-size:24px; top:76%;  right:7%;"></div>
+    </div>
+    <div class="container" style="position:relative;">
+      <h1>You are not alone in your&nbsp;longing.</h1>
+      <p class="lede">Hermitage World is a worldwide community of seekers learning to find the quiet space within, through meditation, simplicity, and companions on the way. Whatever tradition you come from, or none at all: the door is open.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#path">Begin the path</a>
+        <a class="btn btn-quiet" href="#gatherings">This week's gatherings</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THRESHOLD ============ -->
+  <section class="threshold plaster">
+    <div class="container">
+      <h2 class="reveal">The door has no lock, and never has.</h2>
+      <div class="door reveal" role="presentation"></div>
+      <div class="on-shadow reveal">
+        <blockquote class="voice">
+          &ldquo;The hermitage is a quiet space within each human being. Meditation is a means by which a person can discover this place and use it to achieve a full life.&rdquo;
+          <cite>Friar Justin Belitz, OFM &middot; Founder of the Hermitage, 1985</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUES — the lit wall ============ -->
+  <section class="values section ground-shadow on-shadow shadowed" data-ignite-group>
+    <div class="container">
+      <h2>Five lights hold this place up.</h2>
+      <p class="section-lede">Not doctrines. Not requirements. Just the convictions this community keeps returning to, and builds everything upon.</p>
+      <div class="value-row">
+        <div class="value">
+          <div class="ap" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <circle cx="24" cy="24" r="16"/>
+              <circle cx="24" cy="24" r="2.4" fill="currentColor" stroke="none"/>
+              <path d="M24 14v4M24 30v4M14 24h4M30 24h4M17 17l2.8 2.8M28.2 28.2 31 31M31 17l-2.8 2.8M19.8 28.2 17 31"/>
+            </svg>
+          </div>
+          <h3>Inner divinity</h3>
+          <p>You already carry what you are looking for.</p>
+        </div>
+        <div class="value">
+          <div class="ap ap-blue" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M33.9 11.5A16 16 0 1 0 39.6 19"/>
+              <circle cx="39" cy="12" r="2.4" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h3>Experience over doctrine</h3>
+          <p>Nothing here asks for belief. Everything invites practice.</p>
+        </div>
+        <div class="value">
+          <div class="ap" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <circle cx="19" cy="24" r="11.5"/>
+              <circle cx="29" cy="24" r="11.5"/>
+            </svg>
+          </div>
+          <h3>Radical acceptance</h3>
+          <p>There is beauty in everyone and everything. Come as you are.</p>
+        </div>
+        <div class="value">
+          <div class="ap ap-madder" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M14 36V14h20v22H22"/>
+              <circle cx="18" cy="36" r="2.4" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h3>Conscious creation</h3>
+          <p>Thought, intention and action shape a life. We practice shaping it well.</p>
+        </div>
+        <div class="value">
+          <div class="ap" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <circle cx="24" cy="11" r="3"/><circle cx="37" cy="20" r="3"/><circle cx="32" cy="36" r="3"/><circle cx="16" cy="36" r="3"/><circle cx="11" cy="20" r="3"/>
+              <path d="M24 14v0M26.6 12.6l7.8 5.6M36 23l-3 10M29 36H19M12 23l3 10M21.4 12.6l-7.8 5.6M24 14l10 20M24 14 14 34M14 21h20"/>
+            </svg>
+          </div>
+          <h3>Unity &amp; connection</h3>
+          <p>All life is held together by love. None of us seeks alone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PATH — three hallways ============ -->
+  <section class="path section ground-shadow-2 on-shadow shadowed board-form" id="path">
+    <div class="container">
+      <h2>From this room, three hallways.</h2>
+      <p class="section-lede" style="max-width:44em;">Everyone arrives differently: brand new to meditation, decades into practice, or carrying memories of Friar Justin himself. Each hallway leads somewhere real.</p>
+      <div class="portals">
+        <a class="portal" href="#path">
+          <h3>Begin</h3>
+          <strong>Train Your Mind: Meditation Foundations</strong>
+          <p>A rotating class exploring meditation through modern science and ancient contemplative wisdom. Concentration, clarity, emotional balance, lasting happiness. No experience needed; no tradition required.</p>
+          <span class="go">Explore the class &rarr;</span>
+        </a>
+        <a class="portal" href="#path">
+          <h3>Deepen</h3>
+          <strong>Success: Full Living &amp; the practice space</strong>
+          <p>Friar Justin's flagship program joins practical tools for managing a life with meditation and direct spirituality. Around it: silent sits, discussion circles, retreats, and visiting teachers from around the world.</p>
+          <span class="go">See programs &amp; retreats &rarr;</span>
+        </a>
+        <a class="portal" href="friar-justin.html">
+          <h3>Remember</h3>
+          <strong>Friar Justin &amp; the Library</strong>
+          <p>The founder's voice, kept living: twenty-five hours of homilies and teachings, and the meditations he always gave freely.</p>
+          <span class="go">Enter the hall &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GATHERINGS ============ -->
+  <section class="gatherings section ground-deep plaster" id="gatherings">
+    <div class="container">
+      <h2>The week keeps a rhythm. Join it from anywhere.</h2>
+      <div class="gather-list">
+        <div class="gather">
+          <span class="when">Tuesdays</span>
+          <div>
+            <h3>Worldwide Energy Circle</h3>
+            <p>Every week since 2020, the community gathers across time zones, Indianapolis to Australia, to hold silence together and send peace outward.</p>
+          </div>
+          <a class="join" href="#gatherings">Join on Zoom &rarr;</a>
+        </div>
+        <div class="gather">
+          <span class="when">Sundays</span>
+          <div>
+            <h3>Contemplative Unity</h3>
+            <p>An hour of silent meditation, held together. The simplest thing we do, and the deepest.</p>
+          </div>
+          <a class="join" href="#gatherings">Sit with us &rarr;</a>
+        </div>
+        <div class="gather">
+          <span class="when">Monthly</span>
+          <div>
+            <h3>The Way Between</h3>
+            <p>A spiritual discussion circle for the questions that don't fit anywhere else: guided, unhurried, and open to every tradition.</p>
+          </div>
+          <a class="join" href="#gatherings">Ask to join &rarr;</a>
+        </div>
+      </div>
+      <p class="gather-note">Meeting times and links are placeholders in this prototype; the live site will show each gathering in your local time.</p>
+    </div>
+  </section>
+
+  <!-- ============ COMMUNITY ============ -->
+  <section class="community section ground-plaster plaster">
+    <div class="container">
+      <h2>The Hermitage was never the building.</h2>
+      <p class="story">For forty years, a house in Indianapolis held this community. In September it passes to new hands. What Friar Justin actually built keeps going: people in the United States, Australia, and Europe who found the quiet space within, and found each other. Come for the meditation. Stay for the spirituality.</p>
+      <form class="signup" action="#" method="post">
+        <label for="signup-email" class="inscription" style="width:100%;">Receive the weekly letter</label>
+        <input id="signup-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn btn-primary" type="submit">Join 3,300+ seekers</button>
+      </form>
+      <p class="signup-note">One letter a week. Quiet, useful, easy to leave.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOUNDER BAND ============ -->
+  <section class="founder-band section ground-concrete on-shadow shadowed board-form">
+    <div class="container">
+      <figure class="asset-pending" style="margin:0;">
+        <span class="inscription">Photograph to come</span>
+        <small>Friar Justin teaching, from the Hermitage archive (Garry's collection)</small>
+      </figure>
+      <div>
+        <h2>Founded on a friar's conviction that peace is learnable.</h2>
+        <p>Justin Belitz was a Franciscan friar who taught meditation across the United States, Europe, and Australia for four decades, and believed every person could awaken to the divine energy within. This is not a memorial to him. It is his work, continuing.</p>
+        <p style="margin-top: var(--s3);"><a class="btn btn-quiet" href="friar-justin.html">Meet Friar Justin</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSE ============ -->
+  <section class="close-section section ground-shadow on-shadow shadowed" data-ignite-group>
+    <div class="container">
+      <div class="close-aps" aria-hidden="true">
+        <div class="ap" data-ignite></div>
+        <div class="ap ap-blue" data-ignite style="--ap-size:52px;"></div>
+        <div class="ap" data-ignite style="--ap-size:64px;"></div>
+        <div class="ap ap-madder" data-ignite style="--ap-size:52px;"></div>
+        <div class="ap" data-ignite></div>
+      </div>
+      <blockquote class="voice">
+        &ldquo;The Hermitage exists to help every person awaken to the divine energy within — so that through meditation, simplicity, and community, we may each live with greater love, peace, and purpose.&rdquo;
+        <cite>The mission of Hermitage World</cite>
+      </blockquote>
+      <div class="close-actions">
+        <a class="btn btn-primary" href="#gatherings">Join a gathering this week</a>
+        <a class="btn btn-quiet" href="#path">Or begin the path</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer shadowed">
+  <div class="container">
+    <div class="footer-cols">
+      <div>
+        <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true"></span>Hermitage&nbsp;World</a>
+        <p style="max-width:30ch; margin-top:var(--s2);">An interfaith center for meditation and spirituality. Indianapolis, and everywhere.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="#path">The Path</a>
+        <a href="#gatherings">Gatherings</a>
+        <a href="friar-justin.html">Friar Justin</a>
+        <a href="friar-justin.html#library">The Library</a>
+        <a href="#">Ways to Give</a>
+      </nav>
+      <nav aria-label="Contact">
+        <a href="#">Contact</a>
+        <a href="#">Newsletter</a>
+        <a href="https://hermitageindy.org">Formerly hermitageindy.org</a>
+      </nav>
+    </div>
+    <div class="fine">
+      <span>&copy; 2026 The Hermitage &middot; All traditions honored here.</span>
+      <span>Design prototype v0.1 &middot; imagery, times &amp; links are placeholders.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/hw.js"></script>
+</body>
+</html>

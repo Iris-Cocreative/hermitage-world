@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Hermitage World — design tokens
+   --------------------------------------------------------------------------
+   The one file to edit to restyle the site. Three tiers:
+
+   1. PRIMITIVES   raw values (the palette, the type families, the scales).
+                   Nothing outside this file should reference these directly.
+   2. SEMANTICS    what a value is FOR (surface, text, accent, line...).
+                   Components only ever use these.
+   3. ROOMS        a room is a section ground. Setting data-room on any element
+                   remaps the semantic tokens for everything inside it, so
+                   every component works on every ground without variants.
+
+   Rule of thumb: change a color here once and every page follows.
+   ========================================================================== */
+
+@layer tokens {
+  :root {
+    /* ---------------------------------------------------------------- 1. PRIMITIVES */
+
+    /* Umber: the warm darks. Never blue-black. */
+    --umber-1000: #120b02;
+    --umber-950: #180f03;
+    --umber-900: #1f1405;   /* the page ground; temple.js matches this exactly */
+    --umber-850: #261a0a;
+    --umber-800: #2e2210;
+    --umber-700: #3d2f1b;
+
+    /* Plaster: the warm lights. Never pure white. */
+    --plaster-50: #f8f3e8;
+    --plaster-100: #f5eddc;  /* lumen */
+    --plaster-200: #f1ebdf;  /* plaster */
+    --plaster-300: #e6decc;  /* plaster, raking light */
+    --plaster-400: #d8cdb6;
+
+    /* Stone: the warm mid-tones, for secondary text and hairlines. */
+    --stone-200: #c2b49e;
+    --stone-300: #bbb09d;
+    --stone-400: #a1947f;
+    --stone-500: #857965;
+    --stone-600: #5e564c;
+    --stone-700: #463f36;
+
+    /* Ink: text on light grounds. */
+    --ink-900: #1c150c;
+    --ink-700: #3a3127;
+
+    /* Gold: the one interactive accent. */
+    --gold-300: #d2b277;
+    --gold-400: #b8954f;
+    --gold-500: #a68140;     /* Figma's gold; buttons, hairlines, marks */
+    --gold-600: #8a6a30;
+    --gold-700: #6e5323;     /* gold that passes AA as small text on plaster */
+
+    /* Glass: color that only ever arrives as light through glass.
+       Never on text or controls. */
+    --glass-amber: #d99a2b;
+    --glass-blue: #5b7bae;
+    --glass-verdigris: #62878e;
+    --glass-madder: #b14a31;
+
+    /* Type families */
+    --font-display: 'Marcellus', 'Times New Roman', Georgia, serif;
+    --font-body: 'Alegreya Sans', 'Segoe UI', system-ui, sans-serif;
+    --font-voice: 'Alegreya', Georgia, serif;
+
+    /* Type scale. Fluid between a 360px phone and the 1728px Figma frame.
+       Named by role-free size so a component can pick what it needs. */
+    --text-xs: 0.875rem;
+    --text-sm: clamp(0.95rem, 0.92rem + 0.15vw, 1.0625rem);
+    --text-base: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+    --text-md: clamp(1.125rem, 1.02rem + 0.45vw, 1.4375rem);
+    --text-lg: clamp(1.2rem, 1.05rem + 0.6vw, 1.5625rem);
+    --text-xl: clamp(1.4rem, 1.15rem + 0.95vw, 2rem);
+    --text-2xl: clamp(1.7rem, 1.3rem + 1.55vw, 2.5rem);
+    --text-3xl: clamp(2.1rem, 1.5rem + 2.45vw, 3.75rem);
+    --text-4xl: clamp(2.4rem, 1.6rem + 3.4vw, 4.25rem);
+    --text-5xl: clamp(2.7rem, 1.6rem + 4.8vw, 6.15rem);
+    --text-display: clamp(3.25rem, 1.6rem + 7vw, 9.5rem);
+
+    --leading-none: 0.96;
+    --leading-tight: 1.07;
+    --leading-snug: 1.22;
+    --leading-normal: 1.5;
+    --leading-loose: 1.65;
+
+    --tracking-tight: -0.01em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.06em;
+    --tracking-caps: 0.2em;
+
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-bold: 700;
+
+    /* Space scale (fluid). Use for gaps, padding and stack rhythm. */
+    --space-3xs: 0.25rem;
+    --space-2xs: 0.5rem;
+    --space-xs: 0.75rem;
+    --space-sm: 1rem;
+    --space-md: clamp(1.25rem, 1.1rem + 0.6vw, 1.75rem);
+    --space-lg: clamp(1.75rem, 1.4rem + 1.4vw, 2.75rem);
+    --space-xl: clamp(2.5rem, 1.8rem + 2.6vw, 4.5rem);
+    --space-2xl: clamp(3.5rem, 2.4rem + 4.4vw, 7rem);
+    --space-3xl: clamp(4.5rem, 3rem + 7vw, 10rem);
+
+    /* Layout */
+    --container: 1460px;
+    --container-wide: 1640px;
+    --container-narrow: 920px;
+    --measure: 64ch;
+    --gutter: clamp(1.25rem, 6.5vw, 8.4rem);
+    --section-y: var(--space-3xl);
+    --nav-h: clamp(4.5rem, 3.6rem + 2.6vw, 6.6rem);
+
+    /* Shape. The site's geometry is arch, circle and pill. */
+    --radius-xs: 4px;
+    --radius-sm: 10px;
+    --radius-md: 20px;
+    --radius-lg: 40px;
+    --radius-pill: 999px;
+    --radius-arch-foot: 20px;   /* the square-ish shoulders under an arch */
+
+    --line-thin: 1px;
+    --line-medium: 1.5px;
+    --line-thick: 3px;
+
+    /* Motion. Calm by default; reduced-motion zeroes the durations. */
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-fast: 180ms;
+    --dur-base: 350ms;
+    --dur-slow: 700ms;
+    --dur-reveal: 900ms;
+
+    /* Depth */
+    --z-base: 1;
+    --z-sticky: 40;
+    --z-nav: 50;
+    --z-drawer: 80;
+    --z-toast: 100;
+
+    /* ---------------------------------------------------------------- 2. SEMANTICS
+       Defaults are the dark room, the site's home ground. */
+    --surface: var(--umber-900);
+    --surface-sunken: var(--umber-950);
+    --surface-raised: var(--umber-850);
+    --surface-glass: rgb(31 20 5 / 0.4);
+
+    --text: var(--plaster-200);
+    --text-strong: var(--plaster-100);
+    --text-muted: var(--stone-400);
+    --text-subtle: var(--stone-500);
+    --heading: var(--plaster-100);
+
+    --accent: var(--gold-500);            /* fills, marks, button grounds */
+    --accent-hover: var(--gold-400);
+    --accent-text: var(--gold-300);       /* accent used AS text: links, kickers */
+    --on-accent: var(--plaster-100);      /* text sitting on an accent fill */
+
+    --line: rgb(166 129 64 / 0.8);        /* gold hairline */
+    --line-subtle: rgb(166 129 64 / 0.35);
+    --line-neutral: rgb(241 235 223 / 0.18);
+
+    --art: var(--stone-200);              /* line-art and glyph color */
+    --art-faint: rgb(166 129 64 / 0.55);
+    --focus: var(--gold-300);
+
+    --scrim: rgb(31 20 5 / 0.72);
+    --pending: rgb(194 180 158 / 0.5);    /* placeholder frames and notes */
+  }
+
+  /* ------------------------------------------------------------------ 3. ROOMS
+     <section data-room="plaster"> and everything inside follows. */
+
+  [data-room] {
+    background-color: var(--surface);
+    color: var(--text);
+  }
+
+  [data-room="dark"] {
+    --surface: var(--umber-900);
+    --surface-raised: var(--umber-850);
+  }
+
+  [data-room="deep"] {
+    --surface: var(--umber-950);
+    --surface-raised: var(--umber-900);
+    --surface-glass: rgb(24 15 3 / 0.5);
+  }
+
+  [data-room="plaster"],
+  [data-room="stone"] {
+    --surface: var(--plaster-200);
+    --surface-sunken: var(--plaster-300);
+    --surface-raised: var(--plaster-50);
+    --surface-glass: rgb(248 243 232 / 0.6);
+
+    --text: var(--ink-900);
+    --text-strong: var(--ink-900);
+    --text-muted: var(--stone-600);
+    --text-subtle: var(--stone-500);
+    --heading: var(--ink-900);
+
+    --accent-text: var(--gold-700);
+    --on-accent: var(--plaster-100);
+
+    --line: rgb(166 129 64 / 0.85);
+    --line-subtle: rgb(166 129 64 / 0.4);
+    --line-neutral: rgb(28 21 12 / 0.14);
+
+    --art: var(--gold-500);
+    --art-faint: rgb(166 129 64 / 0.5);
+    --focus: var(--gold-600);
+    --scrim: rgb(241 235 223 / 0.75);
+    --pending: rgb(94 86 76 / 0.45);
+  }
+
+  [data-room="stone"] {
+    --surface: var(--plaster-300);
+    --surface-sunken: var(--plaster-400);
+    --surface-raised: var(--plaster-200);
+  }
+
+  /* A photographic room: a dark ground with an image behind it. The image is
+     supplied by .room-photo (see components). Text tokens are the dark ones. */
+  [data-room="photo"] {
+    --surface: var(--umber-950);
+    --surface-glass: rgb(24 15 3 / 0.45);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --dur-fast: 0ms;
+      --dur-base: 0ms;
+      --dur-slow: 0ms;
+      --dur-reveal: 0ms;
+    }
+  }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gatherings · Hermitage World</title>
+<meta name="description" content="The Hermitage's weekly rhythm: the Tuesday Worldwide Energy Circle, Sunday Contemplative Unity, The Way Between and more, shown in your own time zone.">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya:ital@0;1&display=swap">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/site.js"></script>
+</head>
+<body>
+<hw-header></hw-header>
+
+<main id="main">
+
+<section class="page-hero" data-room="dark">
+  <div class="room-arch" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <div data-reveal>
+      <h1>The week keeps a rhythm</h1>
+      <p class="t-lede">Join it from anywhere. Everything is free and everything is optional: come once, or come every week. Times are shown in your own time zone, <strong data-viewer-tz>your time zone</strong>.</p>
+      <div class="page-hero__actions cluster">
+        <a class="btn" href="../calendar/">The full calendar</a>
+        <a class="btn" href="../in-person/">In person, Indianapolis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" data-room="dark">
+  <div class="container">
+    <fieldset class="chips" data-gatherings-filter="#gathering-cards" aria-label="Show">
+      <label class="chip"><input type="radio" name="g-filter" value="all" checked><span>Everything</span></label>
+      <label class="chip"><input type="radio" name="g-filter" value="online"><span>Online</span></label>
+      <label class="chip"><input type="radio" name="g-filter" value="in-person"><span>In person</span></label>
+      <label class="chip"><input type="radio" name="g-filter" value="program"><span>Programs</span></label>
+    </fieldset>
+    <div class="grid grid--2 mt-lg" id="gathering-cards" data-gatherings="cards" aria-live="polite">
+      <noscript><p class="t-muted">Tuesday: Worldwide Energy Circle, online. Sunday: Contemplative Unity, Indianapolis. Monthly: The Way Between.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<section class="section section--seam" data-room="deep">
+  <div class="container grid grid--3">
+    <div class="stack stack--sm" data-reveal>
+      <h2 class="t-h3">You are never late</h2>
+      <p class="t-muted">A gathering shows as happening now until it is actually over, so if you arrive halfway through, the door is still open.</p>
+    </div>
+    <div class="stack stack--sm" data-reveal>
+      <h2 class="t-h3">How to join</h2>
+      <p class="t-muted">Zoom links arrive by email when you sign up for a gathering, so the room stays safe for the people in it. <span class="draft-mark">sign-up flow to build</span></p>
+    </div>
+    <div class="stack stack--sm" data-reveal>
+      <h2 class="t-h3">Hosting a circle</h2>
+      <p class="t-muted">Circles meet in Indianapolis, Australia, Europe and across the United States. If you would like to host one, <a class="link" href="../contact/">write to us</a>.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<hw-signup></hw-signup>
+<hw-footer></hw-footer>
+<script src="../assets/data/gatherings.js"></script>
+</body>
+</html>

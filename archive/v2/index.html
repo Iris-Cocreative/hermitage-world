@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermitage World · You are not alone in your longing</title>
+<meta name="description" content="Hermitage World is an interfaith center for meditation and spirituality: a worldwide community learning to find the quiet space within. Online from anywhere; in person in Indianapolis.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23221B12'/%3E%3Ccircle cx='8' cy='8' r='2.6' fill='%23F2BE5A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya:ital,wght@0,400..700;1,400..700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hw2.css">
+<style>
+  /* ---------- Hero: the atrium — a clerestory wall, the sun coming through ---------- */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-block: 8rem clamp(4rem, 9vw, 7rem);
+    overflow: hidden;
+    background: linear-gradient(180deg, #FCF8EF 0%, #F7F1E6 28%, var(--plaster) 58%, var(--plaster-deep) 100%);
+  }
+  .hero .container { position: relative; z-index: 5; }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6.4vw, 5.5rem);
+    max-width: 11.5em;
+    margin-bottom: var(--s3);
+  }
+  .hero .lede {
+    font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+    max-width: 34em;
+    color: var(--ink-soft);
+    margin-bottom: var(--s4);
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .hero-way { margin-top: var(--s5); }
+
+  /* the vault: ribs converging on a point above the frame — the ceiling has no top */
+  .vault {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .vault line { stroke: rgba(43,36,27,.085); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .vault .rib-strong { stroke: rgba(43,36,27,.14); }
+
+  /* the clerestory: a punched wall receding to the right, one-point perspective */
+  .atrium {
+    position: absolute; inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    perspective: 1500px;
+    perspective-origin: 72% 18%;
+  }
+  .clerestory {
+    position: absolute;
+    top: 5%; right: -5%;
+    width: 52%; height: 92%;
+    transform-origin: 100% 50%;
+    transform: rotateY(-44deg);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 3%;
+  }
+  /* the wall itself: a plane of raking-lit plaster the openings are cut from,
+     running past the top of the frame so the ceiling never arrives */
+  .clerestory::before {
+    content: "";
+    position: absolute;
+    inset: -40% -6% -6% -4%;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(43,36,27,.015) 0%, rgba(43,36,27,.07) 60%, rgba(43,36,27,.11) 100%);
+    box-shadow: inset -60px 0 90px rgba(43,36,27,.06), inset 0 -40px 60px rgba(43,36,27,.04);
+  }
+  .clerestory .ap { width: 100%; height: 100%; }
+  .clerestory .ap:nth-child(1)  { grid-area: 1 / 1 / 3 / 3; }
+  .clerestory .ap:nth-child(2)  { grid-area: 1 / 4 / 2 / 5; }
+  .clerestory .ap:nth-child(3)  { grid-area: 2 / 6 / 3 / 7; }
+  .clerestory .ap:nth-child(4)  { grid-area: 3 / 2 / 4 / 3; }
+  .clerestory .ap:nth-child(5)  { grid-area: 3 / 4 / 5 / 6; }
+  .clerestory .ap:nth-child(6)  { grid-area: 4 / 7 / 5 / 8; }
+  .clerestory .ap:nth-child(7)  { grid-area: 5 / 1 / 6 / 2; }
+  .clerestory .ap:nth-child(8)  { grid-area: 6 / 3 / 7 / 4; }
+  .clerestory .ap:nth-child(9)  { grid-area: 5 / 6 / 6 / 7; }
+  .clerestory .ap:nth-child(10) { grid-area: 7 / 5 / 8 / 6; }
+  .clerestory .ap:nth-child(11) { grid-area: 7 / 2 / 8 / 3; }
+  .clerestory .ap:nth-child(12) { grid-area: 1 / 7 / 2 / 8; }
+
+  /* the sun: shafts through the openings, and the patches where they land */
+  .shaft, .sun {
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .shaft {
+    top: -22%;
+    width: 8%;
+    height: 150%;
+    transform-origin: 50% 0;
+    transform: rotate(33deg);
+    background: linear-gradient(180deg, rgba(255,251,238,0) 0%, rgba(255,251,238,.55) 30%, rgba(255,247,226,.32) 62%, rgba(255,251,238,0) 100%);
+    filter: blur(12px);
+  }
+  .shaft.s1 { right: 14%; width: 10%; }
+  .shaft.s2 { right: 27%; width: 6%; --dawn-opacity: .8; }
+  .shaft.s3 { right: 39%; width: 11%; --dawn-opacity: .7; }
+  .sun {
+    transform: skewX(-38deg);
+    background: linear-gradient(100deg, rgba(255,251,238,1) 0%, rgba(255,247,228,.92) 55%, rgba(242,190,90,.32) 100%);
+    box-shadow: 0 0 36px 8px rgba(255,251,238,.55);
+    filter: blur(.8px);
+  }
+  .sun.p1 { top: 44%; right: 31%; width: 300px; height: 108px; }
+  .sun.p2 { top: 57%; right: 15%; width: 220px; height: 84px; }
+  .sun.p3 { top: 67%; right: 42%; width: 360px; height: 116px; }
+  .sun.p4 { top: 79%; right: 9%;  width: 250px; height: 76px; }
+  .sun.p5 { top: 59%; right: 56%; width: 150px; height: 56px; --dawn-opacity: .85; }
+  .sun.p6 { top: 87%; right: 29%; width: 420px; height: 96px; }
+  .sun.p7 { top: 27%; right: 41%; width: 120px; height: 46px; --dawn-opacity: .55;
+    background: linear-gradient(100deg, rgba(238,243,252,.95), rgba(91,123,174,.25)); box-shadow: 0 0 30px 6px rgba(238,243,252,.45); }
+  .sun.p8 { top: 92%; right: 60%; width: 190px; height: 58px; --dawn-opacity: .7;
+    background: linear-gradient(100deg, rgba(253,238,232,.95), rgba(177,74,49,.22)); box-shadow: 0 0 30px 6px rgba(253,238,232,.45); }
+
+  @media (max-width: 760px) {
+    .hero { padding-top: 6rem; }
+    .clerestory { top: 9%; right: -24%; width: 84%; height: 30%; transform: rotateY(-40deg); gap: 3.5%; }
+    .hero-way .way-2 { display: block; }
+    .shaft.s2, .shaft.s3 { display: none; }
+    .shaft.s1 { right: 8%; width: 16%; top: -10%; height: 120%; }
+    .sun.p2, .sun.p4, .sun.p5, .sun.p7, .sun.p8 { display: none; }
+    .sun.p1 { top: 40%; right: 12%; width: 200px; height: 70px; }
+    .sun.p3 { top: 50%; right: 30%; width: 240px; height: 80px; }
+    .sun.p6 { top: 88%; right: 4%; width: 280px; height: 64px; }
+    .vault .rib-hide-m { display: none; }
+  }
+
+  /* ---------- Threshold: daylight into shadow ---------- */
+  .threshold {
+    background: linear-gradient(180deg, var(--plaster-deep) 0%, var(--concrete) 34%, var(--concrete-deep) 55%, var(--shadow) 82%);
+    text-align: center;
+    padding-block: clamp(5rem, 11vw, 9rem) clamp(4rem, 9vw, 7rem);
+  }
+  .threshold h2 { font-size: clamp(1.7rem, 3.2vw, 2.6rem); max-width: 18em; margin-inline: auto; }
+  .door {
+    width: min(300px, 62vw);
+    aspect-ratio: 5 / 7;
+    margin: clamp(2.5rem, 6vw, 4.5rem) auto;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% 100%, rgba(217, 154, 43, .32), transparent 70%),
+      linear-gradient(180deg, #14100A, #1B150C);
+    box-shadow:
+      inset 4px 6px 16px rgba(0,0,0,.75),
+      inset -3px -3px 10px rgba(255,255,255,.04),
+      0 1px 0 rgba(255,255,255,.18);
+    position: relative;
+  }
+  .door::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: 12%;
+    width: 3px; height: 34%;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, transparent, var(--amber-bright));
+    opacity: .8;
+    filter: blur(1px);
+  }
+  /* the circle in the door: the quiet space within, an oculus at eye height */
+  .door::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 26%;
+    width: 22%; aspect-ratio: 1;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 45% 40%, rgba(255,248,230,.07), rgba(217,154,43,.03) 60%, transparent 72%);
+    box-shadow: inset 0 0 0 1px rgba(245,237,220,.11);
+  }
+  .threshold .voice { color: var(--lumen); margin-inline: auto; }
+
+  /* ---------- Values: the lit wall ---------- */
+  .values { text-align: center; }
+  .values::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 55%;
+    background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(217,154,43,.07), transparent 70%);
+    pointer-events: none;
+  }
+  .values h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); }
+  .values .section-lede { margin-inline: auto; color: var(--lumen-soft); max-width: 46em; }
+  .value-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(2rem, 4.5vw, 4rem);
+    margin-top: clamp(3rem, 7vw, 5.5rem);
+  }
+  .value { width: 178px; display: grid; justify-items: center; gap: var(--s2); }
+  @media (min-width: 1100px) {
+    .value-row { gap: clamp(1.5rem, 2.6vw, 2.4rem); flex-wrap: nowrap; }
+    .value { width: auto; flex: 1 1 0; max-width: 210px; }
+  }
+  .value .ap { --ap-size: 108px; }
+  .value .ap svg {
+    position: absolute; inset: 0; margin: auto;
+    width: 46%; height: 46%;
+    z-index: 1;
+    color: rgba(245, 237, 220, .5);
+    transition: color .9s var(--ease-out);
+  }
+  .value .ap.lit svg { color: #241A08; }
+  .value h3 { font-size: 1.15rem; margin: var(--s2) 0 0; letter-spacing: .02em; }
+  .value p { font-size: .95rem; color: var(--lumen-soft); margin: 0; }
+
+  /* ---------- The path: three hallways, with turns ---------- */
+  .path h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); max-width: 15em; }
+  .path .section-lede { color: var(--lumen-soft); }
+  .path .container { position: relative; z-index: 1; }
+  .portals {
+    display: grid;
+    grid-template-columns: 1.08fr 1fr .94fr;
+    gap: clamp(1.25rem, 2.6vw, 2.25rem);
+    align-items: end;
+  }
+  .portal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 430px;
+    padding: var(--s4);
+    text-decoration: none;
+    color: var(--lumen);
+    background:
+      radial-gradient(ellipse 120% 45% at 50% 0%, rgba(217,154,43,.16), transparent 72%),
+      linear-gradient(180deg, #191309, #241D12);
+    box-shadow:
+      inset 3px 5px 14px rgba(0,0,0,.6),
+      inset -2px -2px 8px rgba(255,255,255,.03),
+      0 1px 0 rgba(255,255,255,.08);
+    transition: box-shadow .45s var(--ease-out), transform .45s var(--ease-out);
+  }
+  .portal:nth-child(2) { min-height: 480px; }
+  .portal:nth-child(3) { min-height: 400px; }
+  .portal:hover, .portal:focus-visible {
+    transform: translateY(-4px);
+    box-shadow:
+      inset 3px 5px 14px rgba(0,0,0,.5),
+      inset 0 -60px 90px -50px rgba(217,154,43,.28),
+      0 18px 40px rgba(0,0,0,.45);
+  }
+  .portal h3 {
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    margin-bottom: var(--s2);
+  }
+  .portal strong { display: block; font-size: 1.1rem; margin-bottom: .5rem; }
+  .portal p { font-size: .98rem; color: var(--lumen-soft); margin-bottom: var(--s3); }
+  .portal .go { font-weight: 700; color: var(--amber-bright); }
+  @media (max-width: 900px) {
+    .portals { grid-template-columns: 1fr; align-items: stretch; }
+    .portal, .portal:nth-child(2), .portal:nth-child(3) { min-height: 0; padding-top: var(--s6); }
+  }
+
+  /* ---------- Gatherings: the week ---------- */
+  .gatherings h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); }
+  .gatherings .section-lede { color: var(--ink-soft); max-width: 44em; }
+
+  /* ---------- Community: the ring ---------- */
+  .community { text-align: center; }
+  .community h2 { font-size: clamp(2rem, 4vw, 3.2rem); max-width: 16em; margin-inline: auto; }
+  .community .story { margin-inline: auto; color: var(--ink-soft); max-width: 44em; }
+  .signup {
+    margin: var(--s5) auto 0;
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: var(--s2);
+    max-width: 34rem;
+  }
+  .signup input {
+    flex: 1 1 15rem;
+    font: inherit;
+    padding: .8em 1.1em;
+    border: 1px solid color-mix(in srgb, var(--ink) 40%, transparent);
+    background: #FBF8F1;
+    color: var(--ink);
+  }
+  .signup input::placeholder { color: var(--ink-soft); }
+  .signup input:focus-visible { outline-offset: 0; }
+  .signup-note { font-size: .875rem; color: var(--ink-soft); margin-top: var(--s2); }
+
+  /* ---------- Founder band: the lineage ---------- */
+  .founder-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 380px) 1fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .founder-band .asset-pending { aspect-ratio: 4 / 5; min-height: 0; }
+  .founder-band h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+  .founder-band .question { font-family: var(--face-voice); font-style: italic; font-size: 1.35rem; color: var(--lumen); }
+  @media (max-width: 820px) {
+    .founder-grid { grid-template-columns: 1fr; }
+    .founder-band .asset-pending { max-width: 380px; }
+  }
+
+  /* ---------- Close ---------- */
+  .close-section { text-align: center; overflow: hidden; }
+  .close-aps { display: flex; justify-content: center; gap: var(--s3); margin-bottom: var(--s5); }
+  .close-aps .ap { --ap-size: 40px; }
+  .close-section .voice { margin-inline: auto; max-width: 26em; }
+  .close-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); margin-top: var(--s5); }
+</style>
+</head>
+<body>
+<!--
+THESIS: The hermitage is a quiet space within each human being; this site is that
+space built as architecture. v2 answers the 2026-08-04 review: the sun through a
+wall of squares, the block met by the circle, online as the front door with the
+room in Indianapolis still standing, the founder as foundation rather than memorial,
+and a path that turns.
+OWN-WORLD: Sacred modernism (Ronchamp, Breuer). Warm plaster, board-formed concrete,
+umber shadow; glass light in amber, blue, madder as punched splayed apertures; the
+eight-around-one ring as the second figure. Marcellus lapidary caps, Alegreya Sans
+body, Alegreya italic for a human voice.
+STORY: A seeker arrives alone under a ceiling with no top, reads "You are not alone
+in your longing," passes a threshold from daylight into a lit interior, meets five
+values as glowing apertures, finds their hallway on a path with turns, joins the
+week from anywhere, takes a seat in the ring, and learns whose foundation this is.
+FIRST VIEWPORT: The atrium: a punched clerestory wall receding to the right, the
+morning sun coming through it in shafts and landing as skewed squares of light on
+the plaster floor; ribs of a vault converging above the frame; headline lower-left.
+-->
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">
+      <svg class="ring" viewBox="0 0 24 24" aria-hidden="true">
+        <circle class="center" cx="12" cy="12" r="3.4"/>
+        <circle class="seat" cx="12" cy="3.8" r="1.7"/><circle class="seat" cx="17.8" cy="6.2" r="1.7"/>
+        <circle class="seat" cx="20.2" cy="12" r="1.7"/><circle class="seat" cx="17.8" cy="17.8" r="1.7"/>
+        <circle class="seat" cx="12" cy="20.2" r="1.7"/><circle class="seat" cx="6.2" cy="17.8" r="1.7"/>
+        <circle class="seat" cx="3.8" cy="12" r="1.7"/><circle class="seat" cx="6.2" cy="6.2" r="1.7"/>
+      </svg>
+      Hermitage&nbsp;World
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="#path">The Path</a>
+      <a href="#gatherings">Gatherings</a>
+      <a href="#in-person">In Person &middot; Indianapolis</a>
+      <a href="../friar-justin.html">Friar Justin</a>
+      <a class="btn btn-primary" href="#gatherings">Join this week</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO — the atrium ============ -->
+  <section class="hero section plaster">
+    <svg class="vault" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="66" y1="-40" x2="-14" y2="100" class="rib-hide-m"/>
+      <line x1="66" y1="-40" x2="-2" y2="100"/>
+      <line x1="66" y1="-40" x2="10" y2="100" class="rib-hide-m"/>
+      <line x1="66" y1="-40" x2="22" y2="100"/>
+      <line x1="66" y1="-40" x2="34" y2="100" class="rib-strong"/>
+      <line x1="66" y1="-40" x2="46" y2="100"/>
+      <line x1="66" y1="-40" x2="58" y2="100" class="rib-hide-m"/>
+      <line x1="66" y1="-40" x2="70" y2="100"/>
+      <line x1="66" y1="-40" x2="82" y2="100" class="rib-hide-m"/>
+      <line x1="66" y1="-40" x2="94" y2="100" class="rib-strong"/>
+      <line x1="66" y1="-40" x2="106" y2="100"/>
+      <line x1="66" y1="-40" x2="118" y2="100" class="rib-hide-m"/>
+    </svg>
+    <div class="atrium" aria-hidden="true">
+      <div class="clerestory">
+        <div class="ap"></div>
+        <div class="ap"></div>
+        <div class="ap ap-blue"></div>
+        <div class="ap"></div>
+        <div class="ap"></div>
+        <div class="ap"></div>
+        <div class="ap ap-madder"></div>
+        <div class="ap"></div>
+        <div class="ap"></div>
+        <div class="ap"></div>
+        <div class="ap ap-blue"></div>
+        <div class="ap"></div>
+      </div>
+    </div>
+    <div class="shaft s1 dawn" aria-hidden="true"></div>
+    <div class="shaft s2 dawn" aria-hidden="true"></div>
+    <div class="shaft s3 dawn" aria-hidden="true"></div>
+    <div class="sun p1 dawn" aria-hidden="true"></div>
+    <div class="sun p2 dawn" aria-hidden="true"></div>
+    <div class="sun p3 dawn" aria-hidden="true"></div>
+    <div class="sun p4 dawn" aria-hidden="true"></div>
+    <div class="sun p5 dawn" aria-hidden="true"></div>
+    <div class="sun p6 dawn" aria-hidden="true"></div>
+    <div class="sun p7 dawn" aria-hidden="true"></div>
+    <div class="sun p8 dawn" aria-hidden="true"></div>
+    <div class="container">
+      <h1>You are not alone in your&nbsp;longing.</h1>
+      <p class="lede">Hermitage World is a worldwide community of seekers learning to find the quiet space within, through meditation, simplicity, and companions on the way. Whatever tradition you come from, or none at all: the door is open.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#path">Begin the path</a>
+        <a class="btn btn-quiet" href="#gatherings">This week, online</a>
+      </div>
+      <p class="inscription hero-way">Online, from anywhere <span class="way-2">&nbsp;&middot;&nbsp; In person, Indianapolis</span></p>
+    </div>
+  </section>
+
+  <!-- ============ THRESHOLD ============ -->
+  <section class="threshold plaster" id="threshold">
+    <div class="container">
+      <h2 class="reveal">The door has no lock, and never has.</h2>
+      <div class="door reveal" role="presentation"></div>
+      <div class="on-shadow reveal">
+        <blockquote class="voice">
+          &ldquo;The hermitage is a quiet space within each human being. Meditation is a means by which a person can discover this place and use it to achieve a full life.&rdquo;
+          <cite>Friar Justin Belitz, OFM &middot; Founder of the Hermitage, 1985</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALUES — the lit wall ============ -->
+  <section class="values section ground-shadow on-shadow shadowed" id="values" data-ignite-group>
+    <div class="container">
+      <h2>Five lights hold this place up.</h2>
+      <p class="section-lede">Not doctrines. Not requirements. Just the convictions this community keeps returning to, and builds everything upon.</p>
+      <div class="value-row">
+        <div class="value">
+          <div class="ap" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <circle cx="24" cy="24" r="16"/>
+              <circle cx="24" cy="24" r="2.4" fill="currentColor" stroke="none"/>
+              <path d="M24 14v4M24 30v4M14 24h4M30 24h4M17 17l2.8 2.8M28.2 28.2 31 31M31 17l-2.8 2.8M19.8 28.2 17 31"/>
+            </svg>
+          </div>
+          <h3>Inner divinity</h3>
+          <p>You already carry what you are looking for.</p>
+        </div>
+        <div class="value">
+          <div class="ap ap-blue" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M33.9 11.5A16 16 0 1 0 39.6 19"/>
+              <circle cx="39" cy="12" r="2.4" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h3>Experience over doctrine</h3>
+          <p>Nothing here asks for belief. Everything invites practice.</p>
+        </div>
+        <div class="value">
+          <div class="ap" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <circle cx="19" cy="24" r="11.5"/>
+              <circle cx="29" cy="24" r="11.5"/>
+            </svg>
+          </div>
+          <h3>Radical acceptance</h3>
+          <p>There is beauty in everyone and everything. Come as you are.</p>
+        </div>
+        <div class="value">
+          <div class="ap ap-madder" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M14 36V14h20v22H22"/>
+              <circle cx="18" cy="36" r="2.4" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h3>Conscious creation</h3>
+          <p>Thought, intention and action shape a life. We practice shaping it well.</p>
+        </div>
+        <div class="value">
+          <div class="ap" data-ignite>
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <circle cx="24" cy="11" r="3"/><circle cx="37" cy="20" r="3"/><circle cx="32" cy="36" r="3"/><circle cx="16" cy="36" r="3"/><circle cx="11" cy="20" r="3"/>
+              <path d="M26.6 12.6l7.8 5.6M36 23l-3 10M29 36H19M12 23l3 10M21.4 12.6l-7.8 5.6M24 14l10 20M24 14 14 34M14 21h20"/>
+            </svg>
+          </div>
+          <h3>Unity &amp; connection</h3>
+          <p>All life is held together by love. None of us seeks alone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PATH — three hallways, with turns ============ -->
+  <section class="path section ground-shadow-2 on-shadow shadowed board-form lattice" id="path" data-ignite-group>
+    <div class="container">
+      <h2>From this room, three hallways. None of them run straight.</h2>
+      <p class="section-lede" style="max-width:44em;">Everyone arrives differently: brand new to meditation, decades into practice, or carrying memories of Friar Justin himself. Each hallway leads somewhere real, and each one turns. That is not a flaw in the path. It is the path.</p>
+      <div class="walk">
+        <div class="walk-start">
+          <div class="ap" data-ignite></div>
+          <span class="inscription">You are here</span>
+        </div>
+        <svg class="walk-line" aria-hidden="true"></svg>
+        <div class="portals">
+          <a class="portal" href="#path">
+            <h3>Begin</h3>
+            <strong>Train Your Mind: Meditation Foundations</strong>
+            <p>A rotating class exploring meditation through modern science and ancient contemplative wisdom. Concentration, clarity, emotional balance, lasting happiness. No experience needed; no tradition required.</p>
+            <span class="go">Explore the class &rarr;</span>
+          </a>
+          <a class="portal" href="#path">
+            <h3>Deepen</h3>
+            <strong>Success: Full Living &amp; the practice space</strong>
+            <p>Friar Justin's flagship program joins practical tools for managing a life with meditation and direct spirituality. Around it: silent sits, discussion circles, retreats, and visiting teachers from around the world.</p>
+            <span class="go">See programs &amp; retreats &rarr;</span>
+          </a>
+          <a class="portal" href="../friar-justin.html">
+            <h3>Remember</h3>
+            <strong>Friar Justin &amp; the Library</strong>
+            <p>The founder's voice, kept working: twenty-five hours of homilies and teachings, and the meditations he always gave freely.</p>
+            <span class="go">Enter the hall &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GATHERINGS — the week ============ -->
+  <section class="gatherings section ground-deep plaster" id="gatherings">
+    <div class="container">
+      <h2>The week keeps a rhythm. Join it from anywhere.</h2>
+      <p class="section-lede">Online is the front door now. Every gathering below meets on Zoom, wherever you are: Indianapolis, Melbourne, Munich, or a kitchen table at dawn.</p>
+
+      <div class="week">
+        <div class="day empty">
+          <span class="dow">Mon</span>
+        </div>
+        <div class="day has-online">
+          <span class="dow">Tue</span>
+          <div class="slots">
+            <div class="slot">
+              <span class="pane" aria-hidden="true"></span>
+              <h3>Worldwide Energy Circle</h3>
+              <span class="time">Weekly &middot; 7 pm Eastern (placeholder)</span>
+              <p>Every week since 2020, the community holds silence together across time zones and sends peace outward.</p>
+              <a href="#gatherings">Join on Zoom &rarr;</a>
+            </div>
+          </div>
+        </div>
+        <div class="day has-online">
+          <span class="dow">Wed</span>
+          <div class="slots">
+            <div class="slot">
+              <span class="pane blue" aria-hidden="true"></span>
+              <h3>The Way Between</h3>
+              <span class="time">Monthly &middot; date to come</span>
+              <p>A spiritual discussion circle for the questions that don't fit anywhere else: guided, unhurried, open to every tradition.</p>
+              <a href="#gatherings">Ask to join &rarr;</a>
+            </div>
+          </div>
+        </div>
+        <div class="day has-online">
+          <span class="dow">Thu</span>
+          <div class="slots">
+            <div class="slot">
+              <span class="pane madder" aria-hidden="true"></span>
+              <h3>Yvonne's Classes</h3>
+              <span class="time">Series &middot; from Australia</span>
+              <p>Long-time teaching from the Australian community, offered to the United States across the date line.</p>
+              <a href="#gatherings">See the series &rarr;</a>
+            </div>
+          </div>
+        </div>
+        <div class="day empty">
+          <span class="dow">Fri</span>
+        </div>
+        <div class="day has-online">
+          <span class="dow">Sat</span>
+          <div class="slots">
+            <div class="slot">
+              <span class="pane" aria-hidden="true"></span>
+              <h3>Train Your Mind</h3>
+              <span class="time">Rotating class &middot; next phase this fall</span>
+              <p>Meditation Foundations with Samuel Robinson: two phases of four classes, science and contemplative wisdom side by side.</p>
+              <a href="#path">Explore the class &rarr;</a>
+            </div>
+          </div>
+        </div>
+        <div class="day has-online">
+          <span class="dow">Sun</span>
+          <div class="slots">
+            <div class="slot">
+              <span class="pane" aria-hidden="true"></span>
+              <h3>Contemplative Unity</h3>
+              <span class="time">Weekly &middot; 10 am Eastern (placeholder)</span>
+              <p>An hour of silent meditation, held together. The simplest thing we do, and the deepest. Also in the room in Indianapolis.</p>
+              <a href="#gatherings">Sit with us &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="week-meta">
+        <span data-tz>Shown in your local time</span>
+        <span>Times and links are prototype placeholders; the live site shows each gathering in your time zone.</span>
+      </div>
+
+      <!-- In person: the room still stands -->
+      <div class="local" id="in-person">
+        <div class="local-head">
+          <h3>Also in person, in Indianapolis.</h3>
+          <p>Most of what we do now happens online. The room still matters: it is where retreats happen, where the photographs come from, and proof that these are real people in a real place, even for someone on the other side of the world.</p>
+        </div>
+        <div class="local-list">
+          <div class="local-row">
+            <span class="where">Sundays</span>
+            <div>
+              <h4>Contemplative Unity, in the room</h4>
+              <p>The Sunday hour of silence, held together in the Hermitage's new home at the Indiana Interchurch Center from this September.</p>
+            </div>
+            <a href="#in-person">Plan a visit &rarr;</a>
+          </div>
+          <div class="local-row">
+            <span class="where">Retreats</span>
+            <div>
+              <h4>Living the Prayer of Quiet</h4>
+              <p>The capstone retreat, in person and unhurried. Dates to come.</p>
+            </div>
+            <a href="#in-person">Ask to be told &rarr;</a>
+          </div>
+          <div class="local-row">
+            <span class="where">Visiting teachers</span>
+            <div>
+              <h4>Guest weekends</h4>
+              <p>Teachers from the wider community come through Indianapolis across the year, and their sessions are opened online where they can be.</p>
+            </div>
+            <a href="#gatherings">See the calendar &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMMUNITY — the ring ============ -->
+  <section class="community section ground-plaster plaster" id="community">
+    <div class="container">
+      <h2>The Hermitage was never the building.</h2>
+      <p class="story">For forty years, a house in Indianapolis held this community. In September it passes to new hands. What Friar Justin actually built keeps going: people in the United States, Australia, and Europe who found the quiet space within, and found each other. Eight seats around one, and one of them is open.</p>
+
+      <figure class="ring-figure" aria-label="Eight seats around a center: Indianapolis, the United States, Australia and Europe are lit; one seat is drawn open for you.">
+        <svg viewBox="0 0 560 420">
+          <g class="threads">
+            <line class="thread" x1="280" y1="124" x2="280" y2="146"/>
+            <line class="thread" x1="386" y1="104" x2="326" y2="164"/>
+            <line class="thread" x1="406" y1="210" x2="344" y2="210"/>
+            <line class="thread" x1="386" y1="316" x2="326" y2="256"/>
+            <line class="thread" x1="280" y1="336" x2="280" y2="274"/>
+            <line class="thread" x1="174" y1="316" x2="234" y2="256"/>
+            <line class="thread" x1="154" y1="210" x2="216" y2="210"/>
+            <line class="thread" x1="174" y1="104" x2="234" y2="164"/>
+          </g>
+          <circle class="core" cx="280" cy="210" r="64"/>
+          <text class="core-text" x="280" y="206" text-anchor="middle">The quiet</text>
+          <text class="core-text" x="280" y="222" text-anchor="middle">space within</text>
+
+          <circle class="seat lit" cx="280" cy="60" r="24"/>
+          <text class="label strong" x="280" y="22" text-anchor="middle">Indianapolis</text>
+          <circle class="seat" cx="386" cy="104" r="24"/>
+          <circle class="seat lit" cx="430" cy="210" r="24"/>
+          <text class="label strong" x="466" y="214">Australia</text>
+          <circle class="seat yours" cx="386" cy="316" r="24"/>
+          <text class="label" x="420" y="352">A seat for you</text>
+          <circle class="seat" cx="280" cy="360" r="24"/>
+          <circle class="seat" cx="174" cy="316" r="24"/>
+          <circle class="seat lit" cx="130" cy="210" r="24"/>
+          <text class="label strong" x="94" y="214" text-anchor="end">Europe</text>
+          <circle class="seat lit" cx="174" cy="104" r="24"/>
+          <text class="label strong" x="140" y="82" text-anchor="end">United States</text>
+        </svg>
+      </figure>
+
+      <form class="signup" action="#" method="post">
+        <label for="signup-email" class="inscription" style="width:100%;">Receive the weekly letter</label>
+        <input id="signup-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn btn-primary" type="submit">Join 3,300+ seekers</button>
+      </form>
+      <p class="signup-note">One letter a week. Quiet, useful, easy to leave.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOUNDER — the lineage ============ -->
+  <section class="founder-band section ground-concrete on-shadow shadowed board-form" id="founder">
+    <div class="container">
+      <div class="founder-grid">
+        <figure class="asset-pending" style="margin:0;">
+          <span class="inscription">Photograph to come</span>
+          <small>Friar Justin teaching, from the Hermitage archive (Garry's collection)</small>
+        </figure>
+        <div>
+          <h2>Peace is learnable. That was the founder's whole claim.</h2>
+          <p>Justin Belitz was a Franciscan friar who taught meditation across the United States, Europe, and Australia for four decades. He believed every person could awaken to the divine energy within, and that enough people meditating daily would change the world. This is not a memorial to him. It is a foundation, still being built on.</p>
+          <p class="question">The question he leaves is a practical one: what can these thoughts do for you?</p>
+          <p style="margin-top: var(--s3);"><a class="btn btn-quiet" href="../friar-justin.html">Meet Friar Justin</a></p>
+        </div>
+      </div>
+      <ul class="lineage">
+        <li>
+          <span class="year">1985</span>
+          <h3>A house in Indianapolis</h3>
+          <p>Friar Justin founds the Hermitage: meditation first, and spirituality found through it.</p>
+        </li>
+        <li>
+          <span class="year">The flagship</span>
+          <h3>Success: Full Living</h3>
+          <p>His program for a whole life: a life mechanism, meditation, and direct spirituality.</p>
+        </li>
+        <li>
+          <span class="year">Since 2020</span>
+          <h3>The Worldwide Energy Circle</h3>
+          <p>Every Tuesday, Indianapolis to Australia, the community holds silence together on Zoom.</p>
+        </li>
+        <li class="now">
+          <span class="year">Now</span>
+          <h3>Train Your Mind, and the teachers after him</h3>
+          <p>Samuel Robinson's new foundations class and Yvonne's classes from Australia: the work continuing in new hands.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CLOSE ============ -->
+  <section class="close-section section ground-shadow on-shadow shadowed" id="close" data-ignite-group>
+    <div class="container">
+      <div class="close-aps" aria-hidden="true">
+        <div class="ap" data-ignite></div>
+        <div class="ap ap-blue" data-ignite style="--ap-size:52px;"></div>
+        <div class="ap" data-ignite style="--ap-size:64px;"></div>
+        <div class="ap ap-madder" data-ignite style="--ap-size:52px;"></div>
+        <div class="ap" data-ignite></div>
+      </div>
+      <blockquote class="voice">
+        &ldquo;The Hermitage exists to help every person awaken to the divine energy within — so that through meditation, simplicity, and community, we may each live with greater love, peace, and purpose.&rdquo;
+        <cite>The mission of Hermitage World</cite>
+      </blockquote>
+      <div class="close-actions">
+        <a class="btn btn-primary" href="#gatherings">Join a gathering this week</a>
+        <a class="btn btn-quiet" href="#path">Or begin the path</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer shadowed">
+  <div class="container">
+    <div class="footer-cols">
+      <div>
+        <a class="wordmark" href="index.html">
+          <svg class="ring" viewBox="0 0 24 24" aria-hidden="true">
+            <circle class="center" cx="12" cy="12" r="3.4"/>
+            <circle class="seat" cx="12" cy="3.8" r="1.7"/><circle class="seat" cx="17.8" cy="6.2" r="1.7"/>
+            <circle class="seat" cx="20.2" cy="12" r="1.7"/><circle class="seat" cx="17.8" cy="17.8" r="1.7"/>
+            <circle class="seat" cx="12" cy="20.2" r="1.7"/><circle class="seat" cx="6.2" cy="17.8" r="1.7"/>
+            <circle class="seat" cx="3.8" cy="12" r="1.7"/><circle class="seat" cx="6.2" cy="6.2" r="1.7"/>
+          </svg>
+          Hermitage&nbsp;World
+        </a>
+        <p style="max-width:30ch; margin-top:var(--s2);">An interfaith center for meditation and spirituality. Online from anywhere; in person in Indianapolis.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="#path">The Path</a>
+        <a href="#gatherings">Gatherings</a>
+        <a href="#in-person">In Person &middot; Indianapolis</a>
+        <a href="../friar-justin.html">Friar Justin</a>
+        <a href="../friar-justin.html#library">The Library</a>
+        <a href="#">Ways to Give</a>
+      </nav>
+      <nav aria-label="Contact">
+        <a href="#">Contact</a>
+        <a href="#">Newsletter</a>
+        <a href="https://hermitageindy.org">Formerly hermitageindy.org</a>
+      </nav>
+    </div>
+    <div class="fine">
+      <span>&copy; 2026 The Hermitage &middot; All traditions honored here.</span>
+      <span>Design prototype v0.2 &middot; imagery, times &amp; links are placeholders.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/hw2.js"></script>
+</body>
+</html>
