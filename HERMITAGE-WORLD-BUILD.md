@@ -51,6 +51,17 @@ QA at the time of writing: every page loads with no console errors and no horizo
 - **Membership:** tier names and pricing ("Friend" and "Family" are proposals).
 - **Domain:** when hermitageworld.org is connected, update the absolute paths in `404.html`.
 
+## Library prototype (started 2026-10-23)
+
+The Holos Library prototype (`iris-webflow-scripts/holos-library/`), rebuilt for the Hermitage at `/library/` (noindex, not in the sitemap). The page is `library/index.html`, styles are in `assets/css/library.css`, the renderer is `assets/js/library-room.js`, and the data is `assets/data/catalog.js`.
+
+- **Real catalog.** Every title, volume and track number, credit, description and price comes from the old hermitageindy.org shop (its WooCommerce store API, read 2026-10-23): 41 MP3 tracks across 11 Opus CDs, Vol. 22 *We Are One*, the Success: Full Living album, the three books and the trilogy, plus the spring 2026 classes. The three named videos and the homily and teaching hours come from the Collab OS surface. 70 items in all.
+- **Four ways in**, all sharing one search and filter set (kind, when, voice, access): **Shelves** (objects keep their own shape: an arch with light for a meditation, a disc for an album, a spine for a book, a frame for a video, numerals for a program, eight seats around one for a reading circle); **The window** (the catalog as a rose window: 13 albums around the sun mark, their tracks behind them, everything else in the border; matches stay lit); **Paths** (four ordered paths on the `.pathway` component); and the **Catalog** (the `.board` list).
+- **What changed from Holos:** holons become companions (morning and evening, private and group, explanation then experience, Vol. 9 as the companion to Vol. 6) and *Read together* (Rohr's *The Universal Christ* beside the circle that read it). Member uploads are dropped, because this library is curated. The 12 domains become "When" (moments of the day and reasons to reach for something). The personas are Guest, Friend (free account with a saved shelf) and Family (phase two, everything included).
+- **Honest gaps:** durations show as "length to come". The free list follows the stated policy (the healing meditations) and is marked draft. Volumes the shop credits only to the "Hermitage Meditation Series" say "voice to confirm". Curator notes and paths are marked draft for Samuel. Buttons say what they will do and show a "(prototype)" toast. Cover art from the old site isn't used until Garry approves it.
+- **Not yet:** the two existing library pages (`meditation/library/`, `friar-justin/library/`) still read the sample `library.js`. If this direction is accepted, they become views of `catalog.js` and `library.js` retires.
+- QA: no console errors and no horizontal overflow at 1440 and 390 wide. Search, filters, persona switch, save, the empty state, the drawer and the window's dimming were all checked.
+
 ## Next steps
 
 1. Review with Garry and Samuel; collect the content above through Collab OS.

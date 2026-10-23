@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Library · prototype · Hermitage World</title>
+<meta name="description" content="A prototype of the Hermitage Library: every meditation the Hermitage recorded, Friar Justin's books and homilies, and the programs that carry his teaching, on shelves, in a rose window, along paths and in one catalog.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya:ital@0;1&display=swap">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/site.js"></script>
+</head>
+<body>
+<hw-header></hw-header>
+
+<main id="main" class="lib">
+
+<!-- Prototype bar: who is looking changes what each object says about access -->
+<div class="lib-proto" data-room="deep">
+  <div class="container container--wide lib-proto__inner">
+    <span class="lib-proto__tag">Prototype</span>
+    <p class="lib-proto__note">Real titles from the old hermitageindy.org shop. Durations, audio and the free list arrive with Garry’s catalog; membership is a phase-two proposal.</p>
+    <label class="lib-proto__who" for="lib-persona"><span>Viewing as</span>
+      <select class="select lib-proto__select" id="lib-persona">
+        <option value="guest">A guest</option>
+        <option value="friend" selected>A Friend (free account)</option>
+        <option value="family">A Family member (phase two)</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<section class="page-hero lib-desk" data-room="dark">
+  <div class="room-arch" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <div class="lib-desk__head">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><span>The Library</span></nav>
+        <h1>Forty years of practice, <em>kept open</em></h1>
+        <p class="t-lede">Every meditation the Hermitage recorded, Friar Justin’s books and homilies, and the programs that carry his teaching on. The healing meditations are free; the rest carry a small cost that keeps the Hermitage going.</p>
+      </div>
+      <div class="cluster lib-desk__actions">
+        <button class="btn" type="button" data-lib="wander"><svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#sun"/></svg>Choose one for me</button>
+      </div>
+    </div>
+
+    <div class="lib-search" role="search">
+      <svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#search"/></svg>
+      <label class="sr-only" for="lib-q">Search the library</label>
+      <input class="input" id="lib-q" type="search" autocomplete="off" placeholder="Search titles, prayers, teachers, moments of the day">
+      <kbd class="lib-search__key" aria-hidden="true">/</kbd>
+    </div>
+    <p class="lib-try" id="lib-try"><span>Try</span>
+      <button type="button" data-try="healing">healing</button>
+      <button type="button" data-try="morning">morning</button>
+      <button type="button" data-try="St. Francis">St. Francis</button>
+      <button type="button" data-try="Ho’oponopono">Ho’oponopono</button>
+      <button type="button" data-try="children">children</button>
+      <button type="button" data-try="Samuel">Samuel</button>
+    </p>
+
+    <form class="lib-facets" id="lib-facets" aria-label="Refine the library">
+      <fieldset class="lib-facet">
+        <legend class="lib-facet__label">Kind</legend>
+        <div class="chips" data-facet="kind"></div>
+      </fieldset>
+      <fieldset class="lib-facet">
+        <legend class="lib-facet__label">When</legend>
+        <div class="chips" data-facet="occasion"></div>
+      </fieldset>
+      <details class="lib-more">
+        <summary>Whose voice, and what it costs <svg class="icon" aria-hidden="true"><use href="../assets/img/icons.svg#chevron-down"/></svg></summary>
+        <fieldset class="lib-facet">
+          <legend class="lib-facet__label">Voice</legend>
+          <div class="chips" data-facet="voice"></div>
+        </fieldset>
+        <fieldset class="lib-facet">
+          <legend class="lib-facet__label">Access</legend>
+          <div class="chips" data-facet="access"></div>
+        </fieldset>
+      </details>
+    </form>
+  </div>
+</section>
+
+<nav class="lib-tabs" data-room="dark" aria-label="Ways to browse">
+  <div class="container lib-tabs__inner" role="tablist">
+    <button class="lib-tab" role="tab" type="button" data-view="shelves" aria-selected="true" aria-controls="view-shelves">Shelves</button>
+    <button class="lib-tab" role="tab" type="button" data-view="window" aria-selected="false" aria-controls="view-window">The window</button>
+    <button class="lib-tab" role="tab" type="button" data-view="paths" aria-selected="false" aria-controls="view-paths">Paths</button>
+    <button class="lib-tab" role="tab" type="button" data-view="catalog" aria-selected="false" aria-controls="view-catalog">Catalog</button>
+    <span class="lib-tabs__count" id="lib-count" aria-live="polite"></span>
+  </div>
+</nav>
+
+<section class="section lib-views" data-room="dark">
+  <div class="container">
+
+    <!-- SHELVES -->
+    <div class="lib-view" id="view-shelves" role="tabpanel">
+      <div id="lib-editorial">
+        <section class="lib-sec">
+          <div class="lib-sec__head">
+            <div>
+              <h2>On the lectern</h2>
+              <p class="lib-sec__sub">Three places to begin, each with a word on why. <span class="draft-mark">curator notes, draft</span></p>
+            </div>
+          </div>
+          <div class="lectern">
+            <button class="lectern__lead" type="button" data-feature="t-universal-am">
+              <span class="lectern__obj"></span>
+              <span class="lectern__text">
+                <span class="t-caps">Begin here</span>
+                <span class="lectern__title"></span>
+                <span class="lectern__by"></span>
+                <span class="lectern__note">Made for people of any faith: the image of light stands for God. If you have never meditated, start with this one, in the morning, and keep its evening companion for the end of the day.</span>
+              </span>
+            </button>
+            <div class="lectern__side">
+              <button class="lectern__item" type="button" data-feature="t-healing-self">
+                <span class="lectern__obj"></span>
+                <span class="lectern__text">
+                  <span class="t-caps">Free to everyone</span>
+                  <span class="lectern__title"></span>
+                  <span class="lectern__note">For anyone who is unwell, in body, mind or spirit. Its companion is for the people who love them.</span>
+                </span>
+              </button>
+              <button class="lectern__item" type="button" data-feature="opus-11">
+                <span class="lectern__obj"></span>
+                <span class="lectern__text">
+                  <span class="t-caps">The contemplative example</span>
+                  <span class="lectern__title"></span>
+                  <span class="lectern__note">Ho’oponopono, explained on one track and experienced on the next. The old site used it to show what contemplative meditation is.</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="lib-sec" data-shelf="mine" hidden>
+          <div class="lib-sec__head"><div><h2>Your shelf</h2><p class="lib-sec__sub">What you have saved. It travels with your account.</p></div></div>
+          <div class="shelf"></div>
+        </section>
+
+        <section class="lib-sec" data-shelf="free">
+          <div class="lib-sec__head">
+            <div><h2>Free, always</h2><p class="lib-sec__sub">The healing meditations, for anyone who needs them. <span class="draft-mark">which tracks are free: to confirm with Garry</span></p></div>
+            <button class="lib-sec__link" type="button" data-only="access:free">Show only what’s free</button>
+          </div>
+          <div class="shelf"></div>
+        </section>
+
+        <section class="lib-sec" data-shelf="companions">
+          <div class="lib-sec__head"><div><h2>Companions</h2><p class="lib-sec__sub">Recordings made to be used together: morning and evening, alone and in a group, the explanation and then the experience.</p></div></div>
+          <div class="shelf"></div>
+        </section>
+
+        <section class="lib-sec" data-shelf="albums">
+          <div class="lib-sec__head">
+            <div><h2>The albums</h2><p class="lib-sec__sub">Twenty-one volumes on eleven Opus discs, then Vol. 22, We Are One, and the Success: Full Living retreat on three.</p></div>
+            <button class="lib-sec__link" type="button" data-goto="window">See them as a window</button>
+          </div>
+          <div class="shelf"></div>
+        </section>
+
+        <section class="lib-sec" data-shelf="books">
+          <div class="lib-sec__head"><div><h2>The Success trilogy</h2><p class="lib-sec__sub">Three books by Friar Justin, read in French, Portuguese, Polish, Hungarian, German, Russian and Greek.</p></div></div>
+          <div class="shelf"></div>
+        </section>
+
+        <section class="lib-sec" data-shelf="text">
+          <div class="lib-sec__head"><div><h2>Praying with a text</h2><p class="lib-sec__sub">“Meditation can be used with any familiar text, scripture, poem or prayer.” These are the examples.</p></div></div>
+          <div class="shelf"></div>
+        </section>
+
+        <section class="lib-sec" data-shelf="video">
+          <div class="lib-sec__head"><div><h2>Friar Justin on video</h2><p class="lib-sec__sub">About seventeen hours of Sunday homilies and seven of teaching, being cleaned, titled and chaptered now.</p></div></div>
+          <div class="shelf"></div>
+        </section>
+
+        <section class="lib-sec" data-shelf="community">
+          <div class="lib-sec__head"><div><h2>Other Hermitage voices</h2><p class="lib-sec__sub">The musicians, teachers and friends whose work sits beside Justin’s.</p></div></div>
+          <div class="shelf"></div>
+        </section>
+
+        <section class="lib-sec" data-shelf="together">
+          <div class="lib-sec__head"><div><h2>Read together</h2><p class="lib-sec__sub">Books from other teachers that the community read as a circle, shelved beside the circle that read them.</p></div></div>
+          <div class="shelf"></div>
+        </section>
+
+        <section class="lib-sec" data-shelf="programs">
+          <div class="lib-sec__head"><div><h2>Programs and retreats</h2><p class="lib-sec__sub">When you want to practice with others. Dates open with each cohort.</p></div></div>
+          <div class="shelf"></div>
+        </section>
+      </div>
+
+      <div id="lib-results"></div>
+    </div>
+
+    <!-- THE WINDOW -->
+    <div class="lib-view" id="view-window" role="tabpanel" hidden>
+      <div class="lib-sec__head">
+        <div>
+          <h2>The window</h2>
+          <p class="lib-sec__sub">The whole library as one rose window. The thirteen albums ring the center, their tracks stand behind them, and the books, videos and programs are set in the border. What matches your search stays lit.</p>
+        </div>
+      </div>
+      <div class="rose">
+        <svg class="rose__svg" id="rose" viewBox="-500 -500 1000 1000" role="group" aria-label="Rose window of the library"></svg>
+        <div class="rose__tip" id="rose-tip" hidden></div>
+      </div>
+      <ul class="rose__legend" role="list">
+        <li><i style="--glass: var(--glass-amber)"></i>Morning, beginning, music</li>
+        <li><i style="--glass: var(--glass-blue)"></i>Evening, sleep, young people</li>
+        <li><i style="--glass: var(--glass-verdigris)"></i>Healing, life</li>
+        <li><i style="--glass: var(--glass-madder)"></i>Prayer, texts, groups</li>
+      </ul>
+    </div>
+
+    <!-- PATHS -->
+    <div class="lib-view" id="view-paths" role="tabpanel" hidden>
+      <div class="lib-sec__head">
+        <div>
+          <h2>Paths</h2>
+          <p class="lib-sec__sub">Ordered ways through the library, each step with a word on why. Steps that don’t match your search are dimmed, not removed. <span class="draft-mark">paths drafted for Samuel</span></p>
+        </div>
+      </div>
+      <div class="paths" id="lib-paths"></div>
+    </div>
+
+    <!-- CATALOG -->
+    <div class="lib-view" id="view-catalog" role="tabpanel" hidden>
+      <div class="lib-sec__head">
+        <div>
+          <h2>The catalog</h2>
+          <p class="lib-sec__sub">Everything in one list, for when you know what you’re looking for. Search and filters apply here too.</p>
+        </div>
+      </div>
+      <ol class="board" role="list" id="lib-catalog"></ol>
+    </div>
+
+  </div>
+</section>
+
+<section class="section section--tight" data-room="stone">
+  <div class="container grid grid--3">
+    <div class="stack stack--sm">
+      <h2 class="t-h3">How access works</h2>
+      <p class="t-muted"><strong>Free</strong> is free to everyone, no account needed. <strong>Small cost</strong> is a one-time purchase: $3.99 a track, $15 an album, as on the old shop. <strong>Being prepared</strong> means the recording is being cleaned and titled. A Friend’s account is free and keeps a shelf; a Family membership would include everything. <span class="draft-mark">membership is a proposal</span></p>
+    </div>
+    <div class="stack stack--sm">
+      <h2 class="t-h3">Whose voice</h2>
+      <p class="t-muted">Every item names who made it. The old shop credits most volumes only to the Hermitage Meditation Series; they are shelved with Friar Justin’s own work until Garry confirms the voices. Books the community read together always name their author, and sit beside the circle that read them.</p>
+    </div>
+    <div class="stack stack--sm">
+      <h2 class="t-h3">Companions</h2>
+      <p class="t-muted">Many recordings were made in pairs: morning and evening, for one person and for a group, an explanation and then the experience. Each item shows its companions, the album it belongs to, the other forms of the same teaching, and the paths it lies on.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="lib-scrim" id="lib-scrim" hidden></div>
+<aside class="lib-drawer" id="lib-drawer" data-room="deep" aria-label="Item details" aria-hidden="true" tabindex="-1"></aside>
+<div class="lib-toast" id="lib-toast" role="status"></div>
+
+<hw-signup></hw-signup>
+<hw-footer></hw-footer>
+<script src="../assets/data/catalog.js"></script>
+<script src="../assets/js/library-room.js"></script>
+</body>
+</html>
