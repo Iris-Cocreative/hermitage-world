@@ -3,3 +3,7 @@
 *.zip
 .DS_Store
 Thumbs.db
+
+# client photos and local renders for print work stay off the public repo
+print/**/local/
+scenes/**/local/

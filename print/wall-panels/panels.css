@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Wall panel composer — a working tool, not a site page.
+   Reads the site tokens; everything else is local to this folder.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--umber-950);
+  color: var(--plaster-200);
+  font: 400 15px/1.45 var(--font-body);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+button, input, select { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+
+/* ------------------------------------------------------------------ bar -- */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 0.7rem 1.25rem;
+  border-bottom: 1px solid var(--line-subtle);
+  background: var(--umber-900);
+}
+.bar__title {
+  margin: 0;
+  font: 400 1.35rem/1 var(--font-display);
+  color: var(--plaster-100);
+  white-space: nowrap;
+}
+.bar__title span { font: 400 0.9rem var(--font-body); color: var(--stone-400); margin-left: 0.5rem; }
+.bar__status { margin-left: auto; font-size: 0.85rem; color: var(--stone-400); }
+
+.tabs { display: flex; gap: 0.25rem; padding: 0.2rem; border: 1px solid var(--line-subtle); border-radius: var(--radius-pill); }
+.tabs button {
+  border: 0; background: none; padding: 0.3rem 0.9rem; border-radius: var(--radius-pill);
+  color: var(--stone-300); cursor: pointer;
+}
+.tabs button[aria-selected="true"] { background: var(--gold-500); color: var(--umber-900); }
+.tabs button:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 2px; }
+
+/* ------------------------------------------------------------------ app -- */
+.app { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 340px; }
+
+.view {
+  min-width: 0;
+  overflow: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.view { position: relative; }
+.view__frame, .view__room { width: 100%; max-width: 1600px; margin-inline: auto; }
+/* hidden but still laid out, so the canvas keeps rendering at size for the room mockup */
+.view__frame.is-offstage { position: absolute; top: 1.5rem; left: 1.5rem; right: 1.5rem; width: auto; visibility: hidden; pointer-events: none; }
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 168 / 64;
+  background: var(--umber-900);
+  cursor: grab;
+  touch-action: none;
+  box-shadow: 0 0 0 1px var(--line-neutral), 0 24px 60px rgb(0 0 0 / 0.45);
+}
+.frame.is-dragging { cursor: grabbing; }
+.frame .hero, .frame .stage { position: absolute; inset: 0; }
+.frame canvas { display: block; width: 100%; height: 100%; }
+
+.guides { position: absolute; inset: 0; pointer-events: none; }
+.guide { position: absolute; }
+.guide--seam { top: 0; bottom: 0; width: 0; border-left: 1px dashed rgb(248 243 232 / 0.75); }
+.guide--horizon, .guide--eye { left: 0; right: 0; height: 0; }
+.guide--horizon { border-top: 1px solid rgb(98 135 142 / 0.95); }
+.guide--eye { border-top: 1px dashed rgb(210 178 119 / 0.95); }
+.guide span {
+  position: absolute; right: 0.4rem; transform: translateY(-120%);
+  font-size: 0.72rem; letter-spacing: 0.04em; padding: 0 0.3rem;
+  background: rgb(24 15 3 / 0.6); border-radius: 3px;
+}
+.guide--horizon span { color: #9cc2c8; right: auto; left: 0.4rem; }
+.guide--eye span { color: var(--gold-300); }
+.guide--eye.is-off span::after { content: " (off the panel)"; }
+.guide--thirds { inset: 0; }
+.guide--thirds i { position: absolute; border: 0 solid rgb(248 243 232 / 0.25); }
+.guide--thirds i:nth-child(1) { left: 33.333%; top: 0; bottom: 0; border-left-width: 1px; }
+.guide--thirds i:nth-child(2) { left: 66.667%; top: 0; bottom: 0; border-left-width: 1px; }
+.guide--thirds i:nth-child(3) { top: 33.333%; left: 0; right: 0; border-top-width: 1px; }
+.guide--thirds i:nth-child(4) { top: 66.667%; left: 0; right: 0; border-top-width: 1px; }
+.guides.hide-seams [data-guide="seams"],
+.guides.hide-eye [data-guide="eye"],
+.guides.hide-horizon [data-guide="horizon"],
+.guides:not(.show-thirds) [data-guide="thirds"] { display: none; }
+
+.ruler { display: flex; margin-top: 0.5rem; font-size: 0.8rem; color: var(--stone-400); }
+.ruler span {
+  text-align: center; padding-top: 0.35rem;
+  border-top: 1px solid var(--line-subtle);
+  border-left: 1px solid var(--line-subtle);
+}
+.ruler span:last-child { border-right: 1px solid var(--line-subtle); }
+
+.hint { margin: 0.75rem 0 0; font-size: 0.82rem; color: var(--stone-450); text-align: center; }
+.link {
+  background: none; border: 0; padding: 0; color: var(--gold-300); cursor: pointer;
+  text-decoration: underline; text-underline-offset: 2px;
+}
+
+/* ----------------------------------------------------------------- room -- */
+.room { position: relative; width: fit-content; max-width: 100%; margin-inline: auto; user-select: none; touch-action: none; }
+.room.is-drop { outline: 2px dashed var(--gold-300); outline-offset: 4px; }
+.room img { display: block; max-width: 100%; max-height: calc(100vh - 10rem); width: auto; height: auto; }
+.room canvas { position: absolute; left: 0; top: 0; transform-origin: 0 0; pointer-events: none; }
+.handle {
+  position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; padding: 0;
+  border-radius: 50%; border: 2px solid var(--umber-900); background: var(--gold-300);
+  box-shadow: 0 0 0 1px var(--gold-300); cursor: move;
+}
+.handle:focus-visible { outline: 2px solid var(--plaster-50); outline-offset: 2px; }
+
+/* ------------------------------------------------------------- controls -- */
+.controls {
+  overflow-y: auto;
+  border-left: 1px solid var(--line-subtle);
+  background: var(--umber-900);
+  padding: 0.5rem 1.1rem 2rem;
+}
+.group { padding: 0.9rem 0; border-bottom: 1px solid rgb(166 129 64 / 0.18); }
+.group h2 {
+  margin: 0 0 0.6rem; font: 500 0.72rem/1 var(--font-body);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-300);
+}
+.note { margin: 0.5rem 0 0; font-size: 0.78rem; line-height: 1.4; color: var(--stone-450); }
+.readout { margin: 0.5rem 0; font-size: 0.82rem; color: var(--stone-300); font-variant-numeric: tabular-nums; }
+
+.row { display: grid; grid-template-columns: 6.2rem 1fr 3.9rem; align-items: center; gap: 0.5rem; margin: 0.3rem 0; }
+.row label { font-size: 0.85rem; color: var(--stone-300); }
+.row input[type="number"] {
+  width: 100%; padding: 0.15rem 0.3rem; text-align: right;
+  background: var(--umber-950); border: 1px solid var(--line-neutral); border-radius: var(--radius-xs);
+  font-size: 0.82rem; font-variant-numeric: tabular-nums;
+}
+input[type="range"] { width: 100%; accent-color: var(--gold-500); }
+.row--check { grid-template-columns: 6.2rem 1fr; }
+
+.presets { display: grid; gap: 0.35rem; }
+.presets button {
+  text-align: left; padding: 0.45rem 0.65rem; cursor: pointer;
+  background: var(--umber-950); border: 1px solid var(--line-neutral); border-radius: var(--radius-xs);
+}
+.presets button:hover { border-color: var(--gold-500); }
+.presets b { display: block; font-weight: 500; color: var(--plaster-100); }
+.presets small { color: var(--stone-450); font-size: 0.78rem; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.5rem 0 0.2rem; }
+.chips button {
+  padding: 0.2rem 0.65rem; font-size: 0.8rem; cursor: pointer;
+  border: 1px solid var(--line-subtle); border-radius: var(--radius-pill); background: none; color: var(--stone-300);
+}
+.chips button:hover { border-color: var(--gold-400); color: var(--plaster-100); }
+
+.checks { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; font-size: 0.85rem; color: var(--stone-300); }
+.checks input { accent-color: var(--gold-500); }
+
+.field { display: grid; gap: 0.25rem; font-size: 0.85rem; color: var(--stone-300); margin-bottom: 0.6rem; }
+.field input, .btns select {
+  padding: 0.35rem 0.5rem; background: var(--umber-950);
+  border: 1px solid var(--line-neutral); border-radius: var(--radius-xs);
+}
+.btns { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+.btns select { flex: 1; min-width: 0; font-size: 0.82rem; }
+.btn {
+  padding: 0.4rem 0.8rem; cursor: pointer; font-size: 0.85rem;
+  background: none; border: 1px solid var(--gold-500); border-radius: var(--radius-pill); color: var(--gold-300);
+}
+.btn:hover { background: rgb(166 129 64 / 0.15); }
+.btn--primary { background: var(--gold-500); color: var(--umber-900); }
+.btn--primary:hover { background: var(--gold-400); }
+.btn:disabled { opacity: 0.5; cursor: progress; }
+.btn:focus-visible, .presets button:focus-visible, .chips button:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 2px; }
+
+/* the tool is for a desktop; on a narrow screen the controls stack under the view */
+@media (max-width: 900px) {
+  body { overflow: auto; height: auto; }
+  .app { grid-template-columns: 1fr; }
+  .controls { border-left: 0; border-top: 1px solid var(--line-subtle); }
+  .view { padding: 1rem; }
+  .bar { flex-wrap: wrap; }
+  .bar__title span { display: none; }
+}
+
+/* range track on the dark ground */
+input[type="range"] { -webkit-appearance: none; appearance: none; height: 18px; background: none; }
+input[type="range"]::-webkit-slider-runnable-track { height: 3px; border-radius: 2px; background: var(--umber-700); }
+input[type="range"]::-moz-range-track { height: 3px; border-radius: 2px; background: var(--umber-700); }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: -5.5px; border-radius: 50%; background: var(--gold-400); border: 0; }
+input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--gold-400); border: 0; }
+input[type="range"]:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 2px; }

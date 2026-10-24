@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The loggia · scene preview · Hermitage World</title>
+<meta name="description" content="A live scene in preview: a limestone loggia over a sea of islands at sunset. Scroll to walk the gallery.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Alegreya:ital@0;1&display=swap">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<script src="../../assets/js/site.js"></script>
+</head>
+<body>
+
+<hw-header variant="overlay"></hw-header>
+
+<!-- ============ THE LOGGIA · a live scene (assets/js/loggia.js) ============
+     Scroll walks from the room, through the portal, down the gallery to the
+     far arch. Not yet placed on a page: this preview stands alone. -->
+<section class="loggia" id="loggia" data-header-until>
+  <div class="loggia__stage">
+    <canvas class="loggia__gl" id="loggia-gl" aria-hidden="true"></canvas>
+    <div class="loggia__scrim" aria-hidden="true"></div>
+    <div class="loggia__copy container container--wide">
+      <p class="t-kicker">Scene preview · the loggia</p>
+    </div>
+    <a class="loggia__cue circle-link circle-link--down circle-link--sm" href="#notes" aria-label="Skip past the scene">
+      <span class="circle-link__ring"><svg class="icon" aria-hidden="true"><use href="../../assets/img/icons.svg#arrow-right"/></svg></span>
+    </a>
+  </div>
+</section>
+
+<main id="main">
+
+<section class="section" id="notes" data-room="plaster">
+  <div class="container container--narrow prose">
+    <h2>The loggia</h2>
+    <p>A live scene, drawn in the browser: a limestone loggia high above a sea of islands at sunset. Scroll to walk from the room, through the portal and down the vaulted gallery to the far arch. On a computer, the pointer turns your head a little.</p>
+    <p>The view beyond the arches is a photograph; everything else (the stone, the olive trees, the sunlight in the air) is generated as the page runs. The sun's light and shadows follow the sun in the photograph.</p>
+    <p><span class="draft-mark">Where this scene lives on the site is still to be decided.</span></p>
+  </div>
+</section>
+
+</main>
+
+<hw-footer></hw-footer>
+
+<script type="module" src="../../assets/js/loggia.js"></script>
+</body>
+</html>

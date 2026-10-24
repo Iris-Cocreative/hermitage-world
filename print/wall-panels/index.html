@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wall Panel Composer · Hermitage World</title>
+<meta name="description" content="Frame the temple scene for the 168 × 64 inch wall panels: seams, eye line, viewer-matched lens, room mockup and proof exports.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1f1405">
+<link rel="icon" href="../../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../../assets/css/tokens.css">
+<link rel="stylesheet" href="panels.css">
+<script type="module" src="panels.js"></script>
+</head>
+<body>
+
+<header class="bar">
+  <h1 class="bar__title">Wall panels <span>168 × 64 in · three panels</span></h1>
+  <nav class="tabs" role="tablist" aria-label="View">
+    <button role="tab" aria-selected="true" data-view="frame">Frame</button>
+    <button role="tab" aria-selected="false" data-view="room">In the room</button>
+  </nav>
+  <span class="bar__status" id="status" aria-live="polite">Loading the temple…</span>
+</header>
+
+<main class="app">
+  <section class="view">
+    <div class="view__frame" data-pane="frame">
+      <div class="frame" id="frame">
+        <section class="hero" id="hero">
+          <div class="stage"><canvas id="hero-gl" aria-label="Temple scene framed for the wall panels"></canvas></div>
+        </section>
+        <div class="guides" aria-hidden="true">
+          <div class="guide guide--thirds" data-guide="thirds"><i></i><i></i><i></i><i></i></div>
+          <div class="guide guide--seam" data-guide="seams" style="left: calc(52 / 168 * 100%)"></div>
+          <div class="guide guide--seam" data-guide="seams" style="left: calc(115 / 168 * 100%)"></div>
+          <div class="guide guide--horizon" data-guide="horizon" id="g-horizon"><span>scene horizon</span></div>
+          <div class="guide guide--eye" data-guide="eye" id="g-eye"><span>eye line</span></div>
+        </div>
+      </div>
+      <div class="ruler" aria-hidden="true">
+        <span style="flex: 52">Panel 1 · 52″</span>
+        <span style="flex: 63">Panel 2 · 63″</span>
+        <span style="flex: 51">Panel 3 · 51″</span>
+      </div>
+      <p class="hint">Drag to look around · Shift-drag to move · Scroll to walk forward or back</p>
+    </div>
+
+    <div class="view__room" data-pane="room" hidden>
+      <div class="room" id="room">
+        <img id="room-photo" alt="The wall with three windows that the panels will cover">
+        <canvas id="room-panel"></canvas>
+        <button class="handle" data-i="0" aria-label="Top-left corner"></button>
+        <button class="handle" data-i="1" aria-label="Top-right corner"></button>
+        <button class="handle" data-i="2" aria-label="Bottom-right corner"></button>
+        <button class="handle" data-i="3" aria-label="Bottom-left corner"></button>
+      </div>
+      <p class="hint">Drag the four corners onto the panel outline · <label class="link">Use another photo<input type="file" id="room-file" accept="image/*" hidden></label> (or drop one here) · <button class="link" id="room-reset">Reset corners</button></p>
+    </div>
+  </section>
+
+  <aside class="controls" id="controls" aria-label="Composer controls">
+    <section class="group">
+      <h2>Framings</h2>
+      <div class="presets" id="presets"></div>
+    </section>
+    <section class="group" data-group="camera"><h2>Camera</h2></section>
+    <section class="group" data-group="viewer">
+      <h2>Viewer in the room</h2>
+      <p class="note">Bottom edge height is an estimate from the photo until we hear back.</p>
+      <div class="chips" id="eye-chips">
+        <button data-eye="62">Standing</button><button data-eye="46">On a chair</button><button data-eye="32">On a cushion</button>
+      </div>
+      <p class="readout" id="viewer-readout"></p>
+      <button class="btn" id="match-viewer">Match this viewer</button>
+      <p class="note">Sets the lens to the angle the wall fills from this distance, levels the camera, and shifts the horizon onto the eye line, so the panel reads like a view into the room. Camera height is left alone.</p>
+    </section>
+    <section class="group" data-group="light"><h2>Light and moment</h2></section>
+    <section class="group" data-group="finish"><h2>Finish</h2></section>
+    <section class="group">
+      <h2>Guides</h2>
+      <div class="checks">
+        <label><input type="checkbox" data-toggle="seams" checked> Panel seams</label>
+        <label><input type="checkbox" data-toggle="eye" checked> Eye line</label>
+        <label><input type="checkbox" data-toggle="horizon" checked> Scene horizon</label>
+        <label><input type="checkbox" data-toggle="thirds"> Thirds</label>
+      </div>
+    </section>
+    <section class="group">
+      <h2>Export</h2>
+      <label class="field"><span>Name</span><input type="text" id="name" placeholder="e.g. A · threshold" maxlength="40"></label>
+      <div class="btns">
+        <button class="btn btn--primary" id="x-sheet">Proof sheet</button>
+        <button class="btn" id="x-image">Image</button>
+        <select id="x-size" aria-label="Image size">
+          <option value="1680">1680 × 640 (10 ppi)</option>
+          <option value="3360" selected>3360 × 1280 (20 ppi)</option>
+          <option value="5040">5040 × 1920 (30 ppi)</option>
+        </select>
+      </div>
+      <div class="btns">
+        <button class="btn" id="x-json">Setup for Blender</button>
+        <button class="btn" id="x-link">Copy link</button>
+      </div>
+      <p class="note">These are proofs from the web scene, for choosing the framing. The print master gets rendered in Blender from the setup file.</p>
+    </section>
+  </aside>
+</main>
+
+</body>
+</html>

@@ -720,11 +720,11 @@ const gradePass = new ShaderPass({
   uniforms: {
     tDiffuse: { value: null }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) },
     uGround: { value: GROUND }, uSettle: { value: 0 }, uGrain: { value: P.post.grain },
-    uCream: { value: CREAM }
+    uCream: { value: CREAM }, uVig: { value: 1 }
   },
   vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
   fragmentShader: /* glsl */`
-    uniform sampler2D tDiffuse; uniform float uTime, uSettle, uGrain; uniform vec2 uRes; uniform vec3 uGround, uCream;
+    uniform sampler2D tDiffuse; uniform float uTime, uSettle, uGrain, uVig; uniform vec2 uRes; uniform vec3 uGround, uCream;
     varying vec2 vUv;
     float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
     void main(){
@@ -745,7 +745,7 @@ const gradePass = new ShaderPass({
         col = min(col, knee) + room * (1.0 - exp(-over / room));
       }
       // vignette pulls toward the page ground, not black; deeper as you enter
-      float v = smoothstep(0.10, 0.80, r2) * mix(0.62, 0.74, uSettle);
+      float v = smoothstep(0.10, 0.80, r2) * mix(0.62, 0.74, uSettle) * uVig;
       col = mix(col, uGround, v);
       // nothing darker than the page ground
       col = max(col, uGround * mix(0.35, 1.0, uSettle));
